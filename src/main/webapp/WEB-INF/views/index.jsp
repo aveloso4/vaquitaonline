@@ -1,6 +1,6 @@
 <%@page session="false"%>
 <html>
 <body>
-	<h1>Title : ${name}</h1>	
+	<h1>Title : ${texto}</h1>	
 </body>
 </html>

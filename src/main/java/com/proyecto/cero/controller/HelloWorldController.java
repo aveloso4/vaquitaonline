@@ -9,11 +9,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HelloWorldController {
 
-	@RequestMapping("/hello")
-	public ModelAndView hello(@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
+	@RequestMapping(value = "/hello")
+	public ModelAndView hello(@RequestParam(
+			value = "name", required = false, defaultValue = "Default Value") String texto) {
 		ModelAndView model = new ModelAndView();
-		name = "Puede entrar el que se le cante a esta pagina de mierda";
-		model.addObject("name", name);
+		texto = "Puede entrar el que se le cante a esta pagina de mierda";
+		model.addObject("texto", texto);
 		model.setViewName("index");
 		return model;
 	}
@@ -22,7 +23,7 @@ public class HelloWorldController {
 	public ModelAndView adminPage() {
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Vos sos el Admin PAPUCHO");
-		model.addObject("message", "This is protected page - Admin Page!");
+		model.addObject("message", "Pagina HIPER protegida - Admin Page!");
 		model.setViewName("admin");
 		return model;
 	}
@@ -30,8 +31,8 @@ public class HelloWorldController {
 	@RequestMapping(value = "/dba**", method = RequestMethod.GET)
 	public ModelAndView dbaPage() {
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "Spring Security Hello World");
-		model.addObject("message", "This is protected page - Database Page!");
+		model.addObject("title", "Pagina para los que manejan la base de datos");
+		model.addObject("message", "Esta pagina esta protegida - Database Page!");
 		model.setViewName("admin");
 		return model;
 	}
