@@ -12,6 +12,11 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 
+<c:if test="${isLogin}">
+<h3>${msg}</h3>
+<a href="/logout">Logout</a>
+</c:if>
+<c:if test="${!isLogin}">
 <h1>Login Personalizado :D</h1>
 <div id="login-error">${msg}</div>
 <form th:action="@{/j_spring_security_check}" method="post" >
@@ -20,7 +25,7 @@ pageEncoding="UTF-8"%>
 <p><label for="password">Password:</label><input id="password" name="password" type="password" /></p>
 <input  type="submit" value="Login"/>
 </form>
-
+</c:if>
 <h2>Buscar Viaje</h2>
 <form th:action="@{j_spring_security_check}" method="post" >
 <p><label for="Desde">Desde:</label><input id="desde" name="desde" type="text" /></p>
