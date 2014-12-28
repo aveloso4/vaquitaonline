@@ -27,7 +27,7 @@ public class LoginController {
 			if (logout != null) {
 				model.addObject("msg", "Hasta Luego!");
 			}
-			model.setViewName("login");
+			model.setViewName("signup");
 		}
 
 		return model;

@@ -16,22 +16,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("rodrigo").password("123456").roles("USER");
-		auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
-		auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
-	}
+//	@Autowired
+//	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.inMemoryAuthentication().withUser("rodrigo").password("123456").roles("USER");
+//		auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
+//		auth.inMemoryAuthentication().withUser("dba").password("123456").roles("DBA");
+//	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests()
-			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-			.and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
-				.usernameParameter("username")
-				.passwordParameter("password")
-			.and().logout().logoutSuccessUrl("/login?logout")
-			.and().csrf().disable();
+		http
+		.formLogin()
+			.loginPage("/signin")
+			.loginProcessingUrl("/signin/authenticate")
+			.failureUrl("/signin?param.error=bad_credentials")
+		.and()
+			.logout()
+				.logoutUrl("/signout")
+				.deleteCookies("JSESSIONID")
+		.and()
+			.authorizeRequests()
+				.antMatchers("/admin/**", "/favicon.ico", "/resources/**", "/auth/**", "/signin/**", "/signup/**", "/disconnect/facebook").permitAll()
+				.antMatchers("/**").authenticated()
+		.and()
+			.rememberMe()
+		.and().csrf().disable();
 
 	}
 
