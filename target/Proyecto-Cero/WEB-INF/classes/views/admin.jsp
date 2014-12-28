@@ -9,8 +9,6 @@
 
 	<!-- csrt support -->
 	<form action="${logoutUrl}" method="post" id="logoutForm">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
 	</form>
 
 	<script>

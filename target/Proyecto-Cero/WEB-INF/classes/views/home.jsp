@@ -22,7 +22,6 @@
 			<p>Welcome, <span th:text="${account.firstName}">first-name</span>!</p>
 			
 			<form method="POST" th:action="@{/signout}">
-				<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
 				<button>Sign Out</button>
 			</form>
 		</div>		

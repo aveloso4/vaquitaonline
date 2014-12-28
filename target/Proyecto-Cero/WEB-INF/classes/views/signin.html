@@ -20,7 +20,6 @@
 		
 		<div id="content" layout:fragment="content">
 			<form id="signin" th:action="@{/signin/authenticate}" method="post">
-				<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"></input> -->
 				<div class="formInfo">
 			  		<div class="error" th:if="${param.error eq 'bad_credentials'}">
 			  			Your sign in information was incorrect.
@@ -51,7 +50,6 @@
 
 			<!-- FACEBOOK SIGNIN -->
 			<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}" method="POST">
-				<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"></input> -->
 				<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access"></input>
 				<button type="submit"><img th:src="@{/resources/social/facebook/sign-in-with-facebook.png}"></img></button>
 			</form>
