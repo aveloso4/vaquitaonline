@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:social="http://spring.io/springsocial"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <title>Comparti tu viaje - SIGNIN</title>
 </head>
 <body>
-<!-- 	<div id="header">
+	<!-- 	<div id="header">
 		<h1>
 			<a th:href="@{/}">Hola!</a>
 		</h1>
 	</div> -->
 
-	<div id="leftNav">Left nav menu</div>
-
 	<div id="content" layout:fragment="content">
-	<!-- FACEBOOK SIGNIN -->
-	<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
-		method="POST">
-		<input type="hidden" name="scope"
-			value="publish_stream,user_photos,offline_access"></input>
-		<button type="submit">
-			<img th:src="@{/resources/social/facebook/sign-in-with-facebook.png}"></img>
-		</button>
-	</form>
+		<!-- FACEBOOK SIGNIN -->
+		<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
+			method="POST">
+			<input type="hidden" name="scope"
+				value="publish_stream,user_photos,offline_access"></input>
+			<button type="submit">
+				<img th:src="@{/resources/img/facebook/sign-in-with-facebook.png}"></img>
+			</button>
+		</form>
+		<form name="buscar-viaje" id="buscar-viaje" th:action="@{/search}"
+			method="POST">
+			<fieldset>
+					<label for="desde">Desde </label>
+					<input type="text"/>
+					<label for="hasta">Hasta</label>
+					<input type="text"/>
+					<label for="costo">Costo</label>
+					<input type="text"/>
+				</fieldset>
+				<button type="submit"></button>
+		</form>
 
 	</div>
 </body>

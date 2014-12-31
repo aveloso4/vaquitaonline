@@ -24,6 +24,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import com.proyecto.cero.account.JdbcAccountRepository;
+import com.proyecto.cero.viaje.JdbcViajeRepository;
 
 @Configuration
 @ComponentScan(basePackages = "com.proyecto.cero", excludeFilters = { @Filter(Configuration.class) })
@@ -54,13 +55,18 @@ public class AppConfig {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 	
+	
 	// internal helpers
-
 	private DatabasePopulator databasePopulator() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
+
 		populator.addScript(new ClassPathResource("Account.sql", JdbcAccountRepository.class));
-		populator.addScript(new ClassPathResource("data.sql", JdbcAccountRepository.class));
+		populator.addScript(new ClassPathResource("dataAccounts.sql", JdbcAccountRepository.class));
+		
+		populator.addScript(new ClassPathResource("Viaje.sql", JdbcViajeRepository.class));
+		populator.addScript(new ClassPathResource("dataViajes.sql", JdbcViajeRepository.class));
+		
 		return populator;
 	}
 }

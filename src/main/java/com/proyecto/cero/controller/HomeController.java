@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
-	
 	private final AccountRepository accountRepository;
 
 	@Inject
