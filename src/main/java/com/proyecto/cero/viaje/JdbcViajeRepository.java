@@ -42,4 +42,32 @@ public class JdbcViajeRepository implements ViajeRepository {
 		// TODO crear el find bu desde hasta
 		return findAll();
 	}
+
+	public List<Viaje> findViajes(Viaje viaje) {
+		String desde;
+		String hasta;
+		String costo;
+		
+		if(viaje.getDesde() != null)
+			desde = viaje.getDesde();
+		else
+			desde = "%"; 
+		
+		if(viaje.getHasta() != null)
+			hasta = viaje.getHasta(); 
+		else
+			hasta = "%"; 
+		
+		if(viaje.getCosto() != null)
+			costo = viaje.getCosto(); 
+		else
+			costo= "%"; 
+		
+		String sql = "select desde, hasta, costo from Viaje WHERE desde LIKE '"+desde+
+																												"' AND hasta LIKE '"+hasta+
+																												"' AND costo LIKE '"+costo+"'";
+		
+		List<Viaje> viajes  = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Viaje.class));
+		return viajes;
+	}
 }

@@ -7,4 +7,5 @@ public interface ViajeRepository {
 		void createViaje(Viaje viaje) throws ViajeInvalidoException;
 		public List<Viaje> findAll();
 		List<Viaje> findViajesByDesdeAndHasta(String desde, String hasta);
+		List<Viaje> findViajes(Viaje viaje);
 }
