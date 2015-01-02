@@ -48,17 +48,17 @@ public class JdbcViajeRepository implements ViajeRepository {
 		String hasta;
 		String costo;
 		
-		if(viaje.getDesde() != null)
+		if(viaje.getDesde() != "" && viaje.getDesde() != null)
 			desde = viaje.getDesde();
 		else
 			desde = "%"; 
 		
-		if(viaje.getHasta() != null)
+		if(viaje.getHasta() != "" && viaje.getHasta() != null)
 			hasta = viaje.getHasta(); 
 		else
 			hasta = "%"; 
 		
-		if(viaje.getCosto() != null)
+		if(viaje.getCosto() != "" && viaje.getCosto() != null)
 			costo = viaje.getCosto(); 
 		else
 			costo= "%"; 

@@ -9,6 +9,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HelloWorldController {
 
+	@RequestMapping(value = "/googleMap")
+	public ModelAndView map() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("map");
+		return model;
+	}
+	
 	@RequestMapping(value = "/hello")
 	public ModelAndView hello(@RequestParam(
 			value = "name", required = false, defaultValue = "Default Value") String texto) {

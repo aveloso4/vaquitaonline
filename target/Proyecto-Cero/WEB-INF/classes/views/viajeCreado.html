@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:social="http://spring.io/springsocial"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<title>Comparti tu viaje - Viaje Creado!</title>
+</head>
+<body>
+	<div id="header">
+		<h1>
+			<a th:href="@{/}">Viaje Creado - Comparti Tu Viaje</a>
+		</h1>
+	</div>
+	<div>
+		<h2>El viaje que acabas de crear es:</h2>
+		<ul>
+			<li>
+				<p>
+					Desde:
+					<td th:text="${viaje.desde}">Desde ...</td> Hasta:
+					<td th:text="${viaje.hasta}">Hasta ...</td> Costo:
+					<td th:text="${viaje.costo}">Costo ...</td>
+				</p>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

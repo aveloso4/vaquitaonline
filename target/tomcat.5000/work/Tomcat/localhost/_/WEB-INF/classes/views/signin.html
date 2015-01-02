@@ -3,36 +3,31 @@
 	xmlns:social="http://spring.io/springsocial"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+<link rel="stylesheet" th:href="@{/resources/css/signin.css}"
+	type="text/css" media="screen"></link>
 <title>Comparti tu viaje - SIGNIN</title>
 </head>
 <body>
-	<!-- 	<div id="header">
-		<h1>
-			<a th:href="@{/}">Hola!</a>
-		</h1>
-	</div> -->
-
 	<div id="content" layout:fragment="content">
 		<!-- FACEBOOK SIGNIN -->
+		<h3>Para Subir o unirte a un viaje solo debes unirte a nosotros
+			con tu cuenta de facebook</h3>
 		<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
 			method="POST">
 			<input type="hidden" name="scope"
 				value="publish_stream,user_photos,offline_access"></input>
-			<button type="submit">
-				<img th:src="@{/resources/img/facebook/sign-in-with-facebook.png}"></img>
+			<button id="boton-facebook" type="submit">
 			</button>
 		</form>
 		<form name="buscar-viaje" id="buscar-viaje" th:action="@{/search}"
-			method="POST">
-			<fieldset>
-					<label for="desde">Desde </label>
-					<input type="text"/>
-					<label for="hasta">Hasta</label>
-					<input type="text"/>
-					<label for="costo">Costo</label>
-					<input type="text"/>
+			method="GET">
+			<h4 id="h4">Buscar un Viaje</h4>
+				<fieldset>
+					<label for="desde">Desde</label> <input type="text" name="desde" />
+					<label for="hasta">Hasta</label> <input type="text" name="hasta" />
+					<label for="costo">Costo</label> <input type="text" name="costo" />
 				</fieldset>
-				<button type="submit"></button>
+				<button id="boton-buscar" type="submit">Buscar!</button>
 		</form>
 
 	</div>

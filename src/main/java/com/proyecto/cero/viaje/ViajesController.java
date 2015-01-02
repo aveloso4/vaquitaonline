@@ -26,15 +26,12 @@ public class ViajesController {
 		// this.providerSignInUtils = new ProviderSignInUtils();
 	}
 
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@RequestMapping(value = "/crearVIaje", method = RequestMethod.POST)
 	public ModelAndView buscarViaje(@Valid ViajesForm form, BindingResult formBinding, WebRequest request) {
 		ModelAndView model = new ModelAndView();
-
 		Viaje viaje = crearViaje(form, formBinding);
-		if (viaje != null) {
-			model.addObject("viajes", viaje);
-		}
-		model.setViewName("search");
+		model.addObject("viaje",viaje);
+		model.setViewName("viajeCreado");
 		return model;
 	}
 
@@ -44,9 +41,9 @@ public class ViajesController {
 			@RequestParam(value = "hasta", required=false) String hasta, 
 			@RequestParam(value = "costo", required=false) String costo) {
 		ModelAndView model = new ModelAndView();
+		
 		Viaje viajeABuscar = new Viaje(desde, hasta, costo);
 		List<Viaje> viajes = getViajeRepository().findViajes(viajeABuscar);
-		
 		for (Viaje viaje : viajes) {
 			System.out.print("Desde: " + viaje.getDesde());
 			System.out.print(" - Hasta: " + viaje.getHasta());
