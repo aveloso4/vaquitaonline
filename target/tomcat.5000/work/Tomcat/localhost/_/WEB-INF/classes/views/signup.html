@@ -22,13 +22,13 @@
 					<div class="error" th:if="${#fields.hasErrors('*')}">Unable to sign up. Please fix the errors below and resubmit.</div>
 				</div>
 				<fieldset>
-					<label for="firstName">First Name <span th:if="${#fields.hasErrors('firstName')}" class="error" th:text="${#fields.errors('firstName')[0]}">Error</span></label>
-					<input type="text" th:field="*{firstName}" />
-					<label for="lastName">Last Name <span th:if="${#fields.hasErrors('lastName')}" class="error" th:text="${#fields.errors('lastName')[0]}">Error</span></label>
-					<input type="text" th:field="*{lastName}" />
-					<label for="username">Username <span th:if="${#fields.hasErrors('username')}" class="error" th:text="${#fields.errors('username')[0]}">Error</span></label>
+					<label for="firstName">Nombre y Apellido: </label>
+					<span th:text="*{firstName}">firstname</span>
+					<span> </span>
+					<span th:text="*{lastName}">lastname</span>
+					<label for="username">  -  Username <span th:if="${#fields.hasErrors('username')}" class="error" th:text="${#fields.errors('username')[0]}">Error</span></label>
 					<input type="text" th:field="*{username}" />
-					<label for="password">Password (at least 6 characters) <span th:if="${#fields.hasErrors('password')}" class="error" th:text="${#fields.errors('password')[0]}">Error</span></label>
+					<label for="password">  -  Password (at least 6 characters) <span th:if="${#fields.hasErrors('password')}" class="error" th:text="${#fields.errors('password')[0]}">Error</span></label>
 					<input type="password" th:field="*{password}" />
 				</fieldset>
 				<p><button type="submit">Sign Up</button></p>

@@ -13,10 +13,8 @@ public class SignupForm {
 	@Size(min = 6, message = "must be at least 6 characters")
 	private String password;
 
-	@NotEmpty
 	private String firstName;
 
-	@NotEmpty
 	private String lastName;
 
 	public String getUsername() {

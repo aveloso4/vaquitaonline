@@ -4,13 +4,16 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.web.ProviderSignInUtils;
+
 import com.proyecto.cero.account.Account;
 import com.proyecto.cero.account.AccountRepository;
 import com.proyecto.cero.account.UsernameAlreadyInUseException;
 import com.proyecto.cero.message.Message;
 import com.proyecto.cero.message.MessageType;
 import com.proyecto.cero.signin.SignInUtils;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -43,10 +46,11 @@ public class SignupController {
 
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
+		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-		Account account = createAccount(form, formBinding);
+		Account account = createAccount(form, formBinding, connection.fetchUserProfile());
 		if (account != null) {
 			SignInUtils.signin(account.getUsername());
 			providerSignInUtils.doPostSignUp(account.getUsername(), request);
@@ -57,9 +61,9 @@ public class SignupController {
 
 	// internal helpers
 	
-	private Account createAccount(SignupForm form, BindingResult formBinding) {
+	private Account createAccount(SignupForm form, BindingResult formBinding, UserProfile providerUser) {
 		try {
-			Account account = new Account(form.getUsername(), form.getPassword(), form.getFirstName(), form.getLastName());
+			Account account = new Account(form.getUsername(), form.getPassword(), providerUser.getFirstName(), providerUser.getLastName());
 			accountRepository.createAccount(account);
 			return account;
 		} catch (UsernameAlreadyInUseException e) {
