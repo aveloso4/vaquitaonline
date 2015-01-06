@@ -21,7 +21,10 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import org.springframework.social.connect.ConnectionRepository;
+import org.springframework.social.facebook.api.Facebook;
+
 import com.proyecto.cero.account.AccountRepository;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,19 +32,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
+	private final Facebook facebook;
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 	private final AccountRepository accountRepository;
 
 	@Inject
-	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository) {
+	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository,Facebook facebook) {
 		this.connectionRepositoryProvider = connectionRepositoryProvider;
 		this.accountRepository = accountRepository;
+		this.facebook = facebook;
 	}
 
 	@RequestMapping("/")
 	public String home(Principal currentUser, Model model) {
 		model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
 		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
+		model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
+		
 		return "home";
 	}
 	
