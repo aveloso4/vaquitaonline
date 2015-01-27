@@ -22,11 +22,12 @@
 		<form name="buscar-viaje" id="buscar-viaje" th:action="@{/search}"
 			method="GET">
 			<h4 id="h4">Buscar un Viaje</h4>
-				<fieldset>
-					<label for="desde">Desde</label> <input type="text" name="desde" />
-					<label for="hasta">Hasta</label> <input type="text" name="hasta" />
-					<label for="costo">Costo</label> <input type="text" name="costo" />
-				</fieldset>
+			<fieldset>
+				<label for="desde">Desde:</label> <input type="text" name="desde" />
+				<label for="hasta">Hasta:</label> <input type="text" name="hasta" />
+				<label for="costo">Costo maximo:</label> <input type="text" name="costo" />
+				<label for="fecha">Fecha:</label> <input type="date" name="fecha" />
+			</fieldset>
 				<button id="boton-buscar" type="submit">Buscar!</button>
 		</form>
 

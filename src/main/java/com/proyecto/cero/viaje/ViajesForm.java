@@ -1,9 +1,8 @@
 package com.proyecto.cero.viaje;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.social.connect.UserProfile;
+import javax.validation.constraints.NotNull;
 
-import com.proyecto.cero.singup.SignupForm;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class ViajesForm {
 	
@@ -19,6 +18,28 @@ public class ViajesForm {
 	
 	@NotEmpty
 	private String costo;
+	
+	@NotNull
+	private Integer cupos;
+
+	@NotEmpty
+	private String fecha;
+	
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public Integer getCupos() {
+		return cupos;
+	}
+
+	public void setCupos(Integer cupos) {
+		this.cupos = cupos;
+	}
 
 	public String getDesde() {
 		return desde;

@@ -22,52 +22,57 @@ public class JdbcViajeRepository implements ViajeRepository {
 	@Transactional
 	public void createViaje(Viaje viaje) throws ViajeInvalidoException {
 		try {
-			jdbcTemplate.update(
-					"insert into Viaje (desde, hasta, costo) values (?, ?, ?)",
-					viaje.getDesde(), viaje.getHasta(), viaje.getCosto());
+			jdbcTemplate.update("insert into Viaje (creador, desde, hasta, fecha, cupos, acompaniantes, costo) values (?,?, ?, ?, ?, ?, ?)", 
+					viaje.getCreador(), viaje.getDesde(), viaje.getHasta(),viaje.getFecha(), viaje.getCupos(),
+					viaje.getAcompaniantes(), viaje.getCosto());
 		} catch (Exception e) {
 			throw new ViajeInvalidoException(viaje.getDesde());
 		}
 	}
 
-	//String sql = "select desde, hasta, costo from Viaje where desde = ? AND hasta = ?";
-	
-	public List<Viaje> findAll(){
-		String sql = "select desde, hasta, costo from Viaje";
-			List<Viaje> viajes  = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Viaje.class));
-			return viajes;
-		}
+	// String sql =
+	// "select desde, hasta, costo from Viaje where desde = ? AND hasta = ?";
 
-	public List<Viaje> findViajesByDesdeAndHasta(String desde, String hasta) {
-		// TODO crear el find bu desde hasta
-		return findAll();
+	public List<Viaje> findAll() {
+		String sql = "select creador, desde, hasta, cupos, acompaniantes, costo from Viaje";
+		List<Viaje> viajes = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Viaje.class));
+		return viajes;
 	}
 
 	public List<Viaje> findViajes(Viaje viaje) {
 		String desde;
 		String hasta;
 		String costo;
-		
-		if(viaje.getDesde() != "" && viaje.getDesde() != null)
+		String fecha;
+
+		if (viaje.getDesde() != "" && viaje.getDesde() != null)
 			desde = viaje.getDesde();
+		else 
+			desde = "%";
+		
+		if (viaje.getHasta() != "" && viaje.getHasta() != null)
+			hasta = viaje.getHasta();
 		else
-			desde = "%"; 
-		
-		if(viaje.getHasta() != "" && viaje.getHasta() != null)
-			hasta = viaje.getHasta(); 
+			hasta = "%";
+
+		if (viaje.getCosto() != "" && viaje.getCosto() != null)
+			costo = viaje.getCosto();
 		else
-			hasta = "%"; 
+			costo = "100000";
 		
-		if(viaje.getCosto() != "" && viaje.getCosto() != null)
-			costo = viaje.getCosto(); 
-		else
-			costo= "%"; 
-		
-		String sql = "select desde, hasta, costo from Viaje WHERE desde LIKE '"+desde+
-																												"' AND hasta LIKE '"+hasta+
-																												"' AND costo LIKE '"+costo+"'";
-		
-		List<Viaje> viajes  = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Viaje.class));
+		if (viaje.getFecha() != "" && viaje.getFecha() != null)
+			fecha = viaje.getFecha();
+		 else 
+			 fecha = "%";
+
+		String sql = "select creador, desde, hasta, cupos, costo, acompaniantes, fecha from Viaje WHERE desde LIKE '" + desde + "' AND hasta LIKE '" + hasta + "' AND fecha LIKE '" + fecha + "' AND cupos NOT LIKE '0'";
+
+		List<Viaje> viajes = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Viaje.class));
 		return viajes;
+	}
+
+	public List<Viaje> findViajesByDesdeAndHasta(String desde, String hasta) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

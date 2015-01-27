@@ -19,10 +19,16 @@
 		<ul>
 			<tr th:each="viaje : ${viajes}">
 				<li>
-					<p>Desde: 
+					<p>Creador: 
+					<td th:text="${viaje.creador}">Creador ...</td>
+					Desde: 
 					<td th:text="${viaje.desde}">Desde ...</td>
 					Hasta: 
 					<td th:text="${viaje.hasta}">Hasta ...</td>
+					Fecha: 
+					<td th:text="${viaje.fecha}">Fecha ...</td>
+					Cupos: 
+					<td th:text="${viaje.cupos}">Cupos ...</td>
 					Costo: 
 					<td th:text="${viaje.costo}">Costo ...</td></p>
 				</li>

@@ -3,28 +3,67 @@
 	xmlns:social="http://spring.io/springsocial"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXaq1x17sp2J8bDb9v-hwitBf-8GDrJoU">
-  
-</script>
-<script type="text/javascript">
-  function initialize() {
-    var mapOptions = {
-      center : {
-        lat : -40.8772292,
-        lng : -56.5604596
-      },
-      zoom : 4
-    };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  }
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script>
 <link rel="stylesheet" th:href="@{/resources/css/home.css}"
 	type="text/css" media="screen"></link>
 <link rel="stylesheet" th:href="@{/resources/css/map.css}"
 	type="text/css" media="screen"></link>
 <title>Comparti Tu Viaje</title>
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;signed_in=true&amp;libraries=places&amp;sensor=false&amp;key=AIzaSyCXaq1x17sp2J8bDb9v-hwitBf-8GDrJoU"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+  // <![CDATA[
+  function dateValidate(inputField) {
+    var pickeddate =  new Date(inputField.value);
+    var todayDate =  new Date();
+    var maxDate = new Date (todayDate.getFullYear()+2, todayDate.getMonth(), todayDate.getDate());
+
+    if( pickeddate >= todayDate && pickeddate <= maxDate){
+      return true;
+    }else{
+      inputField.valueAsDate = new Date()
+    } 
+  }
+
+  $(function() {
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
+    var minDate = year + '-' + month + '-' + day;
+    var maxDate = year + 2 + '-' + month + '-' + day;
+    
+    $('#fecha-Crear').attr('min', minDate);
+    $('#fecha-Buscar').attr('min', minDate);
+    $('#fecha-Crear').attr('max', maxDate);
+    $('#fecha-Buscar').attr('max', maxDate);
+    $('#fecha-Buscar').val(minDate);
+    $('#fecha-Crear').val(minDate);
+  });
+  //]]>
+</script>
+<script>
+  // <![CDATA[
+  function initialize() {
+
+    var dc = document.getElementById('desde-crear');
+    var hc = document.getElementById('hasta-crear');
+    var db = document.getElementById('desde-buscar');
+    var hb = document.getElementById('hasta-buscar');
+
+    var autocomplete = new google.maps.places.Autocomplete(dc);
+    var autocomplete = new google.maps.places.Autocomplete(hc);
+    var autocomplete = new google.maps.places.Autocomplete(db);
+    var autocomplete = new google.maps.places.Autocomplete(hb);
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+  //]]>
+</script>
 </head>
 <body>
 	<div id="header">
@@ -33,7 +72,9 @@
 		</h1>
 	</div>
 
-	<img src="#" th:src="@{'http://graph.facebook.com/' +  ${profileInfo.id}} + '/picture'" alt="profile image"/>
+	<img src="#"
+		th:src="@{'http://graph.facebook.com/' +  ${profileInfo.id}} + '/picture'"
+		alt="profile image" />
 	<div id="content" layout:fragment="content">
 		<p>
 			Bienvenido, <span th:text="${account.firstName}">first-name</span>!
@@ -44,24 +85,38 @@
 		</form>
 	</div>
 	<div class="forms-content">
-		<form name="crear-viaje" id="buscar-viaje" th:action="@{/crearVIaje}"
+
+		<!-- CREAR VIAJE -->
+		<form name="crear-viaje" id="crear-viaje" th:action="@{/crearVIaje}"
 			method="POST">
 			<h4 id="h4">Crear Viaje Nuevo</h4>
 			<fieldset>
-				<label for="desde">Desde</label> <input type="text" name="desde" />
-				<label for="hasta">Hasta</label> <input type="text" name="hasta" />
-				<label for="costo">Costo</label> <input type="text" name="costo" />
+				<label for="desde">Desde:</label> <input id="desde-crear"
+					type="text" name="desde" placeholder="Ingresa desde donde sales" />
+				<label for="hasta">Hasta:</label> <input id="hasta-crear"
+					type="text" name="hasta" placeholder="Ingresa hasta donde vas" /> <label
+					for="fecha">Fecha:</label> <input id="fecha-Crear" type="date"
+					name="fecha" onblur="return dateValidate(this)"/> <label
+					for="cupos">Cupos:</label> <input type="text" name="cupos" /> <label
+					for="costo">Costo por cabeza:</label> <input type="text"
+					name="costo" />
 			</fieldset>
 			<button id="boton-crear" type="submit">Crear!</button>
 		</form>
-		<div id="map-canvas"></div>
+
+		<!-- BUSCAR VIAJE -->
 		<form name="buscar-viaje" id="buscar-viaje" th:action="@{/search}"
 			method="GET">
 			<h4 id="h4">Buscar un Viaje</h4>
 			<fieldset>
-				<label for="desde">Desde</label> <input type="text" name="desde" />
-				<label for="hasta">Hasta</label> <input type="text" name="hasta" />
-				<label for="costo">Costo</label> <input type="text" name="costo" />
+				<label for="desde">Desde:</label> <input id="desde-buscar"
+					type="text" name="desde" placeholder="Ingresa desde donde sales" />
+				<label for="hasta">Hasta:</label> <input id="hasta-buscar"
+					type="text" name="hasta" placeholder="Ingresa hasta donde vas" />
+				<label for="costo">Costo maximo:</label> <input type="text"
+					name="costo" /> <label for="fecha">Fecha:</label> <input
+					id="fecha-Buscar" type="date" name="fecha"
+					onblur="return dateValidate(this)"/>
 			</fieldset>
 			<button id="boton-buscar" type="submit">Buscar!</button>
 		</form>

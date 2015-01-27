@@ -1,12 +1,1 @@
-insert into Viaje (desde, hasta, costo) values ('Junin','9 de Julio',80);
-insert into Viaje (desde, hasta, costo) values ('Junin','9 de Julio',75);
-insert into Viaje (desde, hasta, costo) values ('Junin','9 de Julio',85);
-insert into Viaje (desde, hasta, costo) values ('Junin','Capital Federal',150);
-insert into Viaje (desde, hasta, costo) values ('Junin','Capital Federal',170);
-insert into Viaje (desde, hasta, costo) values ('Junin','Capital Federal',160);
-insert into Viaje (desde, hasta, costo) values ('9 de Julio','Capital Federal',160);
-insert into Viaje (desde, hasta, costo) values ('9 de Julio','Capital Federal',130);
-insert into Viaje (desde, hasta, costo) values ('9 de Julio','Capital Federal',120);
-insert into Viaje (desde, hasta, costo) values ('9 de Julio','Carilo',190);
-insert into Viaje (desde, hasta, costo) values ('9 de Julio','Carilo',200);
-insert into Viaje (desde, hasta, costo) values ('9 de Julio','Carilo',210);
+insert into Viaje (creador, desde, hasta, fecha, cupos, acompaniantes, costo) values ('Eugenio Valeiras','Junin','9 de Julio','2015-01-20',3,'',80);

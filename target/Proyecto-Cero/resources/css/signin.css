@@ -3,7 +3,10 @@
 	width: 185px;
 }
 
-#boton-crear {
+#boton-buscar {
+	font-weight: bold;
+	color: white;
+	background-color: #47639E;
 	margin-top: 10px;
 }
 
@@ -21,3 +24,12 @@
 	width: 1000px;
 	height: 1000px;
 }
+
+.dark-primary-color    { background: #689F38; }
+.default-primary-color { background: #8BC34A; }
+.light-primary-color   { background: #DCEDC8; }
+.text-primary-color    { color: #212121; }
+.accent-color          { background: #03A9F4; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #727272; }
+.divider-color         { border-color: #B6B6B6; }
