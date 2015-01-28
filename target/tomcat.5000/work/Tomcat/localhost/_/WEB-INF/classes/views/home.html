@@ -39,14 +39,19 @@
     var maxDate = year + 2 + '-' + month + '-' + day;
     
     $('#fecha-Crear').attr('min', minDate);
-    $('#fecha-Buscar').attr('min', minDate);
     $('#fecha-Crear').attr('max', maxDate);
     $('#fecha-Buscar').attr('max', maxDate);
-    $('#fecha-Buscar').val(minDate);
     $('#fecha-Crear').val(minDate);
   });
+  
+  function pulsar(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    return (tecla != 13);
+  }
+  
   //]]>
 </script>
+
 <script>
   // <![CDATA[
   function initialize() {
@@ -87,7 +92,7 @@
 	<div class="forms-content">
 
 		<!-- CREAR VIAJE -->
-		<form name="crear-viaje" id="crear-viaje" th:action="@{/crearVIaje}"
+		<form name="crear-viaje" onkeypress = "return pulsar(event)" id="crear-viaje" th:action="@{/crearVIaje} "
 			method="POST">
 			<h4 id="h4">Crear Viaje Nuevo</h4>
 			<fieldset>
@@ -105,7 +110,7 @@
 		</form>
 
 		<!-- BUSCAR VIAJE -->
-		<form name="buscar-viaje" id="buscar-viaje" th:action="@{/search}"
+		<form name="buscar-viaje" onkeypress = "return pulsar(event)" id="buscar-viaje" th:action="@{/search}"
 			method="GET">
 			<h4 id="h4">Buscar un Viaje</h4>
 			<fieldset>
@@ -115,8 +120,7 @@
 					type="text" name="hasta" placeholder="Ingresa hasta donde vas" />
 				<label for="costo">Costo maximo:</label> <input type="text"
 					name="costo" /> <label for="fecha">Fecha:</label> <input
-					id="fecha-Buscar" type="date" name="fecha"
-					onblur="return dateValidate(this)"/>
+					id="fecha-Buscar" type="date" name="fecha"/>
 			</fieldset>
 			<button id="boton-buscar" type="submit">Buscar!</button>
 		</form>
