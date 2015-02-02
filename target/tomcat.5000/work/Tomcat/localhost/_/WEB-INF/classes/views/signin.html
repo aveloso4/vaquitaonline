@@ -14,7 +14,6 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>	
 <script type="text/javascript" th:src="@{/resources/js/jquery-2.1.3.min.js}"></script>
-<script type="text/javascript" th:src="@{/resources/js/fecha.js}"></script>
 <script type="text/javascript" th:src="@{/resources/js/login.js}"></script>
 
 <title>Comparti tu viaje - SIGNIN</title>
@@ -74,15 +73,15 @@
 						method="GET">
 						<div class="hsr-right-top">
 							<div>
-								Desde:<br></br> <input id="desde-buscar" type="text" name="from"
+								Desde:<br></br> <input id="desde-buscar" type="text" name="desde"
 									placeholder="Desde dónde salís?"></input>
 							</div>
 							<div>
-								Hasta:<br></br> <input id="hasta-buscar" type="text" name="to" placeholder="A dónde vas?"></input>
+								Hasta:<br></br> <input id="hasta-buscar" type="text" name="hasta" placeholder="A dónde vas?"></input>
 							</div>
 							<div>
-								Cuando:<br> </br> 
-								<input id="fecha-Crear" type="date" name="fecha" onblur="return dateValidate(this)" placeholder="DD/MM/YY" /> 
+								Cuando:<br></br> 
+								<input id="fecha-Crear" type="date" name="fecha" placeholder="DD/MM/YY" /> 
 							</div>
 						</div>
 						<div class="hsr-right-bottom">

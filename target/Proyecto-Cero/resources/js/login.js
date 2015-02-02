@@ -2,7 +2,6 @@
 function initialize() {
 
 	//AUTOCOMPLETE FIELDS
-	alert("ENTRE");
 	var db = document.getElementById('desde-buscar');
 	var hb = document.getElementById('hasta-buscar');
 	var autocomplete = new google.maps.places.Autocomplete(db);

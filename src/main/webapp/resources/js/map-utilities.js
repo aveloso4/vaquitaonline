@@ -24,18 +24,15 @@ function calcRoute() {
 	}
 
 	var waypointsInput = document.getElementsByClassName("input_parada");
-	//TODO	for (var i = waypointsInput.length - 1; i >= 0; i--) {
-	//		if (waypointsInput[i].value == '') {
-	//			waypointsInput[i].pop();
-	//		}
-	//	};
-	
+
 	var waypoints = [];
 	for ( i = 0; i < waypointsInput.length; i++) {
-		waypoints.push({
-			location : waypointsInput[i].value,
-			stopover : true
-		});
+		if (waypointsInput[i].value != '') {
+			waypoints.push({
+				location : waypointsInput[i].value,
+				stopover : true
+			});
+		}
 	}
 
 	var request = {
@@ -55,7 +52,9 @@ function calcRoute() {
 		} else {
 			//TODO MANEJO DE EXEPCIONES https://developers.google.com/maps/documentation/javascript/directions?hl=es
 			viajeEncontrado = false;
-			directionsDisplay.setDirections({ routes: [] });
+			directionsDisplay.setDirections({
+				routes : []
+			});
 		}
 	});
 }
