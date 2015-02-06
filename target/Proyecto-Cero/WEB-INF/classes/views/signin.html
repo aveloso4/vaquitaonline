@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:social="http://spring.io/springsocial"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <!-- stylesheet -->
 <link rel="stylesheet" th:href="@{/resources/css/signin.css}" type="text/css"
@@ -12,7 +13,7 @@
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;signed_in=true&amp;libraries=places&amp;sensor=true&amp;key=AIzaSyCXaq1x17sp2J8bDb9v-hwitBf-8GDrJoU"></script>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>	
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript" th:src="@{/resources/js/jquery-2.1.3.min.js}"></script>
 <script type="text/javascript" th:src="@{/resources/js/login.js}"></script>
 
@@ -32,13 +33,20 @@
 						<div>
 							<span>Creá tu viaje!</span>
 						</div>
-						<div>
+						<!-- IS NOT LOGIN -->
+						<div sec:authorize="isAnonymous()">
 							<!-- FACEBOOK SIGNIN -->
 							<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
 								method="POST">
 								<input type="hidden" name="scope"
 									value="publish_stream,user_photos,offline_access"></input>
 								<button id="boton-facebook" type="submit"></button>
+							</form>
+						</div>
+						<!-- IS LOGIN -->
+						<div sec:authorize="isAuthenticated()">
+							<form method="POST" th:action="@{/signout}">
+								<button>Sign Out</button>
 							</form>
 						</div>
 					</div>
@@ -77,11 +85,12 @@
 									placeholder="Desde dónde salís?"></input>
 							</div>
 							<div>
-								Hasta:<br></br> <input id="hasta-buscar" type="text" name="hasta" placeholder="A dónde vas?"></input>
+								Hasta:<br></br> <input id="hasta-buscar" type="text" name="hasta"
+									placeholder="A dónde vas?"></input>
 							</div>
 							<div>
-								Cuando:<br></br> 
-								<input id="fecha-Crear" type="date" name="fecha" placeholder="DD/MM/YY" /> 
+								Cuando:<br></br> <input id="fecha-Crear" type="date" name="fecha"
+									placeholder="DD/MM/YY" />
 							</div>
 						</div>
 						<div class="hsr-right-bottom">

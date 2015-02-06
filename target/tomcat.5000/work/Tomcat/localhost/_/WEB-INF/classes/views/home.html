@@ -4,7 +4,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <title>Comparti Tu Viaje</title>
-
+<meta charset="UTF-8"/>
 <!-- stylesheet -->
 <link rel="stylesheet" th:href="@{/resources/css/home.css}"
 	type="text/css" media="screen"></link>
@@ -21,6 +21,7 @@
 <script type="text/javascript" th:src="@{/resources/js/map-utilities.js}"></script>
 <script type="text/javascript" th:src="@{/resources/js/fecha.js}"></script>
 <script type="text/javascript" th:src="@{/resources/js/utilities.js}"></script>
+<script type="text/javascript" th:src="@{/resources/js/home.js}"></script>
 
 </head>
 <body>
@@ -46,7 +47,9 @@
 	
 		<!-- MAPA -->
 		<div id="map_canvas" style="width: 100%; height: 300px"></div>
-
+		<div id="distance">Distance: </div> 
+		<div id="duration">Duration: </div> 
+		
 		<!-- CREAR VIAJE -->
 		<form name="crear-viaje" onkeypress="return pulsar(event)"
 			onsubmit="return validateForm()" id="crear-viaje"
@@ -54,9 +57,9 @@
 			<h4 id="h4">Crear Viaje Nuevo</h4>
 			<fieldset>
 				<label for="desde">Desde:</label> 
-				<input id="desde-crear" onblur="calcRoute();" type="text" name="desde" placeholder="Ingresa desde donde sales" /> 
+				<input id="desde-crear" class="waypoint" type="text" name="desde" placeholder="Ingresa desde donde sales" /> 
 				<label for="hasta">Hasta:</label>
-				<input id="hasta-crear" onblur="calcRoute();" type="text" name="hasta" placeholder="Ingresa hasta donde vas" /> 
+				<input id="hasta-crear" class="waypoint" type="text" name="hasta" placeholder="Ingresa hasta donde vas" /> 
 				<label for="fecha">Fecha:</label> 
 				<input id="fecha-Crear" type="date" name="fecha" onblur="return dateValidate(this)" /> 
 				<label for="cupos">Cupos:</label> 

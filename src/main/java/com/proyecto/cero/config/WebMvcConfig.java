@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -60,6 +61,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		templateEngine.setTemplateResolver(templateResolver);
 		templateEngine.addDialect(new SpringSocialDialect());
 		templateEngine.addDialect(new LayoutDialect());
+		templateEngine.addDialect(new SpringSecurityDialect());
+		
 		return templateEngine;
 	}
 

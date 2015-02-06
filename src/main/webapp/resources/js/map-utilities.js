@@ -47,8 +47,20 @@ function calcRoute() {
 
 	directionsService.route(request, function(result, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
+			//SHOWING DEMO
+			/**			for (var i = 0, len = result.routes.length; i < len; i++) {
+							new google.maps.DirectionsRenderer({
+								map : map,
+								directions : result,
+								routeIndex : i
+							});
+						}**/
 			viajeEncontrado = true;
 			directionsDisplay.setDirections(result);
+			var seconds = result.routes[0].legs[0].duration.value;
+			alert(result.routes[0].legs[0].duration.value);
+			document.getElementById('distance').innerHTML = "Distancia: " + result.routes[0].legs[0].distance.value % 1000 + " KM";
+			document.getElementById('duration').innerHTML = "Tiempo " + Math.floor(seconds / 3600) + " H " + Math.floor(seconds % 3600 / 60) + " Mins";
 		} else {
 			//TODO MANEJO DE EXEPCIONES https://developers.google.com/maps/documentation/javascript/directions?hl=es
 			viajeEncontrado = false;
@@ -87,15 +99,22 @@ function initialize() {
 	};
 	directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
 
+	var optionsAutocomplete = {
+		types : ['(cities)'],
+/**		componentRestrictions : {
+			country : "us"
+		}**/
+	};
 	//AUTOCOMPLETE FIELDS
 	var dc = document.getElementById('desde-crear');
 	var hc = document.getElementById('hasta-crear');
 	var db = document.getElementById('desde-buscar');
 	var hb = document.getElementById('hasta-buscar');
-	var autocomplete = new google.maps.places.Autocomplete(dc);
-	var autocomplete = new google.maps.places.Autocomplete(hc);
-	var autocomplete = new google.maps.places.Autocomplete(db);
-	var autocomplete = new google.maps.places.Autocomplete(hb);
+	var autocomplete = new google.maps.places.Autocomplete(dc,optionsAutocomplete);
+	var autocomplete = new google.maps.places.Autocomplete(hc,optionsAutocomplete);
+	var autocomplete = new google.maps.places.Autocomplete(db,optionsAutocomplete);
+	var autocomplete = new google.maps.places.Autocomplete(hb,optionsAutocomplete);
+	document.getElementById("crear-viaje").acceptCharset = "UTF-8";
 
 }
 

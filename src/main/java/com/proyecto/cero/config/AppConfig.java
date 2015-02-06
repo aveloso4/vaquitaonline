@@ -56,13 +56,12 @@ public class AppConfig {
 	private DatabasePopulator databasePopulator() {
 		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
 		populator.setIgnoreFailedDrops(true);
-		populator.setSqlScriptEncoding("UTF-8");
-		
 		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
 		populator.addScript(new ClassPathResource("Account.sql", JdbcAccountRepository.class));
 		populator.addScript(new ClassPathResource("dataAccounts.sql", JdbcAccountRepository.class));
 		populator.addScript(new ClassPathResource("Viaje.sql", JdbcViajeRepository.class));
 		populator.addScript(new ClassPathResource("dataViajes.sql", JdbcViajeRepository.class));
+		populator.setSqlScriptEncoding("utf-8");
 		
 		return populator;
 	}
