@@ -8,8 +8,8 @@
 	<name>Proyecto Cero</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<spring.version>4.0.3.RELEASE</spring.version>
@@ -223,6 +223,12 @@
 			<version>1.2.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity3</artifactId>
+			<version>2.0.1</version>
+			<scope>compile</scope>
+		</dependency>
 
 	</dependencies>
 	<build>

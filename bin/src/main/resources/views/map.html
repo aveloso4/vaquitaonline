@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:social="http://spring.io/springsocial"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:sec="http://www.springframework.org/security/tags">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
 <head>
 <title>Comparti Tu Viaje</title>
 
@@ -25,20 +26,20 @@
 
 </head>
 <body>
-
-	<sec:authorize access="isAnonymous()">
+	<!-- HEADER -->
+	<div sec:authorize="isAnonymous()">
 		<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
 			method="POST">
 			<input type="hidden" name="scope"
 				value="publish_stream,user_photos,offline_access"></input>
 			<button id="boton-facebook" type="submit"></button>
 		</form>
-	</sec:authorize>
-	<sec:authorize access="isAuthenticated()">
+	</div>
+	<div sec:authorize="isAuthenticated()">
 		<form method="POST" th:action="@{/signout}">
 			<button>Sign Out</button>
 		</form>
-	</sec:authorize>
+	</div>
 
 	<div id="header">
 		<h1>

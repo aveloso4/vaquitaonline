@@ -1,6 +1,7 @@
 package com.proyecto.cero.config;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -28,13 +29,13 @@ import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.facebook.web.DisconnectController;
 
-import com.proyecto.cero.facebook.*;
 import com.proyecto.cero.signin.SimpleSignInAdapter;
+
 /**
- * Spring Social Configuration.
- * This configuration demonstrates the use of the simplified Spring Social configuration options from Spring Social 1.1.
+ * Spring Social Configuration. This configuration demonstrates the use of the
+ * simplified Spring Social configuration options from Spring Social 1.1.
  * 
- * @author Craig Walls
+ * @author Eugenio Valeiras
  */
 @Configuration
 @EnableSocial
@@ -46,13 +47,13 @@ public class SocialConfig implements SocialConfigurer {
 	//
 	// SocialConfigurer implementation methods
 	//
-	
+
 	public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
 		cfConfig.addConnectionFactory(new FacebookConnectionFactory(env.getProperty("facebook.appKey"), env.getProperty("facebook.appSecret")));
 	}
-	
+
 	public UserIdSource getUserIdSource() {
-		return new UserIdSource() {			
+		return new UserIdSource() {
 			public String getUserId() {
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 				if (authentication == null) {
@@ -62,37 +63,38 @@ public class SocialConfig implements SocialConfigurer {
 			}
 		};
 	}
-	
+
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 	}
-	
+
 	//
 	// API Binding Beans
 	//
-	
+
 	@Bean
-	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
+	@Scope(value = "request", proxyMode = ScopedProxyMode.INTERFACES)
 	public Facebook facebook(ConnectionRepository repository) {
 		Connection<Facebook> connection = repository.findPrimaryConnection(Facebook.class);
 		return connection != null ? connection.getApi() : null;
 	}
-	
+
 	//
 	// Web Controller and Filter Beans
 	//
 	@Bean
 	public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
-		ConnectController connectController = new ConnectController(connectionFactoryLocator, connectionRepository);
-		connectController.addInterceptor(new PostToWallAfterConnectInterceptor());
-		return connectController;
+
+		return new ConnectController(connectionFactoryLocator, connectionRepository);
 	}
 
 	@Bean
-	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
-		return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
+	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository,HttpServletRequest request) {
+		ProviderSignInController provSignInController = new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
+		provSignInController.setPostSignInUrl("/previousPage");
+		return provSignInController;
 	}
-	
+
 	@Bean
 	public DisconnectController disconnectController(UsersConnectionRepository usersConnectionRepository, Environment env) {
 		return new DisconnectController(usersConnectionRepository, env.getProperty("facebook.appSecret"));

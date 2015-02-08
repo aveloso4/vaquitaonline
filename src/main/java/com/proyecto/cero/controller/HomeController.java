@@ -28,30 +28,35 @@ import com.proyecto.cero.account.AccountRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class HomeController {
-	
+
 	private final Facebook facebook;
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
 	private final AccountRepository accountRepository;
 
 	@Inject
-	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository,Facebook facebook) {
+	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository, Facebook facebook) {
 		this.connectionRepositoryProvider = connectionRepositoryProvider;
 		this.accountRepository = accountRepository;
 		this.facebook = facebook;
 	}
 
 	@RequestMapping("/")
-	public String home(Principal currentUser, Model model) {
-		model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
-		model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
-		model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
-		
+	public String home(Principal currentUser, Model model, WebRequest request) {
+		try {
+			model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
+			model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
+			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
+		} catch (Exception e) {
+			// TODO: QUE HACEMOS SI NO ESTA LOGUEADO?
+		}	
+		request.setAttribute("redirectUri","/",WebRequest.SCOPE_SESSION);
 		return "home";
 	}
-	
+
 	private ConnectionRepository getConnectionRepository() {
 		return connectionRepositoryProvider.get();
 	}

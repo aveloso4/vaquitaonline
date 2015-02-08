@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:social="http://spring.io/springsocial"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" th:href="@{/resources/css/search.css}"
+	type="text/css" media="screen"></link>
+<title>Comparti tu viaje - Search</title>
+</head>
+<body>
+	<div id="header">
+		<h1>
+			<a th:href="@{/}">Search - Comparti Tu Viaje</a>
+		</h1>
+	</div>
+	<div>
+		<h2>Search - Viajes</h2>
+		<ul>
+			<tr th:each="viaje : ${viajes}">
+				<li>
+					<p>Creador: 
+					<td th:text="${viaje.creador}">Creador ...</td>
+					Desde: 
+					<td th:text="${viaje.desde}">Desde ...</td>
+					Hasta: 
+					<td th:text="${viaje.hasta}">Hasta ...</td>
+					Fecha: 
+					<td th:text="${viaje.fecha}">Fecha ...</td>
+					Cupos: 
+					<td th:text="${viaje.cupos}">Cupos ...</td>
+					Costo: 
+					<td th:text="${viaje.costo}">Costo ...</td></p>
+				</li>
+			</tr>
+		</ul>
+	</div>
+</body>
+</html>

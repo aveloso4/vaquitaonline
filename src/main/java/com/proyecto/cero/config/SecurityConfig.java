@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+
+import com.proyecto.cero.signin.LogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -16,22 +19,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http
-		.formLogin()
-			.loginPage("/signin")
-			.loginProcessingUrl("/signin/authenticate")
-			.failureUrl("/signin?param.error=bad_credentials")
-		.and()
+//		.formLogin()
+//			.loginPage("/signin")
+//			.loginProcessingUrl("/signin/authenticate")
+//			.failureUrl("/signin?param.error=bad_credentials")
+//			.and()
 			.logout()
 				.logoutUrl("/signout")
 				.deleteCookies("JSESSIONID")
+				.logoutSuccessHandler(new LogoutSuccessHandler("/signin"))
 		.and()
 			.authorizeRequests()
-				.antMatchers("/signin/**","/search**", "/googleMap**", "/resources/**", "/auth/**", "/signup/**", "/disconnect/facebook").permitAll()
-				.antMatchers("/**").authenticated()
+				.antMatchers("/**","/signin/**","/search**", "/googleMap**", "/resources/**", "/auth/**", "/signup/**", "/disconnect/facebook").permitAll()
+//				.antMatchers("/**").authenticated()
 		.and()
 			.rememberMe()
 		.and().csrf().disable();
-
 	}
 
 	@Bean
