@@ -3,11 +3,11 @@
 	  xmlns:social="http://spring.io/springsocial"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head>
-		<title>Comparti tu viaje - SIGNUP</title>
+		<title>Vaquita - SIGNUP</title>
 	</head>
 	<body>
 		<div id="header">
-			<h1><a th:href="@{/}">Comparti Tu Viaje</a></h1>
+			<h1><a th:href="@{/}">Vaquita Online</a></h1>
 		</div>
 		
 		<div id="content" layout:fragment="content">
@@ -22,14 +22,26 @@
 					<div class="error" th:if="${#fields.hasErrors('*')}">Unable to sign up. Please fix the errors below and resubmit.</div>
 				</div>
 				<fieldset>
-					<label for="firstName">Nombre y Apellido: </label>
-					<span th:text="*{firstName}">firstname</span>
+					<label for="email"> Email: <span th:if="${#fields.hasErrors('email')}" class="error" th:text="${#fields.errors('email')[0]}">Error</span></label>
+					<input type="text" th:field="*{email}"/>
+					
+					<label for="nombre">Nombre: <span th:if="${#fields.hasErrors('nombre')}" class="error" th:text="${#fields.errors('nombre')[0]}">Error</span></label>
+					<!-- Pasa siempre en == null -->
+					<input th:if="${nombre == null}" type="text" th:field="*{nombre}"/>
+					<!-- <span th:if="${firstName != null}" th:text="*{firstName}">firstname</span> -->
+
 					<span> </span>
-					<span th:text="*{lastName}">lastname</span>
-					<label for="username">  -  Username <span th:if="${#fields.hasErrors('username')}" class="error" th:text="${#fields.errors('username')[0]}">Error</span></label>
-					<input type="text" th:field="*{username}"/>
-					<label for="password">  -  Password (at least 6 characters) <span th:if="${#fields.hasErrors('password')}" class="error" th:text="${#fields.errors('password')[0]}">Error</span></label>
+
+					<label for="nombre">Apellido: <span th:if="${#fields.hasErrors('apellido')}" class="error" th:text="${#fields.errors('apellido')[0]}">Error</span></label>
+					<input th:if="${apellido == null}" type="text" th:field="*{apellido}"/>
+					<!-- <span th:if="${lastName != null}" th:text="*{lastName}">firstname</span> -->
+					
+					<label for="password">  -  Contraseña (at least 6 characters) <span th:if="${#fields.hasErrors('password')}" class="error" th:text="${#fields.errors('password')[0]}">Error</span></label>
 					<input type="password" th:field="*{password}"/>
+	
+					<label for="email">  -  Telefono: <span th:if="${#fields.hasErrors('telefono')}" class="error" th:text="${#fields.errors('telefono')[0]}">Error</span></label>
+					<input type="text" th:field="*{telefono}"/>
+	
 				</fieldset>
 				<p><button type="submit">Sign Up</button></p>
 			</form>

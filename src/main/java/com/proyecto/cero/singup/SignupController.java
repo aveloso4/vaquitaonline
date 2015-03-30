@@ -16,7 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.proyecto.cero.account.Account;
 import com.proyecto.cero.account.AccountRepository;
-import com.proyecto.cero.account.UsernameAlreadyInUseException;
+import com.proyecto.cero.account.emailAlreadyInUse;
 import com.proyecto.cero.message.Message;
 import com.proyecto.cero.message.MessageType;
 import com.proyecto.cero.signin.SignInUtils;
@@ -38,7 +38,7 @@ public class SignupController {
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
 		request.setAttribute("redirectUri", request.getHeader("Referer"),WebRequest.SCOPE_SESSION);
 		if (connection != null) {
-			request.setAttribute("message", new Message(MessageType.INFO, "Your " + StringUtils.capitalize(connection.getKey().getProviderId()) + " account is not associated with a Spring Social Showcase account. If you're new, please sign up."), WebRequest.SCOPE_REQUEST);
+			request.setAttribute("message", new Message(MessageType.INFO, "No estas asociado, por favor asociate."), WebRequest.SCOPE_REQUEST);
 			return SignupForm.fromProviderUser(connection.fetchUserProfile());
 		} else {
 			return new SignupForm();
@@ -51,27 +51,26 @@ public class SignupController {
 		if (formBinding.hasErrors()) {
 			return null;
 		}
-		
     String referer = (String) request.getAttribute("redirectUri",WebRequest.SCOPE_SESSION);
     request.removeAttribute("redirectUri", WebRequest.SCOPE_SESSION);
-		Account account = createAccount(form, formBinding, connection.fetchUserProfile());
+		Account account = createAccount(form, formBinding);
 		if (account != null) {
-			SignInUtils.signin(account.getUsername());
-			providerSignInUtils.doPostSignUp(account.getUsername(), request);
-			return "redirect:"+referer;
+			SignInUtils.signin(account.getEmail());
+			providerSignInUtils.doPostSignUp(account.getEmail(), request);
+			return (referer != null) ? "redirect:"+referer : "redirect:/";
 		}
 		return null;
 	}
 
 	// internal helpers
 	
-	private Account createAccount(SignupForm form, BindingResult formBinding, UserProfile providerUser) {
+	private Account createAccount(SignupForm form, BindingResult formBinding) {
 		try {
-			Account account = new Account(form.getUsername(), form.getPassword(), providerUser.getFirstName(), providerUser.getLastName());
+			Account account = new Account(form.getEmail(), form.getNombre(), form.getApellido(), form.getPassword(), form.getTelefono());
 			accountRepository.createAccount(account);
 			return account;
-		} catch (UsernameAlreadyInUseException e) {
-			formBinding.rejectValue("username", "user.duplicateUsername", "already in use");
+		} catch (emailAlreadyInUse e) {
+			formBinding.rejectValue("email", "user.duplicateEmail", "already in use");
 			return null;
 		}
 	}

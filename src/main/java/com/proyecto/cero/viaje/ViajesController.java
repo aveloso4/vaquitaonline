@@ -28,7 +28,7 @@ public class ViajesController {
 		this.viajeRepository = viajeRepository;
 	}
 
-	@RequestMapping(value = "/crearVIaje", method = RequestMethod.POST)
+	@RequestMapping(value = "/crearViaje", method = RequestMethod.POST)
 	public ModelAndView buscarViaje(@Valid ViajesForm form, BindingResult formBinding, WebRequest request) {
 		ModelAndView model = new ModelAndView();
 		if (formBinding.hasErrors()) {

@@ -22,7 +22,7 @@ public class LoginController {
 		} else {
 			model.addObject("isLogin", false);
 			if (error != null) {
-				model.addObject("msg", "Username y Password invalidos");
+				model.addObject("msg", "Email y Password invalidos");
 			}
 			if (logout != null) {
 				model.addObject("msg", "Hasta Luego!");

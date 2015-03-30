@@ -16,6 +16,7 @@
 package com.proyecto.cero.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -23,7 +24,9 @@ import javax.inject.Provider;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 
+import com.proyecto.cero.account.Account;
 import com.proyecto.cero.account.AccountRepository;
+import com.proyecto.cero.viaje.Viaje;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,20 +47,44 @@ public class HomeController {
 		this.facebook = facebook;
 	}
 
-	@RequestMapping("/")
+	@RequestMapping(value = { "/crearViaje", "/createTravel" })
 	public String home(Principal currentUser, Model model, WebRequest request) {
 		try {
 			model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
-			model.addAttribute(accountRepository.findAccountByUsername(currentUser.getName()));
+			model.addAttribute(accountRepository.findAccountByEmail(currentUser.getName()));
 			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
 		} catch (Exception e) {
 			// TODO: QUE HACEMOS SI NO ESTA LOGUEADO?
-		}	
-		request.setAttribute("redirectUri","/",WebRequest.SCOPE_SESSION);
-		return "home";
+		}
+		request.setAttribute("redirectUri", "/crearViaje", WebRequest.SCOPE_SESSION);
+		return "travelCreate";
 	}
 
 	private ConnectionRepository getConnectionRepository() {
 		return connectionRepositoryProvider.get();
+	}
+
+	@RequestMapping(value = { "/accounts" })
+	public String accounts(Principal currentUser, Model model, WebRequest request) {
+		try {
+			List<Account> accounts = accountRepository.findAll();
+			// for (Account account : accounts) {
+			// System.out.print("Nombre: " + account.getNombre());
+			// System.out.print(" - Nombre: " + account.getApellido());
+			// System.out.print(" - Email: " + account.getEmail());
+			// System.out.println(" - Contraseña: " + account.getPassword());
+			// System.out.print(" - Telefono: " + account.getTelefono());
+			// }
+			if (accounts.size() == 0) {
+				System.out.println("Lista vacia");
+			}
+
+			model.addAttribute("accounts", accounts);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		request.setAttribute("redirectUri", "/", WebRequest.SCOPE_SESSION);
+		return "allAccounts";
+
 	}
 }

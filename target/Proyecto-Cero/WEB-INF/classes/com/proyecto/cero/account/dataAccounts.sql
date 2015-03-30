@@ -1,3 +1,1 @@
-insert into Account (username, password, firstName, lastName) values ('habuma', 'freebirds', 'Craig', 'Walls');
-insert into Account (username, password, firstName, lastName) values ('kdonald', 'melbourne', 'Keith', 'Donald');
-insert into Account (username, password, firstName, lastName) values ('rclarkson', 'atlanta', 'Roy', 'Clarkson');
+insert into Account (Email, Nombre, Apellido, Telefono, Password) values ('rodrigo.gonzalez.it@gmail.com','Rodrigo', 'Gonzalez', '011123456', '$2a$10$daLy2eMwD/eZKxW6zZx6tukWukLgx1ISkbQAISV/LewjwrAG9McT.');

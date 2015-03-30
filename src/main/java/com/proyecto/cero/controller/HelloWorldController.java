@@ -43,4 +43,5 @@ public class HelloWorldController {
 		model.setViewName("admin");
 		return model;
 	}
+	
 }

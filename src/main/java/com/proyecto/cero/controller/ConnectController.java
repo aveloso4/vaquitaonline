@@ -16,7 +16,7 @@ public class ConnectController extends org.springframework.social.connect.web.Co
 
 	@Override
 	protected String connectedView(String providerId) {
-		return "redirect:/sarasa";
+		return "redirect:/";
 	}
 	
 

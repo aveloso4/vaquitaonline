@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:social="http://spring.io/springsocial"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" th:href="@{/resources/css/search.css}"
+	type="text/css" media="screen"></link>
+<title>Vaquita All Accounts - Search</title>
+</head>
+<body>
+	<div id="header">
+		<h1>
+			<a th:href="@{/}">Search - All Accounts</a>
+		</h1>
+	</div>
+	<div>
+		<h2>Search - Accounts</h2>
+		<ul>
+			<tr th:each="account : ${accounts}">
+				<li>
+					Nombre: 
+					<td th:text="${account.nombre}">Nombre ...</td>
+					Apellido: 
+					<td th:text="${account.apellido}">Apellido ...</td>
+					Email: 
+					<td th:text="${account.email}">Email ...</td>
+					Password: 
+					<td th:text="${account.password}">Password ...</td>
+					Telefono: 
+					<td th:text="${account.telefono}">Telefono ...</td>
+				</li>
+			</tr>
+		</ul>
+	</div>
+</body>
+</html>

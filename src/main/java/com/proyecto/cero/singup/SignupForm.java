@@ -8,21 +8,51 @@ import org.springframework.social.connect.UserProfile;
 public class SignupForm {
 
 	@NotEmpty
-	private String username;
+	private String email;
+	
+	@NotEmpty
+	private String nombre;
 
+	@NotEmpty
+	private String apellido;
+	
 	@Size(min = 6, message = "must be at least 6 characters")
 	private String password;
+	
+	@NotEmpty
+	private String telefono;
 
-	private String firstName;
 
-	private String lastName;
-
-	public String getUsername() {
-		return username;
+	public static SignupForm fromProviderUser(UserProfile providerUser) {
+		SignupForm form = new SignupForm();
+		form.setEmail(providerUser.getEmail());
+		form.setNombre(providerUser.getFirstName());
+		form.setApellido(providerUser.getLastName());
+		return form;
+	}
+	
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getPassword() {
@@ -33,27 +63,12 @@ public class SignupForm {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public static SignupForm fromProviderUser(UserProfile providerUser) {
-		SignupForm form = new SignupForm();
-		form.setFirstName(providerUser.getFirstName());
-		form.setLastName(providerUser.getLastName());
-		form.setUsername(providerUser.getUsername());
-		return form;
-	}
+	
 }

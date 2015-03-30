@@ -4,99 +4,148 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<title>Comparti Tu Viaje</title>
-<meta charset="UTF-8" />
-<!-- stylesheet -->
+<!-- CSS -->
 <link rel="stylesheet" th:href="@{/resources/css/home.css}" type="text/css"
 	media="screen"></link>
-<link rel="stylesheet" th:href="@{/resources/css/map.css}" type="text/css"
-	media="screen"></link>
-
-<!-- JavaScript -->
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<!-- JAVASCRIPT -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
 <script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;signed_in=true&amp;libraries=places&amp;sensor=true&amp;key=AIzaSyCXaq1x17sp2J8bDb9v-hwitBf-8GDrJoU"></script>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script type="text/javascript" th:src="@{/resources/js/jquery-2.1.3.min.js}"></script>
-<script type="text/javascript" th:src="@{/resources/js/map-utilities.js}"></script>
-<script type="text/javascript" th:src="@{/resources/js/fecha.js}"></script>
-<script type="text/javascript" th:src="@{/resources/js/utilities.js}"></script>
-<script type="text/javascript" th:src="@{/resources/js/home.js}"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+<title>Vaquita Online - SIGNIN</title>
+<meta name="description" content="Vaquita" />
+<meta name="author" content="Eudrigo Valeiras" />	
 </head>
-<body>
-	<div id="header">
-		<h1>
-			<a th:href="@{/}">Comparti Tu Viaje</a>
-		</h1>
-	</div>
-	<div sec:authorize="isAuthenticated()">
-		<img src="#"
-			th:src="@{'http://graph.facebook.com/' +  ${profileInfo.id}} + '/picture'"
-			alt="profile image" />
-		<div id="content" layout:fragment="content">
-			<p>
-				Bienvenido, <span th:text="${account.firstName}">first-name</span>!
-			</p>
 
-			<form method="POST" th:action="@{/signout}">
-				<button>Sign Out</button>
-			</form>
+<body class="light-primary-color">
+	<!-- Page Header -->
+	<header class="dark-primary-color text-primary-color">
+		<!-- Header Container -->
+		<div class="head-container">
+			<!-- Header Itself -->
+			<div class="col-md-12">
+				<!-- Branding Header -->
+				<div class="col-md-8">
+					<!-- Logo Container -->
+					<div class="col-md-3 logo-container">
+						<img th:src="@{/resources/img/home/logo.png}" />
+					</div>
+					<!-- Brand Catchphrase -->
+					<div class="brand-catchphrase col-md-9">
+						<span> Juntá dinero facil... Vaquita Online! </span>
+					</div>
+				</div>
+				<!-- User Header -->
+				<div class="user-header col-md-4">
+				<div sec:authorize="isAnonymous()">
+					<!-- New Vaquita -->
+					<a class="new-vaquita" href="#">
+						<div class="col-md-6">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva
+							Vaquita
+						</div>
+					</a>
+					<!-- User Access/Profile -->
+					<div class="user-access col-md-6">
+						<div class="col-md-8">
+							<a href="#" data-toggle="modal" data-target="#modalLogIn">Accedé</a>
+						</div>
+						<div class="col-md-8">
+							<a href="/signup" data-toggle="modal" data-target="#modalAccess">Unite!</a>
+						</div>
+					</div>
+				</div>
+				<div sec:authorize="isAuthenticated()">
+					<a href="#" >Mi Cuenta</a>
+					<img src="#" th:if="${profileInfo != null}"
+						th:src="@{'http://graph.facebook.com/' +  ${profileInfo.id}} + '/picture'"
+						alt="profile image" />
+						<form method="POST" th:action="@{/signout}">
+							<button>Sign Out</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Page Content -->
+	<section></section>
+
+	<!-- Page Footer -->
+	<footer> </footer>
+
+	<!-- ModalLogIn -->
+	<div class="modal fade" id="modalLogIn" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Accedé</h4>
+				</div>
+				<div class="modal-body">
+
+					<section class="">
+						<section id="signup">
+							<h2>Logo</h2>
+							<p class="">Conectar con Facebook</p>
+							<div class="social-signup">
+								<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
+								method="POST">
+								<input type="hidden" name="scope"
+									value="publish_stream,user_photos,offline_access"></input>
+								<button id="boton-facebook" type="submit"></button>
+							</form>
+							</div>
+							<form name="signin" id="signin" th:action="@{/signin}" method="POST">
+								<p class="lead">Accedé con tu Email</p>
+								<div class="field">
+									<label for="login-email-name">Email</label> 
+									<input id="email login-email-name" type="text" name="email" value=""
+										autofocus="autofocus"/>
+								</div>
+								<div class="field">
+									<label for="login-email-password">Contraseña</label> 
+									<input id="password login-email-password" type="password" name="password" value=""/>
+								</div>
+								<div class="">
+									<input type="submit" value="Acceder" onclick=""/> 
+									<a class="forgot-password" href="#">Olvidaste tu contraseña?</a>
+								</div>
+							</form>
+						</section>
+					</section>
+
+				</div>
+			</div>
 		</div>
 	</div>
-	<div sec:authorize="isAnonymous()">
-		<!-- FACEBOOK SIGNIN -->
-		<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
-			method="POST">
-			<input type="hidden" name="scope"
-				value="publish_stream,user_photos,offline_access"></input>
-			<button id="boton-facebook" type="submit"></button>
-		</form>
-	</div>
-	<div class="forms-content">
 
-		<!-- MAPA -->
-		<div id="map_canvas" style="width: 100%; height: 300px"></div>
-		<div id="distance">Distance:</div>
-		<div id="duration">Duration:</div>
+	<!-- ModalAccess -->
+	<div class="modal fade" id="modalAccess" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Unite!</h4>
 
-		<!-- CREAR VIAJE -->
-		<form name="crear-viaje" onkeypress="return pulsar(event)"
-			onsubmit="return validateForm()" id="crear-viaje" th:action="@{/crearVIaje} "
-			method="POST">
-			<h4 id="h4">Crear Viaje Nuevo</h4>
-			<fieldset>
-				<label for="desde">Desde:</label> <input id="desde-crear" class="waypoint"
-					type="text" name="desde" placeholder="Ingresa desde donde sales" /> <label
-					for="hasta">Hasta:</label> <input id="hasta-crear" class="waypoint"
-					type="text" name="hasta" placeholder="Ingresa hasta donde vas" /> <label
-					for="fecha">Fecha:</label> <input id="fecha-Crear" type="date" name="fecha"
-					onblur="return dateValidate(this)" /> <label for="cupos">Cupos:</label> <input
-					type="text" name="cupos" /> <label for="costo">Costo por cabeza:</label> <input
-					type="text" name="costo" /> <label for="parada">Agregar una
-					parada:</label>
-				<div id="paradas"></div>
-				<input class="agregar-parada" value="Agregar Parada" type="button"
-					name="costo" onclick="crearParada()" />
-			</fieldset>
-			<button id="boton-crear" type="submit">Crear!</button>
-		</form>
-
-		<!-- BUSCAR VIAJE -->
-		<form name="buscar-viaje" onkeypress="return pulsar(event)" id="buscar-viaje"
-			th:action="@{/search}" method="GET">
-			<h4 id="h4">Buscar un Viaje</h4>
-			<fieldset>
-				<label for="desde">Desde:</label> <input id="desde-buscar" type="text"
-					name="desde" placeholder="Ingresa desde donde sales" /> <label for="hasta">Hasta:</label>
-				<input id="hasta-buscar" type="text" name="hasta"
-					placeholder="Ingresa hasta donde vas" /> <label for="costo">Costo
-					maximo:</label> <input type="text" name="costo" /> <label for="fecha">Fecha:</label>
-				<input id="fecha-Buscar" type="date" name="fecha" />
-			</fieldset>
-			<button id="boton-buscar" type="submit">Buscar!</button>
-		</form>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

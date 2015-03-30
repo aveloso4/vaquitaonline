@@ -25,16 +25,14 @@
 	<header>
 		<div class="header-cont">
 			<div class="left-hcont">
-				<a href="#"><img th:src="@{/resources/img/home/logo.png}" /></a>
+				<a href="#"><img th:src="@{/resources/img/home/logo-2.png}" /></a>
 			</div>
 			<div class="right-hcont">
 				<div class="header-links">
 					<div class="header-buttons">
-						<div>
-							<span>Creá tu viaje!</span>
-						</div>
 						<!-- IS NOT LOGIN -->
 						<div sec:authorize="isAnonymous()">
+
 							<!-- FACEBOOK SIGNIN -->
 							<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
 								method="POST">
@@ -42,8 +40,22 @@
 									value="publish_stream,user_photos,offline_access"></input>
 								<button id="boton-facebook" type="submit"></button>
 							</form>
+							
+							<!-- SIGNIN FORM	 -->
+							<form name="signin" id="signin" th:action="@{/signin}"
+								method="POST">
+							 <label for="email">Email</label>
+               				 <input type="text" id="email" name="email"/>        
+                			<label for="password">Password</label>
+                			<input type="password" id="password" name="password"/>
+							<button id="boton" style="height: 20px; width: 50px" type="submit">Loguear</button>
+							</form>
+
 						</div>
 						<!-- IS LOGIN -->
+						<div sec:authorize="isAuthenticated()">
+						<a href="/crearViaje"><span>Creá tu viaje</span></a>
+						</div>
 						<div sec:authorize="isAuthenticated()">
 							<form method="POST" th:action="@{/signout}">
 								<button>Sign Out</button>
