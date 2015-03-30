@@ -1,1 +1,1 @@
-insert into Account (Email, Nombre, Apellido, Telefono, Password) values ('rodrigo.gonzalez.it@gmail.com','Rodrigo', 'Gonzalez', '011123456', '$2a$10$daLy2eMwD/eZKxW6zZx6tukWukLgx1ISkbQAISV/LewjwrAG9McT.');
+insert into Account (Email, Nombre, Apellido, Telefono, Password) values ('vaquitaOnline@gmail.com','Rodrigo', 'Gonzalez', '011123456', '$2a$10$daLy2eMwD/eZKxW6zZx6tukWukLgx1ISkbQAISV/LewjwrAG9McT.');
