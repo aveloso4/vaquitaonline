@@ -1,11 +1,14 @@
 package com.proyecto.cero.signin;
 
+import java.security.Principal;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,18 +24,26 @@ import com.proyecto.cero.singup.SignupForm;
 @Controller
 public class SigninController {
 
+	private final Facebook facebook;
 	private final AccountRepository accountRepository;
 	private final ProviderSignInUtils providerSignInUtils;
 
 	@Inject
-	public SigninController(AccountRepository accountRepository) {
+	public SigninController(AccountRepository accountRepository, Facebook facebook) {
 		this.accountRepository = accountRepository;
 		this.providerSignInUtils = new ProviderSignInUtils();
+		this.facebook = facebook;
 	}
 	
 //	MAPPINGS
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String signin(WebRequest request) {
+	public String signin(Principal currentUser, Model model, WebRequest request) {
+		try{
+			model.addAttribute(accountRepository.findAccountByEmail(currentUser.getName()));
+			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
+		} catch (Exception e){
+			//TODO
+		}
 		request.setAttribute("redirectUri","/",WebRequest.SCOPE_SESSION);
 		return "home";
 	}

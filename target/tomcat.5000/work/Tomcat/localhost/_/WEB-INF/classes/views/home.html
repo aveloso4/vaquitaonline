@@ -64,7 +64,7 @@
 				</div>
 				<div sec:authorize="isAuthenticated()">
 					<a href="#" >Mi Cuenta</a>
-					<img src="#" th:if="${profileInfo != null}"
+					<img src="#" th:if="${profileInfo} != null"
 						th:src="@{'http://graph.facebook.com/' +  ${profileInfo.id}} + '/picture'"
 						alt="profile image" />
 						<form method="POST" th:action="@{/signout}">
