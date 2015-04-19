@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.proyecto.cero.signin.loginFail;
-import com.proyecto.cero.viaje.Viaje;
 
 @Repository
 public class JdbcAccountRepository implements AccountRepository {

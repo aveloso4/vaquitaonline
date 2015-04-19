@@ -20,7 +20,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.proyecto.cero.account.JdbcAccountRepository;
-import com.proyecto.cero.viaje.JdbcViajeRepository;
 
 @Configuration
 @ComponentScan(basePackages = "com.proyecto.cero", excludeFilters = { @Filter(Configuration.class) })
@@ -59,9 +58,6 @@ public class AppConfig {
 		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
 		populator.addScript(new ClassPathResource("Account.sql", JdbcAccountRepository.class));
 		populator.addScript(new ClassPathResource("dataAccounts.sql", JdbcAccountRepository.class));
-		//TODO Viaje x Vaca
-		populator.addScript(new ClassPathResource("Viaje.sql", JdbcViajeRepository.class));
-		populator.addScript(new ClassPathResource("dataViajes.sql", JdbcViajeRepository.class));
 		populator.setSqlScriptEncoding("utf-8");
 		
 		return populator;

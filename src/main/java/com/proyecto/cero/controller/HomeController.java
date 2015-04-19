@@ -26,7 +26,6 @@ import org.springframework.social.facebook.api.Facebook;
 
 import com.proyecto.cero.account.Account;
 import com.proyecto.cero.account.AccountRepository;
-import com.proyecto.cero.viaje.Viaje;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
