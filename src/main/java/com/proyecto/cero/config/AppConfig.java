@@ -28,7 +28,6 @@ public class AppConfig {
     public PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
     	return new PropertySourcesPlaceholderConfigurer();
     }
-    
 	
 	@Bean
 	public JdbcTemplate jdbcTemplate() {
