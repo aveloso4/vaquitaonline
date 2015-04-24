@@ -24,8 +24,9 @@ import javax.inject.Provider;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 
-import com.proyecto.cero.account.Account;
-import com.proyecto.cero.account.AccountRepository;
+import com.proyecto.cero.model.Account;
+import com.proyecto.cero.service.UserService;
+import com.proyecto.cero.service.UserServiceImpl;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,43 +38,36 @@ public class HomeController {
 
 	private final Facebook facebook;
 	private final Provider<ConnectionRepository> connectionRepositoryProvider;
-	private final AccountRepository accountRepository;
+	private final UserService userService;
 
 	@Inject
-	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, AccountRepository accountRepository, Facebook facebook) {
+	public HomeController(Provider<ConnectionRepository> connectionRepositoryProvider, UserService us, Facebook facebook) {
 		this.connectionRepositoryProvider = connectionRepositoryProvider;
-		this.accountRepository = accountRepository;
 		this.facebook = facebook;
+		this.userService = us;
 	}
 
-	@RequestMapping(value = { "/crearViaje", "/createTravel" })
-	public String home(Principal currentUser, Model model, WebRequest request) {
-		try {
-			model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
-			model.addAttribute(accountRepository.findAccountByEmail(currentUser.getName()));
-			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
-		} catch (Exception e) {
-			// TODO: QUE HACEMOS SI NO ESTA LOGUEADO?
-		}
-		request.setAttribute("redirectUri", "/crearViaje", WebRequest.SCOPE_SESSION);
-		return "travelCreate";
-	}
-
-	private ConnectionRepository getConnectionRepository() {
-		return connectionRepositoryProvider.get();
-	}
+//	TODO @RequestMapping(value = { "/crearViaje", "/createTravel" })
+//	public String home(Principal currentUser, Model model, WebRequest request) {
+//		try {
+//			model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
+//			model.addAttribute(accountRepository.findAccountByEmail(currentUser.getName()));
+//			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
+//		} catch (Exception e) {
+//			// TODO: QUE HACEMOS SI NO ESTA LOGUEADO?
+//		}
+//		request.setAttribute("redirectUri", "/crearViaje", WebRequest.SCOPE_SESSION);
+//		return "travelCreate";
+//	}
+//
+//	private ConnectionRepository getConnectionRepository() {
+//		return connectionRepositoryProvider.get();
+//	}
 
 	@RequestMapping(value = { "/accounts" })
 	public String accounts(Principal currentUser, Model model, WebRequest request) {
 		try {
-			List<Account> accounts = accountRepository.findAll();
-			// for (Account account : accounts) {
-			// System.out.print("Nombre: " + account.getNombre());
-			// System.out.print(" - Nombre: " + account.getApellido());
-			// System.out.print(" - Email: " + account.getEmail());
-			// System.out.println(" - Contraseña: " + account.getPassword());
-			// System.out.print(" - Telefono: " + account.getTelefono());
-			// }
+			List<Account> accounts = userService.findAll();
 			if (accounts.size() == 0) {
 				System.out.println("Lista vacia");
 			}

@@ -14,23 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import com.proyecto.cero.account.Account;
-import com.proyecto.cero.account.AccountRepository;
 import com.proyecto.cero.account.emailAlreadyInUse;
 import com.proyecto.cero.message.Message;
 import com.proyecto.cero.message.MessageType;
+import com.proyecto.cero.model.Account;
+import com.proyecto.cero.service.UserService;
+import com.proyecto.cero.service.UserServiceImpl;
 import com.proyecto.cero.signin.SignInUtils;
 
 @Controller
 public class SignupController {
 
-	private final AccountRepository accountRepository;
+	private final UserService userService;
 	private final ProviderSignInUtils providerSignInUtils;
 
 	@Inject
-	public SignupController(AccountRepository accountRepository) {
-		this.accountRepository = accountRepository;
+	public SignupController(UserService us) {
 		this.providerSignInUtils = new ProviderSignInUtils();
+		this.userService = us;
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
@@ -67,7 +68,7 @@ public class SignupController {
 	private Account createAccount(SignupForm form, BindingResult formBinding) {
 		try {
 			Account account = new Account(form.getEmail(), form.getNombre(), form.getApellido(), form.getPassword(), form.getTelefono());
-			accountRepository.createAccount(account);
+			userService.createAccount(account);
 			return account;
 		} catch (emailAlreadyInUse e) {
 			formBinding.rejectValue("email", "user.duplicateEmail", "already in use");

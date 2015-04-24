@@ -16,21 +16,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import com.proyecto.cero.account.Account;
-import com.proyecto.cero.account.AccountRepository;
 import com.proyecto.cero.account.emailAlreadyInUse;
+import com.proyecto.cero.model.Account;
+import com.proyecto.cero.service.UserService;
+import com.proyecto.cero.service.UserServiceImpl;
 import com.proyecto.cero.singup.SignupForm;
 
 @Controller
 public class SigninController {
 
 	private final Facebook facebook;
-	private final AccountRepository accountRepository;
 	private final ProviderSignInUtils providerSignInUtils;
-
+	private final UserService userService;
+	
 	@Inject
-	public SigninController(AccountRepository accountRepository, Facebook facebook) {
-		this.accountRepository = accountRepository;
+	public SigninController(UserService us, Facebook facebook) {
+		this.userService = us;
 		this.providerSignInUtils = new ProviderSignInUtils();
 		this.facebook = facebook;
 	}
@@ -39,7 +40,7 @@ public class SigninController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String signin(Principal currentUser, Model model, WebRequest request) {
 		try{
-			model.addAttribute(accountRepository.findAccountByEmail(currentUser.getName()));
+			model.addAttribute(userService.getUser(currentUser.getName()));
 			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
 		} catch (Exception e){
 			//TODO
@@ -77,7 +78,7 @@ public class SigninController {
 	private Account signInAccount(SigninForm form, BindingResult formBinding) {
 		try {
 			Account account = new Account(form.getEmail(), null, null, form.getPassword(), null);
-			return accountRepository.logInAccount(account);
+			return userService.logInAccount(account);
 		} catch (loginFail e) {
 			formBinding.rejectValue("email", "user.duplicateEmail", "already in use");
 			return null;
