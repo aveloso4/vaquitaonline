@@ -26,7 +26,6 @@ public class Role {
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	
-	@Column(name = "role", unique = true, nullable = false)
 	private String role;
 	
 	@OneToMany(cascade=CascadeType.ALL)
