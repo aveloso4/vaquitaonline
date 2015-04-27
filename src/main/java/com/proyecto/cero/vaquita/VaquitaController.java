@@ -36,13 +36,13 @@ public class VaquitaController {
 		this.facebook = facebook;
 	}
 
-  @RequestMapping(value = "/crearVaquita", method = RequestMethod.POST)
+  @RequestMapping(value = "/vaquitaCreada", method = RequestMethod.POST)
   public ModelAndView crearVaquita(@Valid VaquitaPrimerPasoForm form, BindingResult formBinding, WebRequest request) {
     ModelAndView model = new ModelAndView();
-    if (formBinding.hasErrors()) {
-      model.setViewName("redirect:/");
-      return model;
-    }
+//    if (formBinding.hasErrors()) {
+//      model.setViewName("redirect:/");
+//      return model;
+//    }
     Vaquita vaquita = crearVaquita(form, formBinding);
     model.addObject("vaquita", vaquita);
     model.setViewName("vaquitaCreada");

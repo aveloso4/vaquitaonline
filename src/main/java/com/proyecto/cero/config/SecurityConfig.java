@@ -19,19 +19,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http
-//		.formLogin()
-//			.loginPage("/signin")
+		.formLogin()
+			.loginPage("/signupExtra")
 //			.loginProcessingUrl("/signin/authenticate")
 //			.failureUrl("/signin?param.error=bad_credentials")
-//			.and()
+			.and()
 			.logout()
 				.logoutUrl("/signout")
 				.deleteCookies("JSESSIONID")
 				.logoutSuccessHandler(new LogoutSuccessHandler("/signin"))
 		.and()
 			.authorizeRequests()
+				.antMatchers("/vaquitaCreada").authenticated()
 				.antMatchers("/**","/signin/**","/search**", "/googleMap**", "/resources/**", "/auth/**", "/signup/**", "/disconnect/facebook").permitAll()
-//				.antMatchers("/**").authenticated()
 		.and()
 			.rememberMe()
 		.and().csrf().disable();
