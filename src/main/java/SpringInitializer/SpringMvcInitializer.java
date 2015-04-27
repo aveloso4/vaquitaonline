@@ -35,9 +35,7 @@ public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServ
 		CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
 		encodingFilter.setEncoding("UTF-8");
 		encodingFilter.setForceEncoding(true);
-		
 		DelegatingFilterProxy reconnectDelegate = new DelegatingFilterProxy("apiExceptionHandler");
-		
 		return new Filter[] { reconnectDelegate, encodingFilter, new HiddenHttpMethodFilter() };
 	}
 

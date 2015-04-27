@@ -46,6 +46,18 @@ public class SignupController {
 		}
 	}
 
+	@RequestMapping(value="/signupExtra", method=RequestMethod.GET)
+	public SignupForm signupExtraForm(WebRequest request) {
+		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
+		request.setAttribute("redirectUri", request.getHeader("Referer"),WebRequest.SCOPE_SESSION);
+		if (connection != null) {
+			request.setAttribute("message", new Message(MessageType.INFO, "No estas asociado, por favor asociate."), WebRequest.SCOPE_REQUEST);
+			return SignupForm.fromProviderUser(connection.fetchUserProfile());
+		} else {
+			return new SignupForm();
+		}
+	}
+
 	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);

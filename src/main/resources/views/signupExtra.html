@@ -74,22 +74,69 @@
 	</header>
 
 	<!-- Page Content -->
-			<section class="main-cont">
-				<div class="new-vaq-cont">
-					<div class="col-md-12">
-						<div class="col-md-4">
-							<img  th:src="@{/resources/img/home/logo.png}" style="width:100%;max-width:160px;margin:0 auto;display:block;" />
-						</div>
-						<div class="col-md-8">
-							<div class="vaq-title-final" style="margin-top:25%;">
-								<h2 th:text="${vaquita.nombre}"></h2>
+	<section class="main-cont">
+				<div class="new-vaq-cont" style="padding-top:30px;">
+					<div class="col-md-7" style="border-right:solid 1px gray;">
+						<section class="">
+							<section id="signup" style="padding: 0 10%;">
+								<p class="li-lead fb-user-title">Conectar con Facebook</p>
+								<div class="social-signup">
+								<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
+								method="POST">
+									<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access"></input>
+									<button id="boton-facebook" type="submit" style="color: white">Facebook</button>
+								</form>
 							</div>
-						</div>
+								<form name="signin" id="signin" th:action="@{/signin}" method="POST">
+									<p class="li-lead">Accedé con tu Email</p>
+									<div class="field">
+										<label for="login-email-name">Email</label>
+										<input id="login-email-name" type="text" name="username" value="" autofocus="autofocus"/>
+									</div>
+									<div class="field">
+										<label for="login-email-password">Contraseña</label>
+										<input id="login-email-password" type="password" name="password" value=""/>
+												</div>
+									<div class="access-modal-controls">
+										<input type="submit" value="Acceder" onclick=""/>
+										<a class="forgot-password" href="#" >Olvidaste tu contraseña?</a>
+									</div>
+								</form>
+							</section>
+						</section>
 					</div>
-					<div class="col-md-12">
-						<div class="vaq-desc-final" style="padding: 0 10% 0 10%;margin:50px 0 60px 0;">
-							<p th:text="${vaquita.descripcion}"></p>
-						</div>
+					<div class="col-md-5">
+						<form id="login-email" th:action="@{/signup}" method="post" th:object="${signupForm}" style="padding-left:30px;">
+							<p class="li-lead">Creá tu cuenta!</p>
+							<div class="field">
+								<label for="nlogin-email-name">Nombre</label>
+								<input th:field="*{nombre}" style="width: 80%;" id="nlogin-email-name" type="text" name="fname" value="" autofocus="autofocus"/>
+							</div>
+						
+							<div class="field">
+								<label for="nlogin-email-lname">Apellido</label>
+								<input th:field="*{apellido}" style="width: 80%;" id="nlogin-email-lname" type="text" name="lname" value="" autofocus="autofocus"/>
+							</div>
+						
+							<div class="field">
+								<label for="nlogin-email">Email</label>
+								<input th:field="*{email}" style="width: 80%;" id="nlogin-email" type="text" name="email" value="" autofocus="autofocus"/>
+							</div>
+							
+							<div class="field">
+								<label for="nlogin-email-password">Contraseña</label>
+								<input th:field="*{password}" style="width: 80%;" id="nlogin-email-password" type="password" name="password" value=""/>
+							</div>
+							
+							<div class="field">
+								<label for="nlogin-email-password">Telefono</label>
+								<input th:field="*{telefono}" style="width: 80%;" id="nlogin-email-password" type="text" name="telefono" value=""/>
+							</div>
+							
+							<div class="access-modal-controls">
+								<p><button type="submit">Crear Cuenta</button></p>
+							</div>
+						</form>
 					</div>
 				</div>
 			
@@ -120,7 +167,7 @@
 								<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
 								method="POST">
 									<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access"></input>
-									<button id="boton-facebook" type="submit"  style="color: white">Facebook</button>
+									<button id="boton-facebook" type="submit" style="color: white">Facebook</button>
 								</form>
 							</div>
 							<form name="signin" id="signin" th:action="@{/signin}" method="POST">
