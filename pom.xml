@@ -8,8 +8,6 @@
 	<name>Proyecto Cero</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<junit>4.8.2</junit>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -261,6 +259,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
+				<encoding>UTF-8</encoding>
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>

@@ -1,11 +1,14 @@
 package com.proyecto.cero.vaquita;
 
+import java.security.Principal;
 import java.util.Date;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,20 +19,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.cero.account.dao.VaquitaDao;
 import com.proyecto.cero.model.Vaquita;
+import com.proyecto.cero.service.UserService;
+import com.proyecto.cero.service.VaquitaService;
 
 @Controller
 public class VaquitaController {
 
-  @Qualifier("vaquitaDaoImp")
-  private final VaquitaDao vaquitaDao;
-
-  @Inject
-  public VaquitaController(VaquitaDao vaquitaDao) {
-    this.vaquitaDao = vaquitaDao;
-  }
+	private final Facebook facebook;
+	private final ProviderSignInUtils providerSignInUtils;
+	private final VaquitaService vaquitaService;
+	
+	@Inject
+	public VaquitaController(VaquitaService vs, Facebook facebook) {
+		this.vaquitaService = vs;
+		this.providerSignInUtils = new ProviderSignInUtils();
+		this.facebook = facebook;
+	}
 
   @RequestMapping(value = "/crearVaquita", method = RequestMethod.POST)
-  public ModelAndView buscarVaquita(@Valid VaquitaForm form, BindingResult formBinding, WebRequest request) {
+  public ModelAndView crearVaquita(@Valid VaquitaPrimerPasoForm form, BindingResult formBinding, WebRequest request) {
     ModelAndView model = new ModelAndView();
     if (formBinding.hasErrors()) {
       model.setViewName("redirect:/");
@@ -39,6 +47,13 @@ public class VaquitaController {
     model.addObject("vaquita", vaquita);
     model.setViewName("vaquitaCreada");
     return model;
+  }
+  
+  @RequestMapping(value = "/crearVaquita", method = RequestMethod.GET)
+  public ModelAndView crearVaquita(Principal user) {
+	  ModelAndView model = new ModelAndView();
+	  model.setViewName("crearVaquita-1");
+	  return model;
   }
 
   @RequestMapping(value = "/search", method = RequestMethod.GET)
@@ -66,7 +81,7 @@ public class VaquitaController {
 		ModelAndView model = new ModelAndView();
 		
 //		Vaquita vaquitaABuscar = new Vaquita("Eugenio Valeiras",creador, organizador, imagen, descripcion, cancelReason, fechaInicio, fechaFin, vaquitaPublica, contributionField, mostrarNombreParticipantes, mostrarPlataParticipante, mostrarPlataTotalRecaudada, mensajeAbierto, invitacionAbierta, mostrarMuroMensajes, emailNotifications, contribucionDefinida, contribucionSugerida, objetivoDeDinero);
-		Vaquita vaquita = getVaquitaDao().findVaquitaById(1);
+		Vaquita vaquita = vaquitaService.findVaquitaById(1);
 //		for (Vaquita vaquita : vaquitas) {
 			System.out.print(vaquita);
 //		}
@@ -77,14 +92,10 @@ public class VaquitaController {
 
   
   // Internal Helpers
-  private Vaquita crearVaquita(VaquitaForm form, BindingResult formBinding) {
-		Vaquita vaquita = new Vaquita("Eugenio Valeiras",form.getCreador(), form.getOrganizador(), form.getImagen(), form.getDescripcion(), form.getCancelReason(), form.getFechaInicio(), form.getFechaFin(), form.isVaquitaPublica(), form.isContributionField(), form.isMostrarNombreParticipantes(), form.isMostrarPlataParticipante(), form.isMostrarPlataTotalRecaudada(), form.isMensajeAbierto(), form.isInvitacionAbierta(), form.isMostrarMuroMensajes(), form.isEmailNotifications(), form.getContribucionDefinida(),form.getContribucionSugerida(),form.getObjetivoDeDinero());
-    getVaquitaDao().createVaquita(vaquita);
+  private Vaquita crearVaquita(VaquitaPrimerPasoForm form, BindingResult formBinding) {
+		Vaquita vaquita = new Vaquita(form.getNombre(), form.getDescripcion(), form.getImagen());
+    vaquitaService.createVaquita(vaquita);
     return vaquita;
 	}
-
-  private VaquitaDao getVaquitaDao() {
-    return vaquitaDao;
-  }
 
 }

@@ -3,6 +3,7 @@
 	  xmlns:social="http://spring.io/springsocial"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<head>
+		<meta charset="UTF-8"/>
 		<title>Vaquita - SIGNUP</title>
 	</head>
 	<body>
@@ -36,7 +37,7 @@
 					<input th:if="${apellido == null}" type="text" th:field="*{apellido}"/>
 					<!-- <span th:if="${lastName != null}" th:text="*{lastName}">firstname</span> -->
 					
-					<label for="password">  -  Contraseña (at least 6 characters) <span th:if="${#fields.hasErrors('password')}" class="error" th:text="${#fields.errors('password')[0]}">Error</span></label>
+					<label for="password">  -  ContraseÃ±a (at least 6 characters) <span th:if="${#fields.hasErrors('password')}" class="error" th:text="${#fields.errors('password')[0]}">Error</span></label>
 					<input type="password" th:field="*{password}"/>
 	
 					<label for="email">  -  Telefono: <span th:if="${#fields.hasErrors('telefono')}" class="error" th:text="${#fields.errors('telefono')[0]}">Error</span></label>

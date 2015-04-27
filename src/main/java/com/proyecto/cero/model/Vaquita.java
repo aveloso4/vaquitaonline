@@ -24,7 +24,7 @@ public class Vaquita {
   @Column(name = "nombre")
   private String nombre;
   
-  @NotNull
+//  @NotNull
   @Column(name = "creador")
   private String creador;
   
@@ -41,46 +41,46 @@ public class Vaquita {
   @Column(name = "cancelReason")
   private String cancelReason;
 
-  @NotNull
+//  @NotNull
   @Column(name = "fechaInicio")
   private Date fechaInicio;
   
   @Column(name = "fechaFin")
   private Date fechaFin;
 
-  @NotNull
+//  @NotNull
   @Column(name = "VaquitaPublica")
   private boolean VaquitaPublica; // Default: False;
   
-  @NotNull
+//  @NotNull
   @Column(name = "contributionField")
   private boolean contributionField; // Default: True // Se le saca el monto // final Sino se le saca a la contribucion
   
-  @NotNull
+//  @NotNull
   @Column(name = "mostrarNombreParticipantes")
   private boolean mostrarNombreParticipantes; // Default: False
   
-  @NotNull
+//  @NotNull
   @Column(name = "mostrarPlataParticipante")
   private boolean mostrarPlataParticipante; // Default: False
   
-  @NotNull
+//  @NotNull
   @Column(name = "mostrarPlataTotalRecaudada")
   private boolean mostrarPlataTotalRecaudada; // Default: False
   
-  @NotNull
+//  @NotNull
   @Column(name = "mensajeAbierto")
   private boolean mensajeAbierto; // Default: True
   
-  @NotNull
+//  @NotNull
   @Column(name = "invitacionAbierta")
   private boolean invitacionAbierta; // Default: True
   
-  @NotNull
+//  @NotNull
   @Column(name = "mostrarMuroMensajes")
   private boolean mostrarMuroMensajes; // Default: True
   
-  @NotNull
+//  @NotNull
   @Column(name = "emailNotifications")
   private boolean emailNotifications; // Default: False
 
@@ -98,6 +98,12 @@ public class Vaquita {
   private Status status; // Default: ACTIVA
 */
 
+  public Vaquita(String nombre, String desc, String img){
+	  this.nombre = nombre;
+	  this.descripcion = desc;
+	  this.imagen = img;
+  }
+  
   public Vaquita(String nombre, String creador, String organizador, String imagen, String descripcion, String cancelReason, Date fechaInicio,
       Date fechaFin, boolean vaquitaPublica, boolean contributionField, boolean mostrarNombreParticipantes, boolean mostrarPlataParticipante,
       boolean mostrarPlataTotalRecaudada, boolean mensajeAbierto, boolean invitacionAbierta, boolean mostrarMuroMensajes, boolean emailNotifications,

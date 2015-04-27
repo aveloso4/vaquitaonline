@@ -39,9 +39,9 @@ public class AppConfig {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/test");
-		dataSource.setUsername("root");
-		dataSource.setPassword("");
+		dataSource.setUrl("jdbc:mysql://us-cdbr-iron-east-02.cleardb.net:3306/heroku_b679f12e8abf617");
+		dataSource.setUsername("b705dcfa497ca6");
+		dataSource.setPassword("ba8d8a73");
 		
 		return dataSource;
 	}
@@ -57,7 +57,7 @@ public class AppConfig {
 	
 	private Properties hibProperties() {
 		Properties properties = new Properties();
-		properties.put("hibernate.hbm2ddl.auto", "create-drop");
+		properties.put("hibernate.hbm2ddl.auto", "update");
 		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		properties.put("hibernate.show_sql", true);
 		return properties;	
