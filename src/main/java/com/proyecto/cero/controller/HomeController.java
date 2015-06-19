@@ -23,15 +23,13 @@ import javax.inject.Provider;
 
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
-
-import com.proyecto.cero.model.Account;
-import com.proyecto.cero.service.UserService;
-import com.proyecto.cero.service.UserServiceImpl;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
+
+import com.proyecto.cero.model.Account;
+import com.proyecto.cero.service.UserService;
 
 @Controller
 public class HomeController {
@@ -47,23 +45,6 @@ public class HomeController {
 		this.userService = us;
 	}
 
-//	TODO @RequestMapping(value = { "/crearViaje", "/createTravel" })
-//	public String home(Principal currentUser, Model model, WebRequest request) {
-//		try {
-//			model.addAttribute("connectionsToProviders", getConnectionRepository().findAllConnections());
-//			model.addAttribute(accountRepository.findAccountByEmail(currentUser.getName()));
-//			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
-//		} catch (Exception e) {
-//			// TODO: QUE HACEMOS SI NO ESTA LOGUEADO?
-//		}
-//		request.setAttribute("redirectUri", "/crearViaje", WebRequest.SCOPE_SESSION);
-//		return "travelCreate";
-//	}
-//
-//	private ConnectionRepository getConnectionRepository() {
-//		return connectionRepositoryProvider.get();
-//	}
-
 	@RequestMapping(value = { "/accounts" })
 	public String accounts(Principal currentUser, Model model, WebRequest request) {
 		try {
@@ -78,6 +59,5 @@ public class HomeController {
 		}
 		request.setAttribute("redirectUri", "/", WebRequest.SCOPE_SESSION);
 		return "allAccounts";
-
 	}
 }

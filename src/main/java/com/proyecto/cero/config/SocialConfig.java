@@ -91,7 +91,8 @@ public class SocialConfig implements SocialConfigurer {
 	@Bean
 	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository,HttpServletRequest request) {
 		ProviderSignInController provSignInController = new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
-		provSignInController.setPostSignInUrl("/previousPage");
+		provSignInController.setPostSignInUrl("/");
+		provSignInController.setSignInUrl("/signin/facebook");
 		return provSignInController;
 	}
 

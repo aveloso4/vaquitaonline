@@ -3,24 +3,19 @@ package com.proyecto.cero.signin;
 import java.security.Principal;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
-import com.proyecto.cero.account.emailAlreadyInUse;
 import com.proyecto.cero.model.Account;
 import com.proyecto.cero.service.UserService;
-import com.proyecto.cero.service.UserServiceImpl;
-import com.proyecto.cero.singup.SignupForm;
 
 @Controller
 public class SigninController {
@@ -41,46 +36,37 @@ public class SigninController {
 	public String signin(Principal currentUser, Model model, WebRequest request) {
 		try{
 			model.addAttribute(userService.getUser(currentUser.getName()));
+			
 			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
+//			model.addAttribute("AuthenticUser", SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
+			
 		} catch (Exception e){
 			//TODO
 		}
-		request.setAttribute("redirectUri","/",WebRequest.SCOPE_SESSION);
 		return "home";
 	}
 
-	@RequestMapping(value = "/previousPage", method = RequestMethod.GET)
-	public String previousPage(WebRequest request) {
-		 String referer = (String) request.getAttribute("redirectUri",WebRequest.SCOPE_SESSION);
-		 request.removeAttribute("redirectUri", WebRequest.SCOPE_SESSION);
-		 return "redirect:"+referer;
-	}
-
 	@RequestMapping(value="/signin", method=RequestMethod.POST)
-	public String signin(@Valid SigninForm form, BindingResult formBinding, WebRequest request) {
+	public String signin(WebRequest request) {
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-		if (formBinding.hasErrors()) {
-			return null;
-		}
-    String referer = (String) request.getAttribute("redirectUri",WebRequest.SCOPE_SESSION);
-    request.removeAttribute("redirectUri", WebRequest.SCOPE_SESSION);
-		Account account = signInAccount(form, formBinding);
-		System.out.println("EL ACCOUNT A LOGGUEAR: "+account);
+		
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		Account account = signInAccount(email,password);
+		
 		if (account != null) {
 			SignInUtils.signin(account.getEmail());
 			providerSignInUtils.doPostSignUp(account.getEmail(), request);
-//			return (referer != null) ? "redirect:"+referer : "redirect:/";
 		}
-		return (referer != null) ? "redirect:"+referer : "redirect:/";
-//		return null;
+		
+		return "redirect:/";
 	}
 	
-	private Account signInAccount(SigninForm form, BindingResult formBinding) {
+	private Account signInAccount(String email, String password) {
 		try {
-			Account account = new Account(form.getEmail(), null, null, form.getPassword(), null);
+			Account account = new Account(email, null, null, password, null);
 			return userService.logInAccount(account);
 		} catch (loginFail e) {
-			formBinding.rejectValue("email", "user.duplicateEmail", "already in use");
 			return null;
 		}
 	}

@@ -1,89 +1,83 @@
 package com.proyecto.cero.singup;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import java.security.Principal;
 
+import javax.inject.Inject;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
 import com.proyecto.cero.account.emailAlreadyInUse;
-import com.proyecto.cero.message.Message;
-import com.proyecto.cero.message.MessageType;
 import com.proyecto.cero.model.Account;
 import com.proyecto.cero.service.UserService;
-import com.proyecto.cero.service.UserServiceImpl;
 import com.proyecto.cero.signin.SignInUtils;
 
 @Controller
 public class SignupController {
 
+	private final Facebook facebook;
 	private final UserService userService;
 	private final ProviderSignInUtils providerSignInUtils;
 
 	@Inject
-	public SignupController(UserService us) {
+	public SignupController(UserService us, Facebook facebook) {
 		this.providerSignInUtils = new ProviderSignInUtils();
 		this.userService = us;
+		this.facebook = facebook;
 	}
 
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
-	public SignupForm signupForm(WebRequest request) {
+		public String facebookSignup(Principal currentUser, Model model, WebRequest request) throws emailAlreadyInUse {
+		
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-		request.setAttribute("redirectUri", request.getHeader("Referer"),WebRequest.SCOPE_SESSION);
-		if (connection != null) {
-			request.setAttribute("message", new Message(MessageType.INFO, "No estas asociado, por favor asociate."), WebRequest.SCOPE_REQUEST);
-			return SignupForm.fromProviderUser(connection.fetchUserProfile());
+		String name, lastName, password, email, telephone;
+		
+		if(connection != null){
+			//Facebook Signup
+			UserProfile userProfile = connection.fetchUserProfile();
+			name = userProfile.getFirstName();
+			lastName = userProfile.getLastName();
+			password = "23%&/2423&/3435ÑsdjNsadI";
+			email = "eugenio.valeiras@gmail.com";
+			telephone = null;
+			
 		} else {
-			return new SignupForm();
+			//Application Signup
+			name = request.getParameter("name");
+			lastName = request.getParameter("lastName");
+			password = request.getParameter("password");
+			email = request.getParameter("email");
+			telephone = request.getParameter("telephone");
 		}
-	}
+			
+			Account account = createAccount(email, name, lastName, password, telephone);
+			System.out.println(account);
 
-	@RequestMapping(value="/signupExtra", method=RequestMethod.GET)
-	public SignupForm signupExtraForm(WebRequest request) {
-		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-		request.setAttribute("redirectUri", request.getHeader("Referer"),WebRequest.SCOPE_SESSION);
-		if (connection != null) {
-			request.setAttribute("message", new Message(MessageType.INFO, "No estas asociado, por favor asociate."), WebRequest.SCOPE_REQUEST);
-			return SignupForm.fromProviderUser(connection.fetchUserProfile());
-		} else {
-			return new SignupForm();
+			if(account != null) {
+				//If not duplicated account
+				SignInUtils.signin(account.getEmail());
+				providerSignInUtils.doPostSignUp(account.getEmail(), request);
+				return "redirect:/";
+			}
+			return "redirect:/duplicateAccount";
 		}
-	}
-
-	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signup(@Valid SignupForm form, BindingResult formBinding, WebRequest request) {
-		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-		if (formBinding.hasErrors()) {
-			return null;
-		}
-    String referer = (String) request.getAttribute("redirectUri",WebRequest.SCOPE_SESSION);
-    request.removeAttribute("redirectUri", WebRequest.SCOPE_SESSION);
-		Account account = createAccount(form, formBinding);
-		if (account != null) {
-			SignInUtils.signin(account.getEmail());
-			providerSignInUtils.doPostSignUp(account.getEmail(), request);
-			return (referer != null) ? "redirect:"+referer : "redirect:/";
-		}
-		return null;
-	}
 
 	// internal helpers
 	
-	private Account createAccount(SignupForm form, BindingResult formBinding) {
+	private Account createAccount(String email, String name, String lastName, String password, String telefono) {
 		try {
-			Account account = new Account(form.getEmail(), form.getNombre(), form.getApellido(), form.getPassword(), form.getTelefono());
+			Account account = new Account(email, name, lastName, password, telefono);
 			userService.createAccount(account);
 			return account;
 		} catch (emailAlreadyInUse e) {
-			formBinding.rejectValue("email", "user.duplicateEmail", "already in use");
 			return null;
 		}
 	}

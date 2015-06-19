@@ -2,9 +2,6 @@ package com.proyecto.cero.vaquita;
 
 import java.sql.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class VaquitaForm {

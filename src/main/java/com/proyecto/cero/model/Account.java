@@ -25,7 +25,7 @@ public class Account {
 	@Column(name = "Password", nullable = false, length = 60)
 	private String password;
 	
-	@Column(name = "Telefono", nullable = false, length = 60)
+	@Column(name = "Telefono", nullable = true, length = 60)
 	private String telefono;
 	
 	@OneToOne(cascade=CascadeType.ALL)

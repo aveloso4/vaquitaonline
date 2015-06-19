@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Regalenlo.com</title>
+    <meta name="description" content="An interactive getting started guide for Brackets.">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!--animate.css styles and scripts-->
+    <link rel="stylesheet" href="resources/css/animate.css">
+    <script></script>
+
+    <!--Main Styles-->
+    <link rel="stylesheet" href="resources/css/main.css">
+
+
+</head>
+
+<body class="col-md-12">
+    <!--Header-->
+    <header class="col-md-12">
+        <!-- Header Container -->
+        <div class="center-col head-container">
+            <!-- Header Itself -->
+            <div class="col-md-12">
+                <!-- Branding Header -->
+                <div class="col-md-8">
+                    <!-- Logo Container -->
+                    <div class="col-md-4 logo-container">
+                        <img src="resources/img/home/Logo-Mayus.png" />
+                    </div>
+                    <!-- Brand Catchphrase -->
+                    <div class="brand-catchphrase col-md-8">
+                        <span>
+						<!-- ToDo -->
+				        </span>
+                    </div>
+                </div>
+                <!-- User Header -->
+                <div class="user-header col-md-4">
+                    <!-- New Vaquita -->
+                    <a class="new-vaquita" href="#">
+                        <div class="col-md-6">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Vaquita
+                        </div>
+                    </a>
+                    <!-- User Access/Profile -->
+                    {{#AuthenticUser}}
+						<img src="#" src="http://graph.facebook.com/{{accountInfo.id}}/picture"	alt="profile image" />
+                    {{/AuthenticUser}}
+                    {{^AuthenticUser}}
+	                    <div class="user-access col-md-6" style="font-size: 16px;">
+	                        <div class="col-md-8">
+	                            <a href="#" data-toggle="modal" data-target="#modalLogIn">Accedé</a>
+	                        </div>
+	                        <div class="col-md-8">
+	                            <a href="#" data-toggle="modal" data-target="#modalAccess">Unite!</a>
+	                        </div>
+	                    </div>
+                    {{/AuthenticUser}}
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Content-->
+    <section>
+        <div class="center-col">
+            <!--Access Container-->
+            <div class="col-md-10 access-container">
+                <div class="col-md-6 login-section">
+                    <section class="">
+                        <section id="signup">
+                            <p class="li-lead fb-user-title">Acceso Usuarios</p>
+                            <div class="social-signup">
+                                <form name="fb_signin" id="fb_signin" method="POST" action="/signin/facebook">
+                                    <input type="hidden" name="scope" value="public_profile, publish_actions, user_friends">
+                                    <button id="boton-facebook" type="submit" style="color:white;font-size:20px; background-color:#3a5795; padding:15px 20px;">Accedé con Facebook</button>
+                                </form>
+                            </div>
+                            <form id="login-email" class="" action="/signin" method="POST">
+                                <p class="li-lead">Accedé con tu Email</p>
+                                <p class="field">
+                                    <label for="login-email-name">Email:</label>
+                                    <input id="login-email-name" type="text" name="email" value="" autofocus="autofocus">
+                                </p>
+                                <p class="field">
+                                    <label for="login-email-password">Contraseña:</label>  |
+                                    <input id="login-email-password" type="password" name="password" value="">
+                                </p>
+                                <div class="access-modal-controls button">
+                                    <input type="submit" value="Acceder" onclick="">
+                                    <a class="forgot-password" href="#">Olvidaste tu contraseña?</a>
+                                </div>
+                            </form>
+                        </section>
+                    </section>
+                </div>
+                
+                <div class="col-md-6 signin-section">
+                    <section class="">
+                        <section id="signup">
+                            <p class="li-lead-na fb-user-title">Registro Nuevo Usuario</p>
+                            <div class="social-signup">
+                                <form name="fb_signin" id="fb_signin" method="POST" action="/signin/facebook">
+                                    <input type="hidden" name="scope" value="public_profile, publish_actions, user_friends">
+                                    <button id="boton-facebook" type="submit" style="color:white;font-size:20px; background-color:#3a5795; padding:15px 20px;">Registrate con Facebook</button>
+                                </form>
+                            </div>
+                            <div id="register" class="animate form">
+                                <form action="/signup" autocomplete="on">
+                                    <p>
+                                        <label for="emailsignup" class="youmail" data-icon="e"><span style="color:red">*</span>Nombre:</label>
+                                        <input id="emailsignup" name="name" required="required" type="text" placeholder="Juan" />
+                                    </p>
+                                    <p>
+                                        <label for="emailsignup" class="youmail" data-icon="e"><span style="color:red">*</span>Apellido:</label>
+                                        <input id="emailsignup" name="lastName" required="required" type="text" placeholder="Fernandez" />
+                                    </p>
+                                    <p>
+                                        <label for="emailsignup" class="youmail" data-icon="e">Telefono:</label>
+                                        <input id="emailsignup" name="telephone" required="required" type="text" placeholder="01144444444" />
+                                    </p>
+                                    <p>
+                                        <label for="emailsignup" class="youmail" data-icon="e"><span style="color:red">*</span>Email:</label>
+                                        <input id="emailsignup" name="email" required="required" type="email" placeholder="mysupermail@mail.com" />
+                                    </p>
+                                    <p>
+                                        <label for="passwordsignup" class="youpasswd" data-icon="p"><span style="color:red">*</span>Contraseña:</label>
+                                        <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                    </p>
+                                    <p>
+                                        <label for="passwordsignup_confirm" class="youpasswd" data-icon="p"><span style="color:red">*</span>Verifica tu contraseña:</label>
+                                        <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                    </p>
+                                    <p class="access-modal-controls signin button">
+                                        <input type="submit" value="Crear Cuenta" />
+                                    </p>
+                                </form>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Footer-->
+    <footer>
+        <div class="center-col">
+
+        </div>
+    </footer>
+
+</body>
+
+</html>
