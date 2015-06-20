@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Regalenlo.com</title>
+    <meta name="description" content="An interactive getting started guide for Brackets.">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!--animate.css styles and scripts-->
+    <link rel="stylesheet" href="animate.css">
+    <script></script>
+
+    <!--Main Styles-->
+    <link rel="stylesheet" href="main.css">
+
+
+</head>
+
+<body class="col-md-12">
+    <!--Header-->
+    <header class="col-md-12">
+        <!-- Header Container -->
+        <div class="center-col head-container">
+            <!-- Header Itself -->
+            <div class="col-md-12">
+                <!-- Branding Header -->
+                <div class="col-md-8">
+                    <!-- Logo Container -->
+                    <div class="col-md-4 logo-container">
+                        <img src="Logo-Mayus.png" />
+                    </div>
+                    <!-- Brand Catchphrase -->
+                    <div class="brand-catchphrase col-md-8">
+                        <span>
+						<!-- ToDo -->
+				        </span>
+                    </div>
+                </div>
+                <!-- User Header -->
+                <div class="user-header col-md-4">
+                    <!-- New Vaquita -->
+                    <a class="new-vaquita" href="#">
+                        <div class="col-md-7">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Vaquita
+                        </div>
+                    </a>
+                    <!-- User Access/Profile -->
+                    <div class="user-access col-md-5" style="font-size: 16px;">
+                        <div class="col-md-8">
+                            <a href="#" data-toggle="modal" data-target="#modalLogIn">Accedé</a>
+                        </div>
+                        <div class="col-md-8">
+                            <a href="#" data-toggle="modal" data-target="#modalAccess">Unite!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Content-->
+    <section style="color:grey">
+        <div class="nueva-vaquita-header center-col">
+            <div><h1>+ Nueva Colecta: Paso 2 - Configuración</h1></div>
+            <hr style="width:100%;height:4px;color:black">
+        </div>
+        <div class="center-col">
+            <form class="vaquita-paso2">
+                <section>
+                    <h2>Paticipación</h2>
+                    <div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio">Comisión a cargo del organizador</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optradio">Comisión a cargo del Colaborador</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="radio2">
+                            <label>
+                                <input type="radio" value="">Monto Fijo</label>
+                            <div class="">
+                                <input type="text" size="5" numeric="">
+                            </div>
+                        </div>
+                        <div class="radio2">
+                            <label>
+                                <input type="radio" value="">Monto Sugerido</label>
+                            <div class="">
+                                <input type="text" size="5" numeric="">
+                            </div>
+                        </div>
+                        <div class="radio2">
+                            <label>
+                                <input type="radio" value="">Monto Libre</label>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Privacidad</h2>
+                    <div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">Mostrar Colaboradores</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">Mostrar monto aportado</label>
+                        </div>
+                        <div class="checkbox disabled">
+                            <label>
+                                <input type="checkbox" value="">Mostrar total recaudado</label>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>Opciones Adicionales</h2>
+                    <div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">Colecta Publica</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="" disabled>Invitación Abierta</label>
+                        </div>
+                        <div class="checkbox disabled">
+                            <label>
+                                <input type="checkbox" value="">Objetivo a alcanzar</label>
+                            <div class="">
+                                <input type="text" size="5" numeric="">
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">Habilitar Mensaje con la Colaboración</label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="" disabled>Mostrar Mensajes de Colaboraciónes</label>
+                        </div>
+                        <div class="checkbox disabled">
+                            <label>
+                                <input type="checkbox" value="">Notificarme por Email las nuevas colaboraciones</label>
+                        </div>
+                    </div>
+                </section>
+                <br>
+                <div class="col-md-6">
+                <input style="font-size:19px;color:white;background-color:orange;" type="submit" value="Paso 3: Compartir Colecta" />
+                </div>
+            </form>
+        </div>
+    </section>
+    <!--Footer-->
+    <footer>
+        <div class="center-col">
+
+        </div>
+    </footer>
+
+</body>
+
+</html>

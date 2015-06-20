@@ -1,0 +1,173 @@
+html {
+    background-color: #e6e9e9;
+    background-image: -webkit-linear-gradient(270deg, rgb(230, 233, 233) 0%, rgb(216, 221, 221) 100%);
+    background-image: linear-gradient(270deg, rgb(230, 233, 233) 0%, rgb(216, 221, 221) 100%);
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #545454;
+    background-color: #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #222;
+    font-weight: 600;
+    line-height: 1.3em;
+}
+
+h2 {
+    margin-top: 1.3em;
+}
+
+a {
+    color: #0083e8;
+}
+
+b,
+strong {
+    font-weight: 600;
+}
+
+samp {
+    display: none;
+}
+
+img {
+    -webkit-animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+    animation: colorize 2s cubic-bezier(0, 0, .78, .36) 1;
+    background: transparent;
+    display: block;
+    max-width: 95%;
+}
+
+@-webkit-keyframes colorize {
+    0% {
+        -webkit-filter: grayscale(100%);
+    }
+    100% {
+        -webkit-filter: grayscale(0%);
+    }
+}
+
+@keyframes colorize {
+    0% {
+        filter: grayscale(100%);
+    }
+    100% {
+        filter: grayscale(0%);
+    }
+}
+/*Global normalizaton*/
+
+div {
+    min-height: 15px;
+}
+
+body,
+header,
+section,
+footer {
+    padding: 0px !important;
+}
+
+header {
+    background-color: #EEEFED;
+    padding: 1em 0 0 0 !important;
+    border-bottom: 2px solid #b4e658;
+}
+
+section {
+    min-height: 600px;
+    background-color: white;
+}
+
+footer {
+    min-height: 75px;
+    background-color: #EEEFED;
+}
+
+.center-col {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+/*Header*/
+
+.logo-container img {
+    margin-bottom: -15px
+}
+
+a.new-vaquita div {
+    margin: 5% 0
+}
+
+.user-access div {
+    text-align: center;
+    margin: 0 auto;
+    float: none;
+    padding: 0px;
+}
+/*Access*/
+
+.access-container {
+    margin: 15px auto !important;
+    float: none;
+}
+
+.access-container input {
+    float: right;
+}
+
+.login-section {
+    border-right: 2px solid #b4e658;
+}
+
+#login-email div {
+    display: block;
+}
+
+#register label,
+#login-email label {
+    display: inline-block;
+}
+
+.access-modal-controls input {
+    float: none;
+    display: block;
+    margin: 25px auto 5px auto;
+    margin-top:
+}
+/*Nueva Vaquita*/
+
+.nueva-vaquita-header div {
+    margin-top: 115px;
+}
+
+.new-vaquita div label,
+.new-vaquita div input {
+    display: block;
+}
+
+.new-vaquita .col-md-12 {
+    margin-bottom: 20px;
+}
+
+.new-vaquita button {
+    float: right;
+}
+
+.vaquita-paso2 section {
+    min-height: 50px;
+    margin-top: 55px;
+}
