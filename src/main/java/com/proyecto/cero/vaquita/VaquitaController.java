@@ -94,7 +94,7 @@ public class VaquitaController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/vaquitaCreada", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscarVaquitaCreada", method = RequestMethod.GET)
 	public ModelAndView vaquitaCreada(Principal user,	@RequestParam(value = "id", required=true) int id) {
 		ModelAndView model = new ModelAndView();
 		ModelManager.initializeModel(model, facebook);
