@@ -27,6 +27,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.mustache.MustacheTemplateLoader;
 import org.springframework.web.servlet.view.mustache.MustacheViewResolver;
 
+import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
+import com.samskivert.mustache.Mustache.TemplateLoader;
+
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -48,22 +51,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		MustacheViewResolver mustacheViewResolver = new MustacheViewResolver();
 		mustacheViewResolver.setPrefix("/WEB-INF/views/");
 		mustacheViewResolver.setSuffix(".html");
-		MustacheTemplateLoader mustacheTemplateLoader = new MustacheTemplateLoader();
+	  mustacheViewResolver.setContentType("text/html;charset=utf-8");
+	  
+	  MustacheTemplateLoader mustacheTemplateLoader = new MustacheTemplateLoader();
 		mustacheTemplateLoader.setResourceLoader(resourceLoader);
+		
 		mustacheViewResolver.setTemplateLoader(mustacheTemplateLoader);
 		return mustacheViewResolver;
 	}
 
-//	@Bean
-//	public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
-//		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//		templateEngine.setTemplateResolver(templateResolver);
-//		templateEngine.addDialect(new SpringSocialDialect());
-//		templateEngine.addDialect(new LayoutDialect());
-//		templateEngine.addDialect(new SpringSecurityDialect());
-//		
-//		return templateEngine;
-//	}
 //
 //	@Bean
 //	public TemplateResolver templateResolver() {

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:social="http://spring.io/springsocial"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<meta charset="UTF-8"/>
+<title>Vaquita Online</title>
+<!-- CSS -->
+<link rel="stylesheet" th:href="@{/resources/css/style.css}" type="text/css" media="screen"></link>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></link>
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+<!-- JAVASCRIPT -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+
+
+<body class="light-primary-color">
+	<!-- Page Header -->
+	<header class="dark-primary-color text-primary-color">
+		<!-- Header Container -->
+		<div class="head-container">
+			<!-- Header Itself -->
+			<div class="col-md-12">
+				<!-- Branding Header -->
+				<div class="col-md-8">
+					<!-- Logo Container -->
+					<div class="col-md-3 logo-container">
+						<img th:src="@{/resources/img/home/logo.png}" />
+					</div>
+					<!-- Brand Catchphrase -->
+					<div class="brand-catchphrase col-md-9">
+						<span> Juntá dinero fácil... Vaquita Online! </span>
+					</div>
+				</div>
+				<!-- User Header -->
+				<div class="user-header col-md-4">
+					<!-- New Vaquita -->
+						<a class="new-vaquita" href="/crearVaquita">
+							<div class="col-md-6">
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								Nueva Vaquita
+							</div>
+						</a>
+						<!-- User Access/Profile -->
+						<div sec:authorize="isAnonymous()" class="user-access col-md-6">
+							<div class="col-md-8">
+								<a href="#" data-toggle="modal" data-target="#modalLogIn">Accedé</a>
+							</div>
+							<div class="col-md-8">
+								<a href="#" data-toggle="modal" data-target="#modalAccess">Unite!</a>
+							</div>
+						</div>
+					<div sec:authorize="isAuthenticated()">
+					<a href="#" >Mi Cuenta</a>
+					<img src="#" th:if="${profileInfo} != null"
+						th:src="@{'http://graph.facebook.com/' +  ${profileInfo.id}} + '/picture'"
+						alt="profile image" />
+						<form method="POST" th:action="@{/signout}">
+							<button>Sign Out</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Page Content -->
+	<section class="main-cont">
+		<div class="new-vaq-cont"></div>
+
+	</section>
+
+	<!-- Page Footer -->
+	<footer> </footer>
+
+	<!-- ModalLogIn -->
+	<div class="modal fade" id="modalLogIn" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Acceso</h4>
+				</div>
+				<div class="modal-body">
+
+					<section class="">
+						<section id="signup">
+							<img class="modal-logo"  th:src="@{/resources/img/home/logo.png}" />
+							<p class="li-lead fb-user-title">Conectar con Facebook</p>
+							<div class="social-signup">
+								<form name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}"
+								method="POST">
+									<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access"></input>
+									<button id="boton-facebook" type="submit" style="color: white">Facebook</button>
+								</form>
+							</div>
+							<form name="signin" id="signin" th:action="@{/signin}" method="POST">
+								<p class="li-lead">Accedé con tu Email</p>
+								<div class="field">
+									<label for="login-email-name">Email</label> 
+									<input id="email login-email-name" type="text" name="email" value=""
+										autofocus="autofocus"/>
+								</div>
+								<div class="field">
+									<label for="login-email-password">Contraseña</label> 
+									<input id="password login-email-password" type="password" name="password" value=""/>
+								</div>
+								<div class="access-modal-controls">
+									<input type="submit" value="Acceder" onclick=""></input> 
+									<a class="forgot-password" href="#">Olvidaste tu contraseña?</a>
+								</div>
+							</form>
+						</section>
+					</section>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- ModalAccess -->
+	<div class="modal fade" id="modalAccess" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Unite!</h4>
+				</div>
+				<div class="modal-body">
+					<section class="">
+						<section id="signup">
+							<img class="modal-logo" th:src="@{/resources/img/home/logo.png}" />
+							<p class="li-lead-na fb-user-title">Registrate con Facebook</p>
+							<div class="social-signup">
+								<form name="fb_signin" id="fb_signin" method="POST"
+									action="/signin/facebook">
+									<input type="hidden" name="scope"
+										value="publish_stream,user_photos,offline_access"></input>
+									<button id="boton-facebook" type="submit" style="color: white">Facebook</button>
+								</form>
+							</div>
+							<form id="login-email" class="" action="" method="POST">
+								<p class="li-lead-na" style="color: black;">
+									También podés 
+									<a href="/signup">Crear tu cuenta</a> via email.
+									<span style="color: red">*</span>
+									<br></br> 
+									<span class="tip-msg">
+									<span style="color: red">*</span>
+									Ten en cuenta que luego podrás asociar tus redes sociales. 
+									Enterate las ventajas viendo nuestra 
+									<a href="#">Sección de Tips y Consejos</a>
+									</span>
+								</p>
+							</form>
+						</section>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -69,14 +69,16 @@ img {
         filter: grayscale(0%);
     }
 }
-
 /*Global normalizaton*/
 
 div {
     min-height: 15px;
 }
 
-body, header, section, footer {
+body,
+header,
+section,
+footer {
     padding: 0px !important;
 }
 
@@ -100,14 +102,22 @@ footer {
     max-width: 1024px;
     margin: 0 auto;
 }
-
-
 /*Header*/
 
 .logo-container img {
     margin-bottom: -15px
 }
 
+a.new-vaquita div {
+    margin: 5% 0
+}
+
+.user-access div {
+    text-align: center;
+    margin: 0 auto;
+    float: none;
+    padding: 0px;
+}
 /*Access*/
 
 .access-container {
@@ -127,14 +137,37 @@ footer {
     display: block;
 }
 
-#register label, #login-email label {
+#register label,
+#login-email label {
     display: inline-block;
-    
 }
 
 .access-modal-controls input {
     float: none;
     display: block;
     margin: 25px auto 5px auto;
-    margin-top: 
+    margin-top:
+}
+/*Nueva Vaquita*/
+
+.nueva-vaquita-header div {
+    margin-top: 115px;
+}
+
+.new-vaquita div label,
+.new-vaquita div input {
+    display: block;
+}
+
+.new-vaquita .col-md-12 {
+    margin-bottom: 20px;
+}
+
+.new-vaquita button {
+    float: right;
+}
+
+.vaquita-paso2 section {
+    min-height: 50px;
+    margin-top: 55px;
 }

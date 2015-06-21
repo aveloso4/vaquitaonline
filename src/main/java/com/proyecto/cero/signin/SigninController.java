@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.cero.model.Account;
 import com.proyecto.cero.service.UserService;
@@ -23,45 +24,40 @@ public class SigninController {
 	private final Facebook facebook;
 	private final ProviderSignInUtils providerSignInUtils;
 	private final UserService userService;
-	
+
 	@Inject
 	public SigninController(UserService us, Facebook facebook) {
 		this.userService = us;
 		this.providerSignInUtils = new ProviderSignInUtils();
 		this.facebook = facebook;
 	}
-	
-//	MAPPINGS
+
+	// MAPPINGS
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String signin(Principal currentUser, Model model, WebRequest request) {
-		try{
-			model.addAttribute(userService.getUser(currentUser.getName()));
-			
-			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
-//			model.addAttribute("AuthenticUser", SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
-			
-		} catch (Exception e){
-			//TODO
-		}
-		return "home";
+	public ModelAndView String(Principal currentUser, WebRequest request) {
+		/*MODEL AND VIEW*/
+		ModelAndView model = new ModelAndView();
+		model.setViewName("home");
+
+		return model;
 	}
 
-	@RequestMapping(value="/signin", method=RequestMethod.POST)
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public String signin(WebRequest request) {
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-		
+
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		Account account = signInAccount(email,password);
-		
+		Account account = signInAccount(email, password);
+
 		if (account != null) {
 			SignInUtils.signin(account.getEmail());
 			providerSignInUtils.doPostSignUp(account.getEmail(), request);
 		}
-		
+
 		return "redirect:/";
 	}
-	
+
 	private Account signInAccount(String email, String password) {
 		try {
 			Account account = new Account(email, null, null, password, null);

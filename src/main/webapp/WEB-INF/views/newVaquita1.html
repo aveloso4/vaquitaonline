@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Regalenlo.com</title>
+    <meta name="description" content="An interactive getting started guide for Brackets.">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!--animate.css styles and scripts-->
+    <link rel="stylesheet" href="/resources/css/animate.css">
+    <script></script>
+
+    <!--Main Styles-->
+    <link rel="stylesheet" href="/resources/css/main.css">
+
+
+</head>
+
+<body class="col-md-12">
+	{{> /WEB-INF/views/templates/header.html}} 
+    <!--Content-->
+    <section style="color:grey">
+        <div class="nueva-vaquita-header center-col">
+            <div><h1>+ Nueva Colecta: Paso 1 - Creación</h1>{{#error}}<span style="color:red; font-size:14px">{{error}}</span>{{/error}}</div>
+            <hr style="width:100%;height:4px;color:black">
+        </div>
+        <div class="center-col">
+            <form class="new-vaquita" action="/create" method="POST">
+                <div class="col-md-4">
+                    <img src="resources/img/logo/Logo-Mayus.png" />
+                    <input type="file" name="image"/>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6">
+                        <label><span style="color:red">*</span>Título:</label>
+                        <input required="required" type="text" name="title"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label><span style="color:red">*</span>Organizar para:</label>
+                        <input required="required" type="text" name="organizedFor"/>
+                    </div>
+                <div class="col-md-12">
+                    <label><span style="color:red">*</span>Descripción:</label>
+                    <textarea class="form-control" rows="4" id="comment" name="description"></textarea>
+                </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <button>Cancelar</button>
+                    </div>
+                    <div class="col-md-6">
+                        <input style="font-size:19px;color:white;background-color:orange;" type="submit" value="Paso 2: Configuración" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+	{{> /WEB-INF/views/templates/footer.html}} 
+</body>
+
+</html>

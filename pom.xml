@@ -14,7 +14,7 @@
 		<spring.version>4.0.3.RELEASE</spring.version>
 		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 		<spring-social.version>1.1.0.RELEASE</spring-social.version>
-		<spring-social-facebook.version>1.1.0.RELEASE</spring-social-facebook.version>
+		<spring-social-facebook.version>2.0.1.RELEASE</spring-social-facebook.version>
 		<spring-security-crypto>3.1.0.RC3</spring-security-crypto>
 		<com.restfb>1.7.0</com.restfb>
 		<javax.servlet-api>3.0.1</javax.servlet-api>
@@ -131,6 +131,20 @@
 			<groupId>com.restfb</groupId>
 			<artifactId>restfb</artifactId>
 			<version>${com.restfb}</version>
+		</dependency>
+
+
+		<!-- Template ENGINES -->
+		<dependency>
+			<groupId>com.github.sps.mustache</groupId>
+			<artifactId>mustache-spring-view</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.jknack</groupId>
+			<artifactId>handlebars</artifactId>
+			<version>2.2.1</version>
 		</dependency>
 
 		<!-- Spring Security Crypto, required if you use: -->
@@ -259,7 +273,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-				<encoding>UTF-8</encoding>
+					<encoding>UTF-8</encoding>
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>

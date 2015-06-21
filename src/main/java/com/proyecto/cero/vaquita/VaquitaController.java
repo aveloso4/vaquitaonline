@@ -33,26 +33,28 @@ public class VaquitaController {
 		this.facebook = facebook;
 	}
 
-  @RequestMapping(value = "/vaquitaCreada", method = RequestMethod.POST)
-  public ModelAndView crearVaquita(@Valid VaquitaPrimerPasoForm form, BindingResult formBinding, WebRequest request) {
-    ModelAndView model = new ModelAndView();
-//    if (formBinding.hasErrors()) {
-//      model.setViewName("redirect:/");
-//      return model;
-//    }
-    Vaquita vaquita = crearVaquita(form, formBinding);
-    model.addObject("vaquita", vaquita);
-    model.setViewName("vaquitaCreada");
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView crearVaquita(Principal user) {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("newVaquita1");
+		return model;
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+  public ModelAndView crearVaquita(@Valid VaquitaFirstStepForm form, BindingResult result, WebRequest request) {
+  	ModelAndView model = new ModelAndView();
+  	if (result.hasErrors()) {
+  		model.setViewName("newVaquita1");
+  		model.addObject("error","Ups! Algo a salido mal. Por favor asegurate de completar los campos requeridos (*)");
+  		return model;
+  	}
+    	Vaquita vaquita = crearVaquita(form, result);
+//    	model.addObject("vaquita", vaquita);
+    	model.setViewName("newVaquita2");
     return model;
   }
   
-  @RequestMapping(value = "/crearVaquita", method = RequestMethod.GET)
-  public ModelAndView crearVaquita(Principal user) {
-	  ModelAndView model = new ModelAndView();
-	  model.setViewName("crearVaquita-1");
-	  return model;
-  }
-
+	
   @RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search(Principal user,	@RequestParam(value = "id", required=true) int id) {
 		ModelAndView model = new ModelAndView();
@@ -63,6 +65,13 @@ public class VaquitaController {
 		return model;
 	}
   
+  // Internal Helpers
+  private Vaquita crearVaquita(VaquitaFirstStepForm form, BindingResult formBinding) {
+		Vaquita vaquita = new Vaquita(form.getTitle(), form.getDescription(), form.getImage(), form.getOrganizedFor());
+    vaquitaService.createVaquita(vaquita);
+    return vaquita;
+	}
+  
   @RequestMapping(value = "/postInWall", method = RequestMethod.GET)
   public ModelAndView compartirVaquita(Principal user){
 //  		FacebookLink fl = new FacebookLink("vaquita-project.herokuapp.com", null, "Vaquita Online", "Slogan de Vaquita", "Una descripcion Para Vaquita");
@@ -71,12 +80,4 @@ public class VaquitaController {
   		model.setViewName("home");
   		return model;
   }
-
-  
-  // Internal Helpers
-  private Vaquita crearVaquita(VaquitaPrimerPasoForm form, BindingResult formBinding) {
-		Vaquita vaquita = new Vaquita(form.getNombre(), form.getDescripcion(), form.getImagen());
-    vaquitaService.createVaquita(vaquita);
-    return vaquita;
-	}
 }

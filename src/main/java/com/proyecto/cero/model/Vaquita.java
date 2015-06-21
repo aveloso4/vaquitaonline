@@ -9,305 +9,275 @@ import javax.validation.constraints.NotNull;
 @Table(name = "Vaquita")
 public class Vaquita {
 
-  public Vaquita() {
-    // Vacio
-  }
-  
-  public enum Status {
-    ACTIVA, FINALIZADA, CANCELADA;
-  }
-  @Id @GeneratedValue
-  @Column(name = "id", unique=true)
-  private int id;
-  
-  @NotNull
-  @Column(name = "nombre")
-  private String nombre;
-  
-//  @NotNull
-  @Column(name = "creador")
-  private String creador;
-  
-  @Column(name = "organizador")
-  private String organizador; // (==NULL) ? Nombre del creador : organizador
+	public Vaquita() {
+		// Vacio
+	}
 
-  @NotNull
-  @Column(name = "imagen")
-  private String imagen; // Default: imgDefault.png
-  
-  @Column(name = "descripcion")
-  private String descripcion;
-  
-  @Column(name = "cancelReason")
-  private String cancelReason;
+	public enum Status {
+		DRAFT, ACTIVE, ENDED, CANCELED;
+	}
+	public enum ContributionType {
+		FIXED, SUGGESTED, OPEN
+	}
 
-//  @NotNull
-  @Column(name = "fechaInicio")
-  private Date fechaInicio;
-  
-  @Column(name = "fechaFin")
-  private Date fechaFin;
+	@Id
+	@GeneratedValue
+	@Column(name = "id", unique = true)
+	private int id;
 
-//  @NotNull
-  @Column(name = "VaquitaPublica")
-  private boolean VaquitaPublica; // Default: False;
-  
-//  @NotNull
-  @Column(name = "contributionField")
-  private boolean contributionField; // Default: True // Se le saca el monto // final Sino se le saca a la contribucion
-  
-//  @NotNull
-  @Column(name = "mostrarNombreParticipantes")
-  private boolean mostrarNombreParticipantes; // Default: False
-  
-//  @NotNull
-  @Column(name = "mostrarPlataParticipante")
-  private boolean mostrarPlataParticipante; // Default: False
-  
-//  @NotNull
-  @Column(name = "mostrarPlataTotalRecaudada")
-  private boolean mostrarPlataTotalRecaudada; // Default: False
-  
-//  @NotNull
-  @Column(name = "mensajeAbierto")
-  private boolean mensajeAbierto; // Default: True
-  
-//  @NotNull
-  @Column(name = "invitacionAbierta")
-  private boolean invitacionAbierta; // Default: True
-  
-//  @NotNull
-  @Column(name = "mostrarMuroMensajes")
-  private boolean mostrarMuroMensajes; // Default: True
-  
-//  @NotNull
-  @Column(name = "emailNotifications")
-  private boolean emailNotifications; // Default: False
+	@NotNull
+	@Column(name = "title")
+	private String title;
 
-  @Column(name = "contribucionDefinida")
-  private int contribucionDefinida;
-  
-  @Column(name = "contribucionSugerida")
-  private int contribucionSugerida;
-  
-  @Column(name = "objetivoDeDinero")
-  private int objetivoDeDinero;
+	@Column(name = "creator")
+	private String creator;
 
-  /** TODO @NotNull
-  @Column(name = "estado")
-  private Status status; // Default: ACTIVA
-*/
+	@Column(name = "organizedFor")
+	private String organizedFor;
 
-  public Vaquita(String nombre, String desc, String img){
-	  this.nombre = nombre;
-	  this.descripcion = desc;
-	  this.imagen = img;
-  }
-  
-  public Vaquita(String nombre, String creador, String organizador, String imagen, String descripcion, String cancelReason, Date fechaInicio,
-      Date fechaFin, boolean vaquitaPublica, boolean contributionField, boolean mostrarNombreParticipantes, boolean mostrarPlataParticipante,
-      boolean mostrarPlataTotalRecaudada, boolean mensajeAbierto, boolean invitacionAbierta, boolean mostrarMuroMensajes, boolean emailNotifications,
-      int contribucionDefinida, int contribucionSugerida, int objetivoDeDinero) {
-    super();
-    this.nombre = nombre;
-    this.creador = creador;
-    this.organizador = organizador;
-    this.imagen = imagen;
-    this.descripcion = descripcion;
-    this.cancelReason = cancelReason;
-    this.fechaInicio = fechaInicio;
-    this.fechaFin = fechaFin;
-    this.VaquitaPublica = vaquitaPublica;
-    this.contributionField = contributionField;
-    this.mostrarNombreParticipantes = mostrarNombreParticipantes;
-    this.mostrarPlataParticipante = mostrarPlataParticipante;
-    this.mostrarPlataTotalRecaudada = mostrarPlataTotalRecaudada;
-    this.mensajeAbierto = mensajeAbierto;
-    this.invitacionAbierta = invitacionAbierta;
-    this.mostrarMuroMensajes = mostrarMuroMensajes;
-    this.emailNotifications = emailNotifications;
-    this.contribucionDefinida = contribucionDefinida;
-    this.contribucionSugerida = contribucionSugerida;
-    this.objetivoDeDinero = objetivoDeDinero;
-  }
+	@Column(name = "image")
+	private String image; // Default: imgDefault.png
 
-  public String getNombre() {
-    return nombre;
-  }
+	@Column(name = "description")
+	private String description;
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
+	@Column(name = "cancelReason")
+	private String cancelReason;
 
-  public String getCreador() {
-    return creador;
-  }
+	@Column(name = "startDate")
+	private Date startDate;
 
-  public void setCreador(String creador) {
-    this.creador = creador;
-  }
+	@Column(name = "endDate")
+	private Date endDate;
 
-  public String getOrganizador() {
-    return organizador;
-  }
+	@Column(name = "isPublic")
+	private boolean isPublic; // Default: False;
 
-  public void setOrganizador(String organizador) {
-    this.organizador = organizador;
-  }
+	@Column(name = "contributionField")
+	private boolean contributionField; // Default: True // Se le saca a el monto
+																			// final //Sino se le saca a la
+																			// contribucion
 
-  public String getImagen() {
-    return imagen;
-  }
+	@Column(name = "showParicipantName")
+	private boolean showParicipantName; // Default: False
 
-  public void setImagen(String imagen) {
-    this.imagen = imagen;
-  }
+	@Column(name = "showParticipantContribution")
+	private boolean showParticipantContribution; // Default: False
 
-  public String getDescripcion() {
-    return descripcion;
-  }
+	@Column(name = "showTotalAmmount")
+	private boolean showTotalAmmount; // Default: False
 
-  public void setDescripcion(String descripcion) {
-    this.descripcion = descripcion;
-  }
+	@Column(name = "openMessage")
+	private boolean openMessage; // Default: True
 
-  public Date getFechaInicio() {
-    return fechaInicio;
-  }
+	@Column(name = "openInvitation")
+	private boolean openInvitation; // Default: True
 
-  public void setFechaInicio(Date fechaInicio) {
-    this.fechaInicio = fechaInicio;
-  }
+	@Column(name = "showMessageWall")
+	private boolean showMessageWall; // Default: True
 
-  public Date getFechaFin() {
-    return fechaFin;
-  }
+	@Column(name = "notifyEmail")
+	private boolean notifyEmail; // Default: False
 
-  public void setFechaFin(Date fechaFin) {
-    this.fechaFin = fechaFin;
-  }
+	@Column(name = "contributionType")
+	private ContributionType contributionType;
+	
+	@Column (name = "contributionAmmount")
+	private int contributionAmmount;
+	
+	@Column(name = "objetivoDeDinero")
+	private int objetivoDeDinero;
 
-  public boolean isContributionField() {
-    return contributionField;
-  }
+	@Column(name = "estado")
+	private Status status; // Default: ACTIVA
 
-  public void setContributionField(boolean contributionField) {
-    this.contributionField = contributionField;
-  }
+	public Vaquita(String title, String desc, String img, String organizedFor) {
+		this.title = title;
+		this.description = desc;
+		this.image = img;
+		this.organizedFor = organizedFor;
+	}
 
-  public boolean isMostrarNombreParticipantes() {
-    return mostrarNombreParticipantes;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setMostrarNombreParticipantes(boolean mostrarNombreParticipantes) {
-    this.mostrarNombreParticipantes = mostrarNombreParticipantes;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public boolean isMostrarPlataParticipante() {
-    return mostrarPlataParticipante;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  public void setMostrarPlataParticipante(boolean mostrarPlataParticipante) {
-    this.mostrarPlataParticipante = mostrarPlataParticipante;
-  }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-  public boolean isMostrarPlataTotalRecaudada() {
-    return mostrarPlataTotalRecaudada;
-  }
+	public String getCreator() {
+		return creator;
+	}
 
-  public void setMostrarPlataTotalRecaudada(boolean mostrarPlataTotalRecaudada) {
-    this.mostrarPlataTotalRecaudada = mostrarPlataTotalRecaudada;
-  }
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
 
-  public int getContribucionDefinida() {
-    return contribucionDefinida;
-  }
+	public String getOrganizedFor() {
+		return organizedFor;
+	}
 
-  public void setContribucionDefinida(int contribucionDefinida) {
-    this.contribucionDefinida = contribucionDefinida;
-  }
+	public void setOrganizedFor(String organizedFor) {
+		this.organizedFor = organizedFor;
+	}
 
-  public int getContribucionSugerida() {
-    return contribucionSugerida;
-  }
+	public String getImage() {
+		return image;
+	}
 
-  public void setContribucionSugerida(int contribucionSugerida) {
-    this.contribucionSugerida = contribucionSugerida;
-  }
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-//  public Status getStatus() {
-//    return status;
-//  }
-//
-//  public void setStatus(Status status) {
-//    this.status = status;
-//  }
+	public String getDescription() {
+		return description;
+	}
 
-  public String getCancelReason() {
-    return cancelReason;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public void setCancelReason(String cancelReason) {
-    this.cancelReason = cancelReason;
-  }
+	public String getCancelReason() {
+		return cancelReason;
+	}
 
-  public boolean isVaquitaPublica() {
-    return VaquitaPublica;
-  }
+	public void setCancelReason(String cancelReason) {
+		this.cancelReason = cancelReason;
+	}
 
-  public void setVaquitaPublica(boolean vaquitaPublica) {
-    VaquitaPublica = vaquitaPublica;
-  }
+	public Date getStartDate() {
+		return startDate;
+	}
 
-  public boolean isMensajeAbierto() {
-    return mensajeAbierto;
-  }
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
 
-  public void setMensajeAbierto(boolean mensajeAbierto) {
-    this.mensajeAbierto = mensajeAbierto;
-  }
+	public Date getEndDate() {
+		return endDate;
+	}
 
-  public boolean isInvitacionAbierta() {
-    return invitacionAbierta;
-  }
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 
-  public void setInvitacionAbierta(boolean invitacionAbierta) {
-    this.invitacionAbierta = invitacionAbierta;
-  }
+	public boolean isPublic() {
+		return isPublic;
+	}
 
-  public boolean isMostrarMuroMensajes() {
-    return mostrarMuroMensajes;
-  }
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
+	}
 
-  public void setMostrarMuroMensajes(boolean mostrarMuroMensajes) {
-    this.mostrarMuroMensajes = mostrarMuroMensajes;
-  }
+	public boolean isContributionField() {
+		return contributionField;
+	}
 
-  public boolean isEmailNotifications() {
-    return emailNotifications;
-  }
+	public void setContributionField(boolean contributionField) {
+		this.contributionField = contributionField;
+	}
 
-  public void setEmailNotifications(boolean emailNotifications) {
-    this.emailNotifications = emailNotifications;
-  }
+	public boolean isShowParicipantName() {
+		return showParicipantName;
+	}
 
-  public int getObjetivoDeDinero() {
-    return objetivoDeDinero;
-  }
+	public void setShowParicipantName(boolean showParicipantName) {
+		this.showParicipantName = showParicipantName;
+	}
 
-  public void setObjetivoDeDinero(int objetivoDeDinero) {
-    this.objetivoDeDinero = objetivoDeDinero;
-  }
+	public boolean isShowParticipantContribution() {
+		return showParticipantContribution;
+	}
 
-  @Override
-  public String toString() {
-    return "Vaquita [nombre=" + nombre + ", creador=" + creador + ", organizador=" + organizador + ", imagen=" + imagen + ", descripcion="
-        + descripcion + ", cancelReason=" + cancelReason + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", VaquitaPublica="
-        + VaquitaPublica + ", contributionField=" + contributionField + ", mostrarNombreParticipantes=" + mostrarNombreParticipantes
-        + ", mostrarPlataParticipante=" + mostrarPlataParticipante + ", mostrarPlataTotalRecaudada=" + mostrarPlataTotalRecaudada
-        + ", mensajeAbierto=" + mensajeAbierto + ", invitacionAbierta=" + invitacionAbierta + ", mostrarMuroMensajes=" + mostrarMuroMensajes
-        + ", emailNotifications=" + emailNotifications + ", contribucionDefinida=" + contribucionDefinida + ", contribucionSugerida="
-        + contribucionSugerida + ", objetivoDeDinero=" + objetivoDeDinero + ", status=" + "]";
-  }
+	public void setShowParticipantContribution(boolean showParticipantContribution) {
+		this.showParticipantContribution = showParticipantContribution;
+	}
+
+	public boolean isShowTotalAmmount() {
+		return showTotalAmmount;
+	}
+
+	public void setShowTotalAmmount(boolean showTotalAmmount) {
+		this.showTotalAmmount = showTotalAmmount;
+	}
+
+	public boolean isOpenMessage() {
+		return openMessage;
+	}
+
+	public void setOpenMessage(boolean openMessage) {
+		this.openMessage = openMessage;
+	}
+
+	public boolean isOpenInvitation() {
+		return openInvitation;
+	}
+
+	public void setOpenInvitation(boolean openInvitation) {
+		this.openInvitation = openInvitation;
+	}
+
+	public boolean isShowMessageWall() {
+		return showMessageWall;
+	}
+
+	public void setShowMessageWall(boolean showMessageWall) {
+		this.showMessageWall = showMessageWall;
+	}
+
+	public boolean isNotifyEmail() {
+		return notifyEmail;
+	}
+
+	public void setNotifyEmail(boolean notifyEmail) {
+		this.notifyEmail = notifyEmail;
+	}
+ 
+	public int getObjetivoDeDinero() {
+		return objetivoDeDinero;
+	}
+
+	public void setObjetivoDeDinero(int objetivoDeDinero) {
+		this.objetivoDeDinero = objetivoDeDinero;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
+	public ContributionType getContributionType() {
+		return contributionType;
+	}
+
+	public void setContributionType(ContributionType contributionType) {
+		this.contributionType = contributionType;
+	}
+
+	public int getContributionAmmount() {
+		return contributionAmmount;
+	}
+
+	public void setContributionAmmount(int contributionAmmount) {
+		this.contributionAmmount = contributionAmmount;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Vaquita [Title=" + title + " Decription: " + description + " Organized For: " + organizedFor + " Image: " + image;
+	}
 
 }

@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/**","/signin/**","/search**", "/googleMap**", "/resources/**", "/auth/**", "/signup/**", "/disconnect/facebook").permitAll()
 		.and()
 			.rememberMe()
-		.and().csrf().disable();
+		.and().csrf();
 	}
 
 	@Bean
