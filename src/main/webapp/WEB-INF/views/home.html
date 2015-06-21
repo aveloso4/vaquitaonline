@@ -27,15 +27,13 @@
 </head>
 
 <body class="col-md-12">
-{{> /WEB-INF/views/templates/header.html}} 
-	<!--Content-->
-	<section>
-		<div class="home-header" style="position: relative; margin-top:90px">
-			<img src="resources/img/home/slider.png"
-				style="width: 146%; max-width: 100% !important; display: block;" />
-			<div class="slier-text"
-				style="width: 75%; max-width: 950px; max-height: 300px; margin-top: 90px; position: absolute; background-color: rgba(0, 0, 0, 0.26); color: white; font-size: 17px; margin-left: 12%; margin-top: -425px;">
-				<span style="text-align: center; display: block; padding: 50px;">La
+    {{> /WEB-INF/views/templates/header.html}}
+    <!--Content-->
+    <section>
+        <div class="home-header" style="position: relative; margin-top:90px">
+            <img src="resources/img/home/slider.png" style="width: 146%; max-width: 100% !important; display: block;" />
+            <div class="slier-text" style="width: 75%; max-width: 950px; max-height: 300px; margin-top: 90px; position: absolute; background-color: rgba(0, 0, 0, 0.26); color: white; font-size: 17px; margin-left: 12%; margin-top: -425px;">
+                <span style="text-align: center; display: block; padding: 50px;">La
 					vida está llena de celebraciones, de momentos para festejar y regalar.<br>
 				<br> Ya sea un cumpleaños, una boda, o simplemente una cálida muestra
 					de afecto, en regalenlo.com queremos ser parte esos moments alegres
@@ -43,44 +41,58 @@
 				<br> En tan solo unos simples pasos, llevar a cabo un lindo regalo
 					nunca fué tan fácil.
 				</span>
-			</div>
+            </div>
 
-			<div class="center-col">
-				<div style="padding-top: 50px;">
-					<div class="col-md-12">
-						<div class="tut-step col-md-3">
-							<div class="tut-step-1">
-								<span>Creá</span>
-								<p>En tan solo unos simples pasos, llevar a cabo un lindo regalo
-									nunca fué tan fácil.</p>
-							</div>
-						</div>
-						<div class="tut-step col-md-3">
-							<div class="tut-step-2">
-								<span>Invitá</span>
-								<p>En tan solo unos simples pasos, llevar a cabo un lindo regalo
-									nunca fué tan fácil.</p>
-							</div>
-						</div>
-						<div class="tut-step col-md-3">
-							<div class="tut-step-3">
-								<span>Retirá</span>
-								<p>En tan solo unos simples pasos, llevar a cabo un lindo regalo
-									nunca fué tan fácil.</p>
-							</div>
-						</div>
-						<div class="tut-step col-md-3">
-							<div class="tut-step-4">
-								<span>Regalá</span>
-								<p>En tan solo unos simples pasos, llevar a cabo un lindo regalo
-									nunca fué tan fácil.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	{{>	/WEB-INF/views/templates/footer.html}}
+            <div class="center-col">
+                <script>
+                    $('.tut-step').hover(function () {
+                        this.addClass("animated flip");
+                        this.span.addClass("animated flipOutX");
+                        /*this.span.css('display', 'none');*/
+                        this.p.addClass("animated flipInX");
+                        /*this.p.css('display', 'table');*/
+                    });
+
+                    $('.tut-step').blur(function () {
+                        this.addClass("animated flip");
+                        this.p.addClass("animated flipOutX");
+                        /*this.p.css('display', 'none');*/
+                        this.span.addClass("animated flipInX");
+                        /*this.span.css('display', 'table');*/
+                    });
+                </script>
+                <div style="padding-top: 50px;">
+                    <div class="col-md-12">
+                        <div class="tut-step step-1 col-md-3">
+                            <div class="tut-step-1">
+                                <span>Creá</span>
+                                <p>En tan solo unos simples pasos, llevar a cabo un lindo regalo nunca fué tan fácil.</p>
+                            </div>
+                        </div>
+                        <div class="tut-step step-2 col-md-3">
+                            <div class="tut-step-2">
+                                <span>Invitá</span>
+                                <p>En tan solo unos simples pasos, llevar a cabo un lindo regalo nunca fué tan fácil.</p>
+                            </div>
+                        </div>
+                        <div class="tut-step step-3 col-md-3">
+                            <div class="tut-step-3">
+                                <span>Retirá</span>
+                                <p>En tan solo unos simples pasos, llevar a cabo un lindo regalo nunca fué tan fácil.</p>
+                            </div>
+                        </div>
+                        <div class="tut-step step-4 col-md-3">
+                            <div class="tut-step-4">
+                                <span>Regalá</span>
+                                <p>En tan solo unos simples pasos, llevar a cabo un lindo regalo nunca fué tan fácil.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{> /WEB-INF/views/templates/footer.html}}
 </body>
+
 </html>
