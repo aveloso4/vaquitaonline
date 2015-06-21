@@ -9,6 +9,7 @@ import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PostData;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proyecto.cero.controller.ModelManager;
 import com.proyecto.cero.model.Vaquita;
 import com.proyecto.cero.model.Vaquita.ContributionType;
 import com.proyecto.cero.model.Vaquita.Status;
@@ -36,15 +38,17 @@ public class VaquitaController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView crearVaquita(Principal user) {
+	public ModelAndView crearVaquita(Principal user, Model modelo) {
 		ModelAndView model = new ModelAndView();
+		ModelManager.initializeModel(model, facebook);
 		model.setViewName("newVaquita1");
 		return model;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-  public ModelAndView crearVaquita(@Valid VaquitaFirstStepForm form, BindingResult result, WebRequest request, Principal user) {
+  public ModelAndView crearVaquita(@Valid VaquitaFirstStepForm form, BindingResult result, WebRequest request, Principal user, Model modelo) {
   	ModelAndView model = new ModelAndView();
+  	ModelManager.initializeModel(model, facebook);
   	if (result.hasErrors()) {
   		model.setViewName("newVaquita1");
   		model.addObject("error","Ups! Algo a salido mal. Por favor asegurate de completar los campos requeridos (*)");
@@ -60,6 +64,7 @@ public class VaquitaController {
   @RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search(Principal user,	@RequestParam(value = "id", required=true) int id) {
 		ModelAndView model = new ModelAndView();
+		ModelManager.initializeModel(model, facebook);
 
 		Vaquita vaquita = vaquitaService.findVaquitaById(id);
 		model.addObject("vaquita", vaquita);

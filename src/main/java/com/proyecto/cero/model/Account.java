@@ -13,19 +13,19 @@ import javax.persistence.Table;
 @Table(name = "Account")
 public class Account {
 	@Id
-	@Column(name = "Email", unique = true, nullable = false)
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
-	@Column(name = "Nombre", nullable = false, length = 60)
+	@Column(name = "nombre", nullable = false, length = 60)
 	private String nombre;
 	
-	@Column(name = "Apellido", nullable = false, length = 60)
+	@Column(name = "apellido", nullable = false, length = 60)
 	private String apellido;
 	
-	@Column(name = "Password", nullable = false, length = 60)
+	@Column(name = "password", nullable = false, length = 60)
 	private String password;
 	
-	@Column(name = "Telefono", nullable = true, length = 60)
+	@Column(name = "telefono", nullable = true, length = 60)
 	private String telefono;
 	
 	@OneToOne(cascade=CascadeType.ALL)

@@ -15,7 +15,6 @@ public class ModelManager {
 	}
 
 	public static void initializeModel(Model model, Facebook facebook) {
-		model.addAttribute("isAthenticate", AuthenticationManager.isAthenticate());
 		try {
 			model.addAttribute("profileInfo", facebook.userOperations().getUserProfile());
 		} catch (Exception e) {

@@ -21,13 +21,13 @@
                 <div class="user-header col-md-4">
                     <!-- New Vaquita -->
                     <a class="new-vaquita" href="/create">
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Vaquita
                         </div>
                     </a>
                     <!-- User Access/Profile -->
                     {{#isAthenticate}}
-						<div class="col-md-8">
+						<div class="col-md-5">
 						{{#profileInfo}}
 						<img src="http://graph.facebook.com/{{profileInfo.id}}/picture"	alt="profile image" />
 						{{/profileInfo}}
@@ -35,7 +35,7 @@
 						</div>
                     {{/isAthenticate}}
                     {{^isAthenticate}}
-	                    <div class="user-access col-md-6" style="font-size: 16px;">
+	                    <div class="user-access col-md-5" style="font-size: 16px;">
 	                        <div class="col-md-8">
 	                            <a href="/access">Accedé</a>
 	                        </div>
