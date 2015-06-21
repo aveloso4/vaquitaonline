@@ -150,6 +150,10 @@ a.new-vaquita div {
 }
 /*Nueva Vaquita*/
 
+.inline-block-vaquita {
+    display: inline-block;
+}
+
 .nueva-vaquita-header div {
     margin-top: 115px;
 }

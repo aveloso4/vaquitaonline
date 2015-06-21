@@ -21,7 +21,59 @@
 
     <!--animate.css styles and scripts-->
     <link rel="stylesheet" href="/resources/css/animate.css">
-    <script></script>
+    <script>
+        function changeInput(elemId1, elemId2, elFrom) {
+            var elfr = elFrom;
+            if (elfr.checked) {
+                // do something when checked
+                var el = document.getElementById(elemId1);
+                var el2 = document.getElementById(elemId2);
+
+                el.disabled = false;
+                el.value = "";
+                el.required = true;
+
+                el2.disabled = true;
+                el2.value = "";
+                el2.required = false;
+            }
+
+        }
+
+        function disableInput(elemId, elemId2, elFrom) {
+            var elfr = elFrom;
+            if (elfr.checked) {
+                var el = document.getElementById(elemId);
+                var el2 = document.getElementById(elemId2);
+
+                el.disabled = true;
+                el.value = "";
+                el.required = false;
+
+                el2.disabled = true;
+                el2.value = "";
+                el2.required = false;
+            }
+        }
+
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+        
+        function requiredChanger(elemId, elFrom){
+            var elfr = elFrom;
+                var el = document.getElementById(elemId);
+            if (elfr.checked) {
+                el.required = true;
+                el.disabled = false;
+            }else{
+                el.required = false;
+                el.disabled = true;
+                el.value = "";
+                el.checked = false;
+            }
+        }
+    </script>
 
     <!--Main Styles-->
     <link rel="stylesheet" href="/resources/css/main.css">
@@ -30,106 +82,112 @@
 </head>
 
 <body class="col-md-12">
-	{{> /WEB-INF/views/templates/header.html}} 
+    {{> /WEB-INF/views/templates/header.html}}
     <!--Content-->
     <section style="color:grey">
         <div class="nueva-vaquita-header center-col">
-            <div><h1>+ Nueva Colecta: Paso 2 - Configuración</h1></div>
+            <div>
+                <h1>+ Nueva Colecta: Paso 2 - Configuración</h1>
+            </div>
             <hr style="width:100%;height:4px;color:black">
         </div>
         <div class="center-col">
             <form class="vaquita-paso2">
-                <section>
+                <fieldset id="participationDetails">
                     <h2>Paticipación</h2>
                     <div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="optradio">Comisión a cargo del organizador</label>
+                                <input type="radio" name="contributionField" value="true" checked="checked">Comisión a cargo del organizador</label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="optradio">Comisión a cargo del Colaborador</label>
+                                <input type="radio" name="contributionField" value="false">Comisión a cargo del Colaborador</label>
                         </div>
+                    </div>
+                    <div>
+                       <label>
+                           <input id="endDate" type="checkbox" name="endDate" onchange="requiredChanger('endDateValue',this)">Fecha de finalización <input id="endDateValue" name="endDate" type="text" id="datepicker"  disabled="disabled"></label>
                     </div>
                     <div>
                         <div class="radio2">
                             <label>
-                                <input type="radio" value="">Monto Fijo</label>
+                                <input id="fixedAmmount" type="radio" value="FIXED" name="contributionType" onchange="changeInput('contAmmFixed','contAmmSug',this);" checked="checked">Monto Fijo</label>
                             <div class="">
-                                <input type="text" size="5" numeric="">
+                                <input class="inline-block-vaquita" id="contAmmFixed" type="number" name="contributionAmmount" size="5" numeric="" required="disabled">
                             </div>
                         </div>
                         <div class="radio2">
                             <label>
-                                <input type="radio" value="">Monto Sugerido</label>
+                                <input id="suggestedAmmount" type="radio" value="SUGGESTED" name="contributionType" onchange="changeInput('contAmmSug','contAmmFixed',this);">Monto Sugerido</label>
                             <div class="">
-                                <input type="text" size="5" numeric="">
+                                <input class="inline-block-vaquita" id="contAmmSug" type="number" name="contributionAmmount" size="5" numeric="" disabled="disabled">
                             </div>
                         </div>
                         <div class="radio2">
                             <label>
-                                <input type="radio" value="">Monto Libre</label>
+                                <input type="radio" value="OPEN" name="contributionType" onchange="disableInput('contAmmSug','contAmmFixed',this);">Monto Libre</label>
                         </div>
                     </div>
-                </section>
-                <section>
+                </fieldset>
+                <fieldset id="privacyDetails">
                     <h2>Privacidad</h2>
                     <div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">Mostrar Colaboradores</label>
+                                <input id="showColaborator" name="showParticipantName" type="checkbox" value="">Mostrar Participantes</label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">Mostrar monto aportado</label>
+                                <input name="showParticipantContribution" type="checkbox" value="">Mostrar monto aportado</label>
                         </div>
-                        <div class="checkbox disabled">
+                        <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">Mostrar total recaudado</label>
+                                <input name="showTotalAmmount" type="checkbox" value="" checked="checked">Mostrar total recaudado</label>
                         </div>
                     </div>
-                </section>
+                </fieldset>
 
-                <section>
+                <fieldset id="additionalOptions">
                     <h2>Opciones Adicionales</h2>
                     <div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">Colecta Publica</label>
+                                <input id="publicVaquita" name="isPublic" type="checkbox" value="" onchange="requiredChanger('openInvit',this)">Colecta Publica</label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="" disabled>Invitación Abierta</label>
+                                <input id="openInvit" name="openInvitation" type="checkbox" value="" disabled="disabled">Invitación Abierta</label>
                         </div>
-                        <div class="checkbox disabled">
+                        <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">Objetivo a alcanzar</label>
-                            <div class="">
-                                <input type="text" size="5" numeric="">
+                                <input id="targetAmmount" type="checkbox" value=""  onchange="requiredChanger('targetAmmountValue',this)">Objetivo a alcanzar</label>
+                            <div class="inline-block-vaquita">
+                                <input id="targetAmmountValue" type="number" size="5" numeric="" disabled="disabled">
                             </div>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">Habilitar Mensaje con la Colaboración</label>
+                                <input name="openMessage" type="checkbox" value="">Habilitar Mensaje con la partcipación</label>
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="" disabled>Mostrar Mensajes de Colaboraciónes</label>
+                                <input name="showMessageWall" type="checkbox" value="">Mostrar Mensajes de partcipantes</label>
                         </div>
-                        <div class="checkbox disabled">
+                        <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="">Notificarme por Email las nuevas colaboraciones</label>
+                                <input name="notifyEmail" type="checkbox" value="">Notificarme por Email las nuevas partcipaciones</label>
                         </div>
                     </div>
-                </section>
+                </fieldset>
                 <br>
                 <div class="col-md-6">
-                <input style="font-size:19px;color:white;background-color:orange;" type="submit" value="Paso 3: Compartir Colecta" />
+                    <input style="font-size:19px;color:white;background-color:orange;" type="submit" value="Paso 3: Compartir Colecta" />
                 </div>
             </form>
         </div>
     </section>
-	{{> /WEB-INF/views/templates/footer.html}} 
+    {{> /WEB-INF/views/templates/footer.html}}
 </body>
 
 </html>
