@@ -107,7 +107,7 @@
                     </div>
                     <div>
                        <label>
-                           <input id="endDate" type="checkbox" name="endDate" onchange="requiredChanger('endDateValue',this)">Fecha de finalización <input id="endDateValue" name="endDate" type="text" id="datepicker"  disabled="disabled"></label>
+                           <input id="endDate" type="checkbox" name="endDateCheck" onchange="requiredChanger('endDateValue',this)">Fecha de finalización <input id="endDateValue" name="endDate" type="text" id="datepicker"  disabled="disabled"></label>
                     </div>
                     <div>
                         <div class="radio2">
@@ -161,9 +161,9 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input id="targetAmmount" type="checkbox" value=""  onchange="requiredChanger('targetAmmountValue',this)">Objetivo a alcanzar</label>
+                                <input id="targetAmmount" type="checkbox" name="moneyTargetCheck" value=""  onchange="requiredChanger('targetAmmountValue',this)">Objetivo a alcanzar</label>
                             <div class="inline-block-vaquita">
-                                <input id="targetAmmountValue" type="number" size="5" numeric="" disabled="disabled">
+                                <input id="targetAmmountValue" name="moneyTarget" type="number" size="5" numeric="" disabled="disabled">
                             </div>
                         </div>
                         <div class="checkbox">
