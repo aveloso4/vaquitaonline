@@ -2,22 +2,16 @@ package com.proyecto.cero.vaquita;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import com.proyecto.cero.model.Vaquita.ContributionType;
-import com.proyecto.cero.model.Vaquita.Status;
 
 public class VaquitaSecondStepForm {
 
 	/* Participation */
-	private boolean contributionField; // Default: True // Se le saca a el monto
-	private boolean endDateCheck;
+	private String contributionField; // Default: True // Se le saca a el monto
+	private String endDateCheck;
 	@Future
 	private Date endDate;
 	@NotNull
@@ -26,28 +20,28 @@ public class VaquitaSecondStepForm {
 	private int contributionAmmount;
 	
 	/* Privacy */
-	private boolean showParicipantName; // Default: False
-	private boolean showParticipantContribution; // Default: False
-	private boolean showTotalAmmount; // Default: False
+	private String showParicipantName; // Default: False
+	private String showParticipantContribution; // Default: False
+	private String showTotalAmmount; // Default: False
 
 	/* Additional Options */
-	private boolean isPublic; // Default: False;
-	private boolean openInvitation; // Default: false
-	private boolean moneytargetCheck;
+	private String isPublic; // Default: False;
+	private String openInvitation; // Default: false
+	private String moneytargetCheck;
 	private int moneyTarget; //Si esta desnmarcado es NULL
-	private boolean openMessage; // Default: True
-	private boolean showMessageWall; // Default: True
-	private boolean notifyEmail; // Default: False
-	public boolean isContributionField() {
+	private String openMessage; // Default: True
+	private String showMessageWall; // Default: True
+	private String notifyEmail; // Default: False
+	public String getContributionField() {
 		return contributionField;
 	}
-	public void setContributionField(boolean contributionField) {
+	public void setContributionField(String contributionField) {
 		this.contributionField = contributionField;
 	}
-	public boolean isEndDateCheck() {
+	public String getEndDateCheck() {
 		return endDateCheck;
 	}
-	public void setEndDateCheck(boolean endDateCheck) {
+	public void setEndDateCheck(String endDateCheck) {
 		this.endDateCheck = endDateCheck;
 	}
 	public Date getEndDate() {
@@ -68,35 +62,41 @@ public class VaquitaSecondStepForm {
 	public void setContributionAmmount(int contributionAmmount) {
 		this.contributionAmmount = contributionAmmount;
 	}
-	public boolean isShowParicipantName() {
+	public String getShowParicipantName() {
 		return showParicipantName;
 	}
-	public void setShowParicipantName(boolean showParicipantName) {
+	public void setShowParicipantName(String showParicipantName) {
 		this.showParicipantName = showParicipantName;
 	}
-	public boolean isShowParticipantContribution() {
+	public String getShowParticipantContribution() {
 		return showParticipantContribution;
 	}
-	public void setShowParticipantContribution(boolean showParticipantContribution) {
+	public void setShowParticipantContribution(String showParticipantContribution) {
 		this.showParticipantContribution = showParticipantContribution;
 	}
-	public boolean isShowTotalAmmount() {
+	public String getShowTotalAmmount() {
 		return showTotalAmmount;
 	}
-	public void setShowTotalAmmount(boolean showTotalAmmount) {
+	public void setShowTotalAmmount(String showTotalAmmount) {
 		this.showTotalAmmount = showTotalAmmount;
 	}
-	public boolean isPublic() {
+	public String getIsPublic() {
 		return isPublic;
 	}
-	public void setPublic(boolean isPublic) {
+	public void setIsPublic(String isPublic) {
 		this.isPublic = isPublic;
 	}
-	public boolean isOpenInvitation() {
+	public String getOpenInvitation() {
 		return openInvitation;
 	}
-	public void setOpenInvitation(boolean openInvitation) {
+	public void setOpenInvitation(String openInvitation) {
 		this.openInvitation = openInvitation;
+	}
+	public String getMoneytargetCheck() {
+		return moneytargetCheck;
+	}
+	public void setMoneytargetCheck(String moneytargetCheck) {
+		this.moneytargetCheck = moneytargetCheck;
 	}
 	public int getMoneyTarget() {
 		return moneyTarget;
@@ -104,30 +104,24 @@ public class VaquitaSecondStepForm {
 	public void setMoneyTarget(int moneyTarget) {
 		this.moneyTarget = moneyTarget;
 	}
-	public boolean isMoneytargetCheck() {
-		return moneytargetCheck;
-	}
-	public void setMoneytargetCheck(boolean moneytargetCheck) {
-		this.moneytargetCheck = moneytargetCheck;
-	}
-	public boolean isOpenMessage() {
+	public String getOpenMessage() {
 		return openMessage;
 	}
-	public void setOpenMessage(boolean openMessage) {
+	public void setOpenMessage(String openMessage) {
 		this.openMessage = openMessage;
 	}
-	public boolean isShowMessageWall() {
+	public String getShowMessageWall() {
 		return showMessageWall;
 	}
-	public void setShowMessageWall(boolean showMessageWall) {
+	public void setShowMessageWall(String showMessageWall) {
 		this.showMessageWall = showMessageWall;
 	}
-	public boolean isNotifyEmail() {
+	public String getNotifyEmail() {
 		return notifyEmail;
 	}
-	public void setNotifyEmail(boolean notifyEmail) {
+	public void setNotifyEmail(String notifyEmail) {
 		this.notifyEmail = notifyEmail;
 	}
 
-	
+
 }

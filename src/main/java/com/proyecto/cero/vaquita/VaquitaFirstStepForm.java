@@ -7,7 +7,7 @@ public class VaquitaFirstStepForm {
 	@NotEmpty
 	private String title;
 	private String description;
-	private String image; // Default: imgDefault.png
+	private String image;
 	private String organizedFor;
 
 	public VaquitaFirstStepForm() {

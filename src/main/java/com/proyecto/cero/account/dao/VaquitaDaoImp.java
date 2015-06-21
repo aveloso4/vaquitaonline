@@ -38,7 +38,7 @@ public class VaquitaDaoImp implements VaquitaDao {
 	}
 	
 	public void updateVaquita(Vaquita vaquita) {
-		openSession().update(vaquita);
+		openSession().merge(vaquita);
 	}
 
 }

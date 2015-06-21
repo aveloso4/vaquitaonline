@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Regalenlo.com</title>
+    <meta name="description" content="An interactive getting started guide for Brackets.">
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!--animate.css styles and scripts-->
+    <link rel="stylesheet" href="animate.css">
+    <script></script>
+
+    <!--Main Styles-->
+    <link rel="stylesheet" href="main.css">
+
+
+</head>
+
+<body class="col-md-12">
+	{{> /WEB-INF/views/templates/header.html}} 
+    <!--Content-->
+    <section>
+        <div class="center-col">
+            <h1>Titulo de vaquita</h1>
+            <div class="col-md-3">
+                <img src="Logo-Mayus.png">
+            </div>
+            <div class="col-md-9">
+                <div class="col-md-5">
+                    <p>Fecha de Finalización: 13/08/2015</p>
+                    <p>Total Recaudado: $1980</p>
+                </div>
+                <div class="col-md-4">
+                    <!--abre modal con opciones para compartir-->
+                    <button>Compartir Vaquita</button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <p>{{#vaquita.description}}{{vaquita.description}}{{/vaquita.description}}</p>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12" style="padding:25px auto; margin:45px ">
+                    <a href="#" data-toggle="modal" data-target="#modalParticipacion" style="color:black; background-color:orange;padding:30px 15px; font-size:30px">Colaborar</a>
+                </div>
+                <div class="col-md-6" style="margin:15px auto; border-top:1px solid green">
+                    Aca van los mensajes de los participantes, su identidad (puede ser anonima), y el monto recaudado si fue habilitado.
+                </div>
+            </div>
+        </div>
+    </section>
+	{{> /WEB-INF/views/templates/header.html}} 
+</body>
+
+</html>

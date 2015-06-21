@@ -83,10 +83,10 @@ public class Vaquita {
 	private ContributionType contributionType;
 	
 	@Column (name = "contributionAmmount")
-	private int contributionAmmount;
+	private Integer contributionAmmount;
 	
 	@Column(name = "moneyTarget")
-	private int moneyTarget;
+	private Integer moneyTarget;
 
 	@Column(name = "status")
 	@Enumerated(EnumType.ORDINAL)
@@ -243,11 +243,11 @@ public class Vaquita {
 		this.notifyEmail = notifyEmail;
 	}
  
-	public int getMoneyTarget() {
+	public Integer getMoneyTarget() {
 		return moneyTarget;
 	}
 
-	public void setMoneyTarget(int moneyTarget) {
+	public void setMoneyTarget(Integer moneyTarget) {
 		this.moneyTarget = moneyTarget;
 	}
 
@@ -267,18 +267,19 @@ public class Vaquita {
 		this.contributionType = contributionType;
 	}
 
-	public int getContributionAmmount() {
+	public Integer getContributionAmmount() {
 		return contributionAmmount;
 	}
 
-	public void setContributionAmmount(int contributionAmmount) {
+	public void setContributionAmmount(Integer contributionAmmount) {
 		this.contributionAmmount = contributionAmmount;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Vaquita [Title=" + title + " Decription: " + description + " Organized For: " + organizedFor + " Image: " + image;
+		return "Vaquita [Title=" + title + " Decription: " + description + " Organized For: " + organizedFor + " Image: " + image+ 
+				" Money Target: "+moneyTarget;
 	}
 
 }

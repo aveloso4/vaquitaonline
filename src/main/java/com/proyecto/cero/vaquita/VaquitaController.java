@@ -65,7 +65,11 @@ public class VaquitaController {
 	public ModelAndView createVaquitaSecondStep(@Valid VaquitaSecondStepForm form, BindingResult result, WebRequest request, Principal user, Model modelo) {
 		ModelAndView model = new ModelAndView();
 		ModelManager.initializeModel(model, facebook);
+		
 		if (result.hasErrors()) {
+			System.out.println("@@@@@@@@@@@@@@@@@Start ERROR@@@@@@@@@@@@@@@@@@@");
+			System.out.println(result);
+			System.out.println("@@@@@@@@@@@@@@@@@End ERROR@@@@@@@@@@@@@@@@@");
 			model.setViewName("newVaquita2");
 			model.addObject("error","Ups! Algo a salido mal. Por favor asegurate de completar los campos requeridos (*)");
 			return model;
@@ -73,15 +77,25 @@ public class VaquitaController {
 		
 		int ID = (Integer) request.getAttribute("ID", RequestAttributes.SCOPE_GLOBAL_SESSION);
 		Vaquita vaquita = vaquitaService.findVaquitaById(ID);
-		updateVaquita(vaquita, form);
+		updateVaquita(form, result, vaquita, request);
 //    	model.addObject("vaquita", vaquita);
 		model.setViewName("newVaquita3");
 		return model;
 	}
-  
-	
+	 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public ModelAndView search(Principal user,	@RequestParam(value = "id", required=true) int id) {
+		ModelAndView model = new ModelAndView();
+		ModelManager.initializeModel(model, facebook);
+
+		Vaquita vaquita = vaquitaService.findVaquitaById(id);
+		model.addObject("vaquita", vaquita);
+		model.setViewName("verVaquita");
+		return model;
+	}
+	
+	@RequestMapping(value = "/vaquitaCreada", method = RequestMethod.GET)
+	public ModelAndView vaquitaCreada(Principal user,	@RequestParam(value = "id", required=true) int id) {
 		ModelAndView model = new ModelAndView();
 		ModelManager.initializeModel(model, facebook);
 
@@ -98,23 +112,24 @@ public class VaquitaController {
     vaquitaService.createVaquita(vaquita);
     return vaquita;
 	}
-  
-  private void updateVaquita(Vaquita vaquita, VaquitaSecondStepForm form) {
-  	vaquita.setContributionField(form.isContributionField());
-  	vaquita.setEndDate(form.isEndDateCheck() ? form.getEndDate() : null);
-  	vaquita.setContributionType(form.getContributionType());
-  	vaquita.setContributionAmmount(form.getContributionType() == ContributionType.OPEN ? null : form.getContributionAmmount());
+   
+  private void updateVaquita(VaquitaSecondStepForm form, BindingResult formBinding, Vaquita vaquita, WebRequest request) {
+  	vaquita.setContributionField(Boolean.parseBoolean(form.getContributionField()));
+  	vaquita.setEndDate(Boolean.parseBoolean(request.getParameter("endDateCheck")) ? null : null);
+  	vaquita.setContributionType(ContributionType.valueOf(request.getParameter("contributionType")));
+  	vaquita.setContributionAmmount(ContributionType.valueOf(request.getParameter("contributionType")) == ContributionType.OPEN ? null : Integer.parseInt(request.getParameter("contributionAmmount")));
 
-  	vaquita.setShowParicipantName(form.isShowParicipantName());
-  	vaquita.setShowParticipantContribution(form.isShowParticipantContribution());
-  	vaquita.setShowTotalAmmount(form.isShowTotalAmmount());
+  	vaquita.setShowParicipantName(Boolean.parseBoolean(request.getParameter("showParicipantName")));
+  	vaquita.setShowParticipantContribution(Boolean.parseBoolean(request.getParameter("showParticipantContribution")));
+  	vaquita.setShowTotalAmmount(Boolean.parseBoolean(request.getParameter("showTotalAmmount")));
   	
-  	vaquita.setPublic(form.isPublic());
-  	vaquita.setOpenInvitation(!form.isPublic() ? false : form.isOpenInvitation());
-  	vaquita.setMoneyTarget(form.isMoneytargetCheck() ? form.getMoneyTarget() : null);
-  	vaquita.setOpenMessage(form.isOpenMessage());
-  	vaquita.setShowMessageWall(form.isShowMessageWall());
-  	vaquita.setNotifyEmail(form.isNotifyEmail());
+  	boolean isPublic = Boolean.parseBoolean(request.getParameter("IsPublic"));
+  	vaquita.setPublic(isPublic);
+  	vaquita.setOpenInvitation(!isPublic ? false : Boolean.parseBoolean(request.getParameter("spenInvitation")));
+  	vaquita.setMoneyTarget(Boolean.parseBoolean(request.getParameter("moneytargetCheck")) ? Integer.parseInt((request.getParameter("moneyTarget"))) : null);
+  	vaquita.setOpenMessage(Boolean.parseBoolean(request.getParameter("openMessage")));
+  	vaquita.setShowMessageWall(Boolean.parseBoolean(request.getParameter("showMessageWall")));
+  	vaquita.setNotifyEmail(Boolean.parseBoolean(request.getParameter("notifyEmail")));
   	
   	vaquitaService.updateVaquita(vaquita);
 	}

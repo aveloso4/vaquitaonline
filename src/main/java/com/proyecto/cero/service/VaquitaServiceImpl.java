@@ -35,7 +35,10 @@ public class VaquitaServiceImpl implements VaquitaService{
 	}
 
 	public void updateVaquita(Vaquita vaquita) {
+		System.out.println("####################UPDATE VAQUITA######################");
+		System.out.println(vaquita);
 		vaquitaDAO.updateVaquita(vaquita);
+		System.out.println("####################END OF UPDATE######################");
 	}
 
 }
