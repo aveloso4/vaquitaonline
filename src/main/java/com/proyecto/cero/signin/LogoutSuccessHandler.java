@@ -20,7 +20,6 @@ public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
 		// do whatever you want
-		this.setDefaultTargetUrl(request.getHeader("Referer"));
 		super.onLogoutSuccess(request, response, authentication);
 	}
 }

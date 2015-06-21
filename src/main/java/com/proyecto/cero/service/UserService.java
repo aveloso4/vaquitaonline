@@ -16,4 +16,4 @@ public interface UserService {
 	
 	public Account logInAccount(Account account) throws loginFail;
 	
-}
+} 

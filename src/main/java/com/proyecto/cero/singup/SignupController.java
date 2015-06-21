@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 
 import com.proyecto.cero.account.emailAlreadyInUse;
+import com.proyecto.cero.controller.ModelManager;
 import com.proyecto.cero.model.Account;
 import com.proyecto.cero.service.UserService;
 import com.proyecto.cero.signin.SignInUtils;
@@ -38,6 +39,7 @@ public class SignupController {
 		public String facebookSignup(Principal currentUser, Model model, WebRequest request) throws emailAlreadyInUse {
 		
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
+		ModelManager.initializeModel(model, facebook);
 		String name, lastName, password, email, telephone;
 		
 		if(connection != null){
@@ -46,7 +48,7 @@ public class SignupController {
 			name = userProfile.getFirstName();
 			lastName = userProfile.getLastName();
 			password = "23%&/2423&/3435ÑsdjNsadI";
-			email = "eugenio.valeiras@gmail.com";
+			email = userProfile.getEmail();
 			telephone = null;
 			
 		} else {

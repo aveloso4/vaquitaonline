@@ -20,26 +20,30 @@
                 <!-- User Header -->
                 <div class="user-header col-md-4">
                     <!-- New Vaquita -->
-                    <a class="new-vaquita" href="#">
+                    <a class="new-vaquita" href="/create">
                         <div class="col-md-6">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Vaquita
                         </div>
                     </a>
                     <!-- User Access/Profile -->
-                    {{#AuthenticUser}}
-						<img src="#" src="http://graph.facebook.com/{{accountInfo.id}}/picture"	alt="profile image" />
-                    {{/AuthenticUser}}
-                    {{^AuthenticUser}}
+                    {{#isAthenticate}}
+						<div class="col-md-8">
+						{{#profileInfo}}
+						<img src="http://graph.facebook.com/{{profileInfo.id}}/picture"	alt="profile image" />
+						{{/profileInfo}}
+							<a href="/signout">Salir</a>
+						</div>
+                    {{/isAthenticate}}
+                    {{^isAthenticate}}
 	                    <div class="user-access col-md-6" style="font-size: 16px;">
 	                        <div class="col-md-8">
-	                            <a href="/access" data-toggle="modal" data-target="#modalLogIn">Accedé</a>
+	                            <a href="/access">Accedé</a>
 	                        </div>
 	                        <div class="col-md-8">
-	                            <a href="#" data-toggle="modal" data-target="#modalAccess">Unite!</a>
+	                            <a href="#">Unite!</a>
 	                        </div>
 	                    </div>
-                    {{/AuthenticUser}}
-                    
+                    {{/isAthenticate}}
                 </div>
             </div>
         </div>

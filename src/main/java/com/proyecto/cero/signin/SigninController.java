@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.proyecto.cero.controller.ModelManager;
 import com.proyecto.cero.model.Account;
 import com.proyecto.cero.service.UserService;
 
@@ -32,20 +33,11 @@ public class SigninController {
 		this.facebook = facebook;
 	}
 
-	// MAPPINGS
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView String(Principal currentUser, WebRequest request) {
-		/*MODEL AND VIEW*/
-		ModelAndView model = new ModelAndView();
-		model.setViewName("home");
-
-		return model;
-	}
-
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public String signin(WebRequest request) {
+	public String signin(WebRequest request, Model model) {
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
-
+		ModelManager.initializeModel(model, facebook);
+		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		Account account = signInAccount(email, password);
@@ -53,16 +45,19 @@ public class SigninController {
 		if (account != null) {
 			SignInUtils.signin(account.getEmail());
 			providerSignInUtils.doPostSignUp(account.getEmail(), request);
+			
+		} else {
+			return "redirect:/access?error=bad_credentials";
 		}
 
-		return "redirect:/";
+		return "/";
 	}
 
 	private Account signInAccount(String email, String password) {
 		try {
 			Account account = new Account(email, null, null, password, null);
 			return userService.logInAccount(account);
-		} catch (loginFail e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}

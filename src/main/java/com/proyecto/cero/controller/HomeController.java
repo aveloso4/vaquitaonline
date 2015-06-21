@@ -21,12 +21,15 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.cero.model.Account;
 import com.proyecto.cero.service.UserService;
@@ -45,6 +48,27 @@ public class HomeController {
 		this.userService = us;
 	}
 
+	// MAPPINGS
+	@RequestMapping(value = "/vaquitaCreada", method = RequestMethod.GET)
+	public ModelAndView index(Principal currentUser, WebRequest request) {
+		/* MODEL AND VIEW */
+		ModelAndView model = new ModelAndView();
+		model.addObject("content", "home");
+		model.setViewName("home");
+
+		return model;
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView root(Principal currentUser, WebRequest request) {
+
+		ModelAndView model = new ModelAndView();
+		ModelManager.initializeModel(model, facebook);
+		model.setViewName("home");
+		
+		return model;
+	}
+
 	@RequestMapping(value = { "/accounts" })
 	public String accounts(Principal currentUser, Model model, WebRequest request) {
 		try {
@@ -57,7 +81,7 @@ public class HomeController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		request.setAttribute("redirectUri", "/", WebRequest.SCOPE_SESSION);
+
 		return "allAccounts";
 	}
 }

@@ -88,14 +88,15 @@ public class Vaquita {
 	@Column(name = "objetivoDeDinero")
 	private int objetivoDeDinero;
 
-	@Column(name = "estado")
+	@Column(name = "status")
+	@Enumerated(EnumType.ORDINAL)
 	private Status status; // Default: ACTIVA
 
-	public Vaquita(String title, String desc, String img, String organizedFor) {
+	public Vaquita(String title, String desc, String img, String creator) {
 		this.title = title;
 		this.description = desc;
 		this.image = img;
-		this.organizedFor = organizedFor;
+		this.creator = creator;
 	}
 
 	public int getId() {

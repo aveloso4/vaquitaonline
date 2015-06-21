@@ -17,6 +17,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.cero.model.Vaquita;
+import com.proyecto.cero.model.Vaquita.ContributionType;
+import com.proyecto.cero.model.Vaquita.Status;
 import com.proyecto.cero.service.VaquitaService;
 
 @Controller
@@ -41,14 +43,14 @@ public class VaquitaController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-  public ModelAndView crearVaquita(@Valid VaquitaFirstStepForm form, BindingResult result, WebRequest request) {
+  public ModelAndView crearVaquita(@Valid VaquitaFirstStepForm form, BindingResult result, WebRequest request, Principal user) {
   	ModelAndView model = new ModelAndView();
   	if (result.hasErrors()) {
   		model.setViewName("newVaquita1");
   		model.addObject("error","Ups! Algo a salido mal. Por favor asegurate de completar los campos requeridos (*)");
   		return model;
   	}
-    	Vaquita vaquita = crearVaquita(form, result);
+    	Vaquita vaquita = crearVaquita(form, result, user.getName());
 //    	model.addObject("vaquita", vaquita);
     	model.setViewName("newVaquita2");
     return model;
@@ -66,8 +68,9 @@ public class VaquitaController {
 	}
   
   // Internal Helpers
-  private Vaquita crearVaquita(VaquitaFirstStepForm form, BindingResult formBinding) {
-		Vaquita vaquita = new Vaquita(form.getTitle(), form.getDescription(), form.getImage(), form.getOrganizedFor());
+  private Vaquita crearVaquita(VaquitaFirstStepForm form, BindingResult formBinding, String userName) {
+		Vaquita vaquita = new Vaquita(form.getTitle(), form.getDescription(), form.getImage(), userName);
+		vaquita.setStatus(Status.ACTIVE);;
     vaquitaService.createVaquita(vaquita);
     return vaquita;
 	}

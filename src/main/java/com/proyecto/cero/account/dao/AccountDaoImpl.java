@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.proyecto.cero.model.Account;
 import com.proyecto.cero.signin.loginFail;
-
+ 
 @Repository
 @Transactional
 public class AccountDaoImpl implements AccountDao {

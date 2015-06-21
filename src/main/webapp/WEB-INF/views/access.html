@@ -30,51 +30,7 @@
 </head>
 
 <body class="col-md-12">
-    <!--Header-->
-    <header class="col-md-12">
-        <!-- Header Container -->
-        <div class="center-col head-container">
-            <!-- Header Itself -->
-            <div class="col-md-12">
-                <!-- Branding Header -->
-                <div class="col-md-8">
-                    <!-- Logo Container -->
-                    <div class="col-md-4 logo-container">
-                        <img src="resources/img/home/Logo-Mayus.png" />
-                    </div>
-                    <!-- Brand Catchphrase -->
-                    <div class="brand-catchphrase col-md-8">
-                        <span>
-						<!-- ToDo -->
-				        </span>
-                    </div>
-                </div>
-                <!-- User Header -->
-                <div class="user-header col-md-4">
-                    <!-- New Vaquita -->
-                    <a class="new-vaquita" href="#">
-                        <div class="col-md-6">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nueva Vaquita
-                        </div>
-                    </a>
-                    <!-- User Access/Profile -->
-                    {{#AuthenticUser}}
-						<img src="#" src="http://graph.facebook.com/{{accountInfo.id}}/picture"	alt="profile image" />
-                    {{/AuthenticUser}}
-                    {{^AuthenticUser}}
-	                    <div class="user-access col-md-6" style="font-size: 16px;">
-	                        <div class="col-md-8">
-	                            <a href="#" data-toggle="modal" data-target="#modalLogIn">Accedé</a>
-	                        </div>
-	                        <div class="col-md-8">
-	                            <a href="#" data-toggle="modal" data-target="#modalAccess">Unite!</a>
-	                        </div>
-	                    </div>
-                    {{/AuthenticUser}}
-                </div>
-            </div>
-        </div>
-    </header>
+   {{> /WEB-INF/views/templates/header.html}} 
     <!--Content-->
     <section>
         <div class="center-col">
@@ -86,7 +42,7 @@
                             <p class="li-lead fb-user-title">Acceso Usuarios</p>
                             <div class="social-signup">
                                 <form name="fb_signin" id="fb_signin" method="POST" action="/signin/facebook">
-                                    <input type="hidden" name="scope" value="public_profile, publish_actions, user_friends">
+                                    <input type="hidden" name="scope" value="public_profile, publish_actions, user_friends, email">
                                     <button id="boton-facebook" type="submit" style="color:white;font-size:20px; background-color:#3a5795; padding:15px 20px;">Accedé con Facebook</button>
                                 </form>
                             </div>
@@ -156,12 +112,7 @@
             </div>
         </div>
     </section>
-    <!--Footer-->
-    <footer>
-        <div class="center-col">
-
-        </div>
-    </footer>
+{{> /WEB-INF/views/templates/footer.html}} 
 
 </body>
 

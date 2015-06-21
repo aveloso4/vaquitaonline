@@ -20,21 +20,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
 		.formLogin()
-			.loginPage("/signupExtra")
-//			.loginProcessingUrl("/signin/authenticate")
-//			.failureUrl("/signin?param.error=bad_credentials")
+			.loginPage("/access")
+//			.loginProcessingUrl("/signin")
+			.failureUrl("/access?error=bad_credentials")
+			.defaultSuccessUrl("/")
 			.and()
 			.logout()
 				.logoutUrl("/signout")
 				.deleteCookies("JSESSIONID")
-				.logoutSuccessHandler(new LogoutSuccessHandler("/signin"))
+//				.logoutSuccessHandler(new LogoutSuccessHandler("/"))
 		.and()
 			.authorizeRequests()
 				.antMatchers("/vaquitaCreada").authenticated()
 				.antMatchers("/**","/signin/**","/search**", "/googleMap**", "/resources/**", "/auth/**", "/signup/**", "/disconnect/facebook").permitAll()
 		.and()
 			.rememberMe()
-		.and().csrf();
+		.and().csrf().disable();
 	}
 
 	@Bean

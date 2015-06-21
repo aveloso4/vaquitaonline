@@ -33,6 +33,13 @@ public class AccessController {
 	public ModelAndView access(Principal currentUser, WebRequest request) {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("access");
+
+		model.addObject("isAthenticate", AuthenticationManager.isAthenticate());
+		try {
+			model.addObject("profileInfo", facebook.userOperations().getUserProfile());
+		} catch (Exception e) {
+		}
+		
 		return model;
 	}
 }

@@ -32,5 +32,5 @@ public class UserServiceImpl implements UserService {
 	public Account logInAccount(Account account) throws loginFail {
 		return userDAO.logInAccount(account);
 	}
-
+ 
 }
