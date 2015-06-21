@@ -9,6 +9,8 @@ public interface VaquitaService {
 	public Vaquita findVaquitaById(int id);
 
 	public void createVaquita(Vaquita vaquita);
+	
+	public void updateVaquita(Vaquita vaquita);
 
 	public List<Vaquita> findAll();
 	

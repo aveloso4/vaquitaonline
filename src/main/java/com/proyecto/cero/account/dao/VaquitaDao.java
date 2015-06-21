@@ -6,5 +6,6 @@ public interface VaquitaDao {
 
   Vaquita findVaquitaById(int id);
   void createVaquita(Vaquita vaquita);
+  void updateVaquita(Vaquita vaquita);
   
 }

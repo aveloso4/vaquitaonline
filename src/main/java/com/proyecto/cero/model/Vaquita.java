@@ -85,8 +85,8 @@ public class Vaquita {
 	@Column (name = "contributionAmmount")
 	private int contributionAmmount;
 	
-	@Column(name = "objetivoDeDinero")
-	private int objetivoDeDinero;
+	@Column(name = "moneyTarget")
+	private int moneyTarget;
 
 	@Column(name = "status")
 	@Enumerated(EnumType.ORDINAL)
@@ -243,12 +243,12 @@ public class Vaquita {
 		this.notifyEmail = notifyEmail;
 	}
  
-	public int getObjetivoDeDinero() {
-		return objetivoDeDinero;
+	public int getMoneyTarget() {
+		return moneyTarget;
 	}
 
-	public void setObjetivoDeDinero(int objetivoDeDinero) {
-		this.objetivoDeDinero = objetivoDeDinero;
+	public void setMoneyTarget(int moneyTarget) {
+		this.moneyTarget = moneyTarget;
 	}
 
 	public Status getStatus() {

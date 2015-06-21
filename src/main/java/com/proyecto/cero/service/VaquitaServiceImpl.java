@@ -34,4 +34,8 @@ public class VaquitaServiceImpl implements VaquitaService{
 		return null;
 	}
 
+	public void updateVaquita(Vaquita vaquita) {
+		vaquitaDAO.updateVaquita(vaquita);
+	}
+
 }
