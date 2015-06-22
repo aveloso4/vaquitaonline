@@ -137,7 +137,7 @@ public class VaquitaController {
   @RequestMapping(value = "/postInWall", method = RequestMethod.GET)
   public ModelAndView compartirVaquita(Principal user){
 //  		FacebookLink fl = new FacebookLink("vaquita-project.herokuapp.com", null, "Vaquita Online", "Slogan de Vaquita", "Una descripcion Para Vaquita");
-  		facebook.feedOperations().post((new PostData("me")).message("Hey! Vaquita Online! Compartan").link("vaquita-project.herokuapp.com", null, "Vaquita Online", "Slogan de Vaquita", "Una descripcion Para Vaquita"));
+  		facebook.feedOperations().post((new PostData("me")).message("Hey! Vaquita Online! Compartan").link("vaquita-project.herokuapp.com/buscarVaquitaCreada?id=2", null, "Vaquita Online", "Slogan de Vaquita", "Una descripcion Para Vaquita"));
   		ModelAndView model = new ModelAndView();
   		model.setViewName("home");
   		return model;
