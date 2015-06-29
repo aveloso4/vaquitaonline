@@ -1,193 +1,212 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html> {{> /WEB-INF/views/templates/header.html}}
+<!--Content-->
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Regalenlo.com</title>
-    <meta name="description" content="An interactive getting started guide for Brackets.">
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <!--[if IE]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<div class="parallax-container valign-wrapper para-steps1">
+    <div class="section no-pad-bot">
+        <div class="container">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-    <!--animate.css styles and scripts-->
-    <link rel="stylesheet" href="/resources/css/animate.css">
-    <script>
-        function changeInput(elemId1, elemId2, elFrom) {
-            var elfr = elFrom;
-            if (elfr.checked) {
-                // do something when checked
-                var el = document.getElementById(elemId1);
-                var el2 = document.getElementById(elemId2);
-
-                el.disabled = false;
-                el.value = "";
-                el.required = true;
-
-                el2.disabled = true;
-                el2.value = "";
-                el2.required = false;
-            }
-
-        }
-
-        function disableInput(elemId, elemId2, elFrom) {
-            var elfr = elFrom;
-            if (elfr.checked) {
-                var el = document.getElementById(elemId);
-                var el2 = document.getElementById(elemId2);
-
-                el.disabled = true;
-                el.value = "";
-                el.required = false;
-
-                el2.disabled = true;
-                el2.value = "";
-                el2.required = false;
-            }
-        }
-
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-        
-        function requiredChanger(elemId, elFrom){
-            var elfr = elFrom;
-                var el = document.getElementById(elemId);
-            if (elfr.checked) {
-                el.required = true;
-                el.disabled = false;
-            }else{
-                el.required = false;
-                el.disabled = true;
-                el.value = "";
-                el.checked = false;
-            }
-        }
-    </script>
-
-    <!--Main Styles-->
-    <link rel="stylesheet" href="/resources/css/main.css">
-
-
-</head>
-
-<body class="col-md-12">
-    {{> /WEB-INF/views/templates/header.html}}
-    <!--Content-->
-    <section style="color:grey">
-        <div class="nueva-vaquita-header center-col">
-            <div>
-                <h1>+ Nueva Colecta: Paso 2 - Configuración</h1>
-            </div>
-            <hr style="width:100%;height:4px;color:black">
         </div>
-        <div class="center-col">
-            <form action="/create_second" method="POST" class="vaquita-paso2">
-                <fieldset id="participationDetails">
-                    <h2>Paticipación</h2>
-                    <div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="contributionField" value="true" checked="checked">Comisión a cargo del organizador</label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="contributionField" value="false">Comisión a cargo del Colaborador</label>
-                        </div>
-                    </div>
-                    <div>
-                       <label>
-                           <input id="endDate" type="checkbox" name="endDateCheck" onchange="requiredChanger('endDateValue',this)">Fecha de finalización <input id="endDateValue" name="endDate" type="text" id="datepicker"  disabled="disabled"></label>
-                    </div>
-                    <div>
-                        <div class="radio2">
-                            <label>
-                                <input id="fixedAmmount" type="radio" value="FIXED" name="contributionType" onchange="changeInput('contAmmFixed','contAmmSug',this);" checked="checked">Monto Fijo</label>
-                            <div class="">
-                                <input class="inline-block-vaquita" id="contAmmFixed" type="number" name="contributionAmmount" size="5" numeric="" required="disabled">
-                            </div>
-                        </div>
-                        <div class="radio2">
-                            <label>
-                                <input id="suggestedAmmount" type="radio" value="SUGGESTED" name="contributionType" onchange="changeInput('contAmmSug','contAmmFixed',this);">Monto Sugerido</label>
-                            <div class="">
-                                <input class="inline-block-vaquita" id="contAmmSug" type="number" name="contributionAmmount" size="5" numeric="" disabled="disabled">
-                            </div>
-                        </div>
-                        <div class="radio2">
-                            <label>
-                                <input type="radio" value="OPEN" name="contributionType" onchange="disableInput('contAmmSug','contAmmFixed',this);">Monto Libre</label>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset id="privacyDetails">
-                    <h2>Privacidad</h2>
-                    <div>
-                        <div class="checkbox">
-                            <label>
-                                <input id="showColaborator" name="showParticipantName" type="checkbox" value="true">Mostrar Participantes</label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input name="showParticipantContribution" type="checkbox" value="true">Mostrar monto aportado</label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input name="showTotalAmmount" type="checkbox" value="true" checked="checked">Mostrar total recaudado</label>
-                        </div>
-                    </div>
-                </fieldset>
+    </div>
+    <div class="parallax"><img src="/resources/img/background2.jpg" alt="Unsplashed background img 2">
+    </div>
+</div>
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s10 center home-ideas">
+                <h4>Nueva Vaquita: Paso 2 - Configuración</h4>
+            </div>
+        </div>
+        <div class="row">
+            <form action="#">
+                <div class="row">
+                    <div class="col s12 m10 l8" style="margin:0 auto; float:none;">
+                        <form action="/create_second" method="POST" class="vaquita-paso2">
+                            <fieldset id="participationDetails">
+                                <h5>Participación</h5>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input class="with-gap" name="contributionField" type="radio" id="contr1" checked="checked" />
+                                        <label for="contr1">Comisión a cargo del organizador</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input class="with-gap" name="contributionField" type="radio" id="contr2" />
+                                        <label for="contr2">Comisión a cargo del Colaborador</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <hr style="width:90%;margin:0 auto;">
+                                <div class="col s12" style="margin:15px 0;">
+                                    <div class="col s11" style="text-align:left;">
+                                        <p class="step2-fixer">
+                                            <input type="checkbox" id="endDate" name="endDateCheck" onchange="requiredChanger('endDateValue',this)" />
+                                            <label for="endDate">Fecha de finalización</label>
+                                        </p>
+                                        <p>
+                                            <input id="endDateValue" name="endDate" style="width:80%;display:block;margin:0 auto;" disabled="disabled" type="date" class="datepicker">
+                                        </p>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <hr style="width:90%;margin:0 auto;">
+                                <div class="col s12" style="padding:0px !important;">
+                                    <div class="col s12">
+                                        <div class="col s11" style="text-align:left;">
+                                            <p class="step2-fixer">
+                                                <input id="fixedAmmount" type="radio" value="FIXED" name="contributionType" onchange="changeInput('contAmmFixed','contAmmSug',this);" checked="checked" />
+                                                <label for="fixedAmmount">Monto Fijo</label>
+                                                <div class="step2-fixer2">
+                                                    <input class="inline-block-vaquita" id="contAmmFixed" type="number" name="contributionAmmount" size="5" numeric="" required="" />
+                                                </div>
+                                            </p>
+                                        </div>
+                                        <div class="col s1 valign-wapper valign">
+                                            <i class="material-icons valign">help_outline</i>
+                                        </div>
+                                    </div>
+                                    <div class="col s12">
+                                        <div class="col s11" style="text-align:left;">
+                                            <p class="step2-fixer">
+                                                <input id="suggestedAmmount" type="radio" value="SUGGESTED" name="contributionType" onchange="changeInput('contAmmSug','contAmmFixed',this);">
+                                                <label for="suggestedAmmount">Monto Sugerido</label>
+                                                <div class="step2-fixer2">
+                                                    <input class="inline-block-vaquita" id="contAmmSug" type="number" name="contributionAmmount" size="5" numeric="" disabled="">
+                                                </div>
+                                            </p>
+                                        </div>
+                                        <div class="col s1 valign-wapper valign">
+                                            <i class="material-icons valign">help_outline</i>
+                                        </div>
+                                    </div>
+                                    <div class="col s12">
+                                        <div class="col s11" style="text-align:left;">
+                                            <p class="step2-fixer">
+                                                <input id="openAmmount" type="radio" value="OPEN" name="contributionType" onchange="disableInput('contAmmSug','contAmmFixed',this);">
+                                                <label for="openAmmount">Monto Libre</label>
+                                            </p>
+                                        </div>
+                                        <div class="col s1 valign-wapper valign">
+                                            <i class="material-icons valign">help_outline</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset id="privacyDetails">
+                                <h5>Privacidad</h5>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input name="showParticipantName" type="checkbox" id="showColaborator" checked="checked" onchange="requiredChanger('showContr',this)" />
+                                        <label for="showColaborator">Mostrar Participantes</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input name="showParticipantContribution" type="checkbox" id="showContr" />
+                                        <label for="showContr">Mostrar monto aportado</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input name="showTotalAmmount" type="checkbox" id="totalAmm" />
+                                        <label for="totalAmm">Mostrar total recaudado</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset id="additionalOptions">
+                                <h5>Opciones Adicionales</h5>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input name="isPublic" type="checkbox" id="publicVaquita" value="true" />
+                                        <label for="publicVaquita">Colecta Publica</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <p class="step2-fixer">
+                                            <input name="moneyTargetCheck" type="checkbox" value="true" id="targetAmmount" onchange="requiredChanger('targetAmmountValue',this)" />
+                                            <label for="targetAmmount">Objetivo a alcanzar</label>
+                                            <div class="step2-fixer2">
+                                                <input class="inline-block-vaquita" id="targetAmmountValue" type="number" name="moneyTarget" size="5" numeric="" disabled="">
+                                            </div>
+                                        </p>
 
-                <fieldset id="additionalOptions">
-                    <h2>Opciones Adicionales</h2>
-                    <div>
-                        <div class="checkbox">
-                            <label>
-                                <input id="publicVaquita" name="isPublic" type="checkbox" value="true" onchange="requiredChanger('openInvit',this)">Colecta Publica</label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input id="openInvit" name="openInvitation" type="checkbox" value="true" disabled="disabled">Invitación Abierta</label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input id="targetAmmount" type="checkbox" name="moneyTargetCheck" value="true"  onchange="requiredChanger('targetAmmountValue',this)">Objetivo a alcanzar</label>
-                            <div class="inline-block-vaquita">
-                                <input id="targetAmmountValue" name="moneyTarget" type="number" size="5" numeric="true" disabled="disabled">
-                            </div>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input name="openMessage" type="checkbox" value="true">Habilitar Mensaje con la partcipación</label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input name="showMessageWall" type="checkbox" value="true">Mostrar Mensajes de partcipantes</label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input name="notifyEmail" type="checkbox" value="true">Notificarme por Email las nuevas partcipaciones</label>
-                        </div>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input name="openMessage" type="checkbox" id="openMessageCheck" />
+                                        <label for="openMessageCheck">Habilitar Mensaje con la partcipación</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input name="showMessageWall" type="checkbox" id="showColaborator" id="messageWallCheck" />
+                                        <label for="messageWallCheck">Mostrar Mensajes de partcipantes</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <div class="col s11" style="text-align:left;">
+                                        <input name="notifyEmail" type="checkbox" id="notifEmailCheck" />
+                                        <label for="notifEmailCheck">Notificarme por Email las nuevas partcipaciones</label>
+                                    </div>
+                                    <div class="col s1 valign-wapper valign">
+                                        <i class="material-icons valign">help_outline</i>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
-                </fieldset>
-                <br>
-                <div class="col-md-6">
-                    <input style="font-size:19px;color:white;background-color:orange;" type="submit" value="Paso 3: Compartir Colecta" />
+                </div>
+                <div class="row">
+                    <div class="col s12 center">
+                        <button class="btn waves-effect green waves-light" type="submit" name="action" style="width:30%">Paso 3 > Compartir
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
-    </section>
-    {{> /WEB-INF/views/templates/footer.html}}
-</body>
 
-</html>
+    </div>
+</div>
+<div class="parallax-container valign-wrapper para-steps2" style="border-bottom:1px solid green;margin-top:45px;">
+    <div class="section no-pad-bot">
+        <div class="container">
+
+        </div>
+    </div>
+    <div class="parallax"><img src="/resources/img/background1.jpg" alt="Unsplashed background img 1">
+    </div>
+</div>
+
+
+{{> /WEB-INF/views/templates/footer.html}}

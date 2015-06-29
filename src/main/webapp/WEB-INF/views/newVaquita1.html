@@ -1,74 +1,67 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html> {{> /WEB-INF/views/templates/header.html}}
+<!--Content-->
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Regalenlo.com</title>
-    <meta name="description" content="An interactive getting started guide for Brackets.">
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-    <!--[if IE]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<div class="parallax-container valign-wrapper para-steps1">
+    <div class="section no-pad-bot">
+        <div class="container">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-    <!--animate.css styles and scripts-->
-    <link rel="stylesheet" href="/resources/css/animate.css">
-    <script></script>
-
-    <!--Main Styles-->
-    <link rel="stylesheet" href="/resources/css/main.css">
-
-
-</head>
-
-<body class="col-md-12">
-	{{> /WEB-INF/views/templates/header.html}} 
-    <!--Content-->
-    <section style="color:grey">
-        <div class="nueva-vaquita-header center-col">
-            <div><h1>+ Nueva Colecta: Paso 1 - Creación</h1>{{#error}}<span style="color:red; font-size:14px">{{error}}</span>{{/error}}</div>
-            <hr style="width:100%;height:4px;color:black">
         </div>
-        <div class="center-col">
-            <form class="new-vaquita" action="/create" method="POST">
-                <div class="col-md-4">
-                    <img src="resources/img/logo/Logo-Mayus.png" />
-                    <input type="file" name="image"/>
+    </div>
+    <div class="parallax"><img src="/resources/img/background2.jpg" alt="Unsplashed background img 2">
+    </div>
+</div>
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s10 center home-ideas">
+                <h4>Nueva Vaquita: Paso 1 - Información</h4>{{#error}}<span style="color:red; font-size:14px">{{error}}</span>{{/error}}
+            </div>
+        </div>
+        <div class="row">
+            <form action="/create" method="POST">
+                <div class="col s4 file-field input-field">
+                    <div class="col s12" style="max-height: 200px;overflow: hidden;">
+                        <img id="imgPrev" src="/resources/img/logo.png" alt="Your Image" style="width:100%" />
+                    </div>
+                    <input class="file-path validate" type="text" style="display:none;" name="image" />
+                    <div class="btn" style="width: 100%;">
+                        <span>*Seleccionar imagen</span>
+                        <input type="file" id="imgSelect" />
+                    </div>
+                    <span style="font-size:0.8rem">*La imagen es opcional.</span>
                 </div>
-                <div class="col-md-8">
-                    <div class="col-md-6">
-                        <label><span style="color:red">*</span>Título:</label>
-                        <input required="required" type="text" name="title"/>
+                <div class="col s8">
+                    <div class="col s12">
+                        <div class="input-field col s6">
+                            <label><span style="color:red">*</span>Título:</label>
+                            <input required="required" type="text" name="title">
+                        </div>
+                        <div class="input-field col s6">
+                            <label>Organizado para:</label>
+                            <input type="text" name="organizedFor">
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label><span style="color:red">*</span>Organizar para:</label>
-                        <input type="text" name="organizedFor"/>
+                    <div class="input-field col s12">
+                        <textarea id="textarea1" required="required" class="materialize-textarea" length="450" name="description"></textarea>
+                        <label for="textarea1"><span style="color:red">*</span>Descripción:</label>
                     </div>
-                <div class="col-md-12">
-                    <label><span style="color:red">*</span>Descripción:</label>
-                    <textarea required="required" class="form-control" rows="4" id="comment" name="description"></textarea>
                 </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <button>Cancelar</button>
-                    </div>
-                    <div class="col-md-6">
-                        <input style="font-size:19px;color:white;background-color:orange;" type="submit" value="Paso 2: Configuración" />
-                    </div>
+                <div class="col s12 center">
+                    <button class="btn waves-effect green waves-light" type="submit" name="action" style="width:30%">Paso 2 > Configuración
+                    </button>
                 </div>
             </form>
         </div>
-    </section>
-	{{> /WEB-INF/views/templates/footer.html}} 
-</body>
 
-</html>
+    </div>
+</div>
+<div class="parallax-container valign-wrapper para-steps2" style="border-bottom:1px solid green;margin-top:45px;">
+    <div class="section no-pad-bot">
+        <div class="container">
+
+        </div>
+    </div>
+    <div class="parallax"><img src="/resources/img/background1.jpg" alt="Unsplashed background img 1">
+    </div>
+</div>
+{{> /WEB-INF/views/templates/footer.html}}

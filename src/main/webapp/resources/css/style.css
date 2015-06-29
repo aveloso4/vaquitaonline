@@ -1,0 +1,325 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+nav ul a,
+nav .brand-logo {
+    color: #444;
+}
+
+p {
+    line-height: 2rem;
+}
+
+.button-collapse {
+    color: #26a69a;
+}
+
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255, 255, 255, .9);
+}
+
+.parallax-container .section {
+    width: 100%;
+}
+/*My Customizations*/
+
+.para-first {
+    height: 420px !important;
+}
+
+.para-second {
+    min-height: 275px;
+    height: 275px !important;
+}
+
+.para-third {
+    min-height: 390px;
+    height: 390px !important;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.home-tutorial .col {
+    padding: 0 0 0 0 !important;
+}
+
+.home-tutorial .icon-block {
+    padding: 5px 15px !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-tutorial .icon-block:hover {
+    cursor: pointer;
+}
+
+.home-tutorial .icon-block:hover p {
+    max-width: 100%;
+    margin: 2%;
+    margin-top: 0%;
+    margin-left: -4.5%;
+    -webkit-transition: margin 1s;
+    -moz-transition: margin 1s;
+    -o-transition: margin 1s;
+    transition: margin 1s;
+}
+
+.home-tutorial h2 {
+    margin: 0.78rem 0 0.424rem 0;
+}
+
+.home-tutorial h5 {
+    margin: 0.22rem 0 1.356rem 0;
+}
+
+.home-tutorial p {
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    background-color: rgba(63, 63, 63, 0.65);
+    color: white;
+    height: 92%;
+    padding: 3px 8px;
+    text-align: center;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    margin: 2%;
+    margin-top: -95%;
+    margin-left: -4.5%;
+    max-width: 100%;
+    -webkit-transition: margin 0.5s;
+    -moz-transition: margin 0.5;
+    -o-transition: margin 0.5s;
+    transition: margin 0.5s;
+}
+
+.home-tutorial .flow-text {
+    font-size: 1rem !important;
+}
+
+.icon-block-1 {
+    background-color: #CCE2A4;
+}
+
+.icon-block-2 {
+    background-color: #A7C7E8;
+}
+
+.icon-block-3 {
+    background-color: #F3EE8A;
+}
+
+.icon-block-4 {
+    background-color: #F49CAD;
+}
+
+.para-second .row {
+    background-color: rgba(104, 126, 117, 0.75);
+    padding: 1.5% 0;
+}
+
+.collection-item {}
+
+.home-ideas,
+.para-third-cont {
+    text-align: left;
+    float: none !important;
+    margin: 0 auto !important;
+}
+
+.home-ideas h4 {
+    text-align: center;
+}
+
+.home-ideas .circle {
+    margin-top: 2%;
+    position: relative !important;
+}
+
+.home-ideas .primary-icon:hover,
+.home-ideas .primary-icon:hover .secondary-icon {
+    cursor: pointer;
+    overflow: visible !important;
+    margin-bottom: 0px;
+}
+
+.home-ideas .primary-icon {
+    margin-bottom: 1px;
+}
+
+.home-ideas .primary-icon a {
+    width: 100%;
+    height: 100%;
+}
+
+.home-ideas .primary-icon:hover a {
+    top: -47px;
+    left: 0px;
+}
+
+.home-ideas .secondary-icon {
+    position: absolute;
+    margin: 0;
+    left: 0px !important;
+    top: -12px;
+}
+
+.home-ideas .title {
+    position: relative;
+    left: 20px;
+    top: 5px;
+}
+
+.home-ideas span,
+.home-ideas p {
+    margin: 0 0%;
+}
+
+.home-ideas .collection .collection-item.avatar {
+    padding: 10px 65px 20px 60px;
+}
+
+.home-ideas .collection .collection-item.avatar .circle,
+{                                               
+    left: 0px;
+}
+
+.para-third-cont {
+    padding: 2% 5% !important;
+}
+
+.para-third-cont i {
+    margin-left: -55%;
+    color: #263238;
+}
+
+footer.page-footer .footer-copyright {
+    height: 20px;
+}
+
+.logo-footer img {
+    margin: 0 auto;
+    display: block;
+}
+
+
+/*Steps*/
+
+.para-steps1 {
+    height: 50px;
+    min-height: 50px;
+}
+
+.para-steps2 {
+    height: 100px;
+    min-height: 100px;
+}
+
+.col .s11 .step2-fixer {
+    margin-top: 0px;
+    width: 50%;
+    display: inline-block;
+    float: left;
+}
+
+.col .s11 .step2-fixer2 {
+    width: 45%;
+    float: left;
+    display: inline-block;
+}
+/*Med
+
+/*Media Queries*/
+/*Positioning of the logo in different screen sizes*/
+
+@media (min-width: 992px) {
+    nav .brand-logo img {
+        max-width: 25%;
+    }
+}
+
+@media (max-width: 1265px) and (min-width: 993px) {
+    nav .nav-wrapper {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 992px) and (min-width: 760px) {
+    nav .brand-logo img {
+        max-width: 40%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media (max-width: 760px) and (min-width: 540px) {
+    nav .brand-logo img {
+        max-width: 50%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media (max-width: 540px) and (min-width: 440px) {
+    nav .brand-logo img {
+        max-width: 60%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media (max-width: 440px) and (min-width: 300px) {
+    nav .brand-logo img {
+        max-width: 75%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media (max-width: 300px) {
+    nav .brand-logo img {
+        max-width: 90%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+/*Other default Media Queries*/
+
+@media only screen and (max-width: 992px) {
+    .parallax-container .section {
+        position: absolute;
+        top: 15%;
+    }
+    #index-banner .section {
+        top: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #index-banner .section {
+        top: 0;
+    }
+}
+
+.icon-block {
+    padding: 0 15px;
+}
+
+.icon-block .material-icons {
+    font-size: inherit;
+}
+
+footer.page-footer {
+    margin: 0;
+}
