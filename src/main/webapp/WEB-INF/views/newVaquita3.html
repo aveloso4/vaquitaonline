@@ -7,7 +7,7 @@
 
             </div>
         </div>
-        <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 2">
+        <div class="parallax"><img src="resources/img/background1.jpg" alt="Unsplashed background img 2">
         </div>
     </div>
     <div class="container">
@@ -26,30 +26,34 @@
 
                     </div>
                 </div>
-                <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 2">
+                <div class="parallax"><img src="resources/img/background1.jpg" alt="Unsplashed background img 2">
                 </div>
             </div>
             <div class="row">
                 <div class="row">
                     <div class="col l4 m6 s10 offset-l4 offset-m3 offset-s1">
-                        <img src="logo.png" style="width:100%;">
+                        <img src="resources/img/logo/Logo-Mayus.png" style="width:100%;">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col l6 m8 s12 offset-l3 offset-m2">
-                        <h5 style="text-align:center; ">Vaquita para el Cumpleaños de Fulano</h5>
-                        <h6 style="text-align:center"><span class="blue-grey-text text-lighten-3 "><i>Organizado para</i> </span>Fulano</h6>
+                        <h5 style="text-align:center; ">{{vaquita.title}}</h5>
+                        {{#vaquita.organizedFor}}<h6 style="text-align:center"><span class="blue-grey-text text-lighten-3 "><i>Organizado para</i> </span>{{vaquita.organizedFor}}</h6>{{/vaquita.organizedFor}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col l10 m12 s12 offset-l1">
-                        <p>Aca va la descripcion bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+                        <p>{{vaquita.description}}</p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col l4 m6 s10 offset-l4 offset-m3 offset-s1">
                     <a style="width:100%" class="amber lighten-1 btn modal-trigger" href="#participationModal">Modal</a>
+                </div>
+                <div class="col l4 m6 s10 offset-l4 offset-m3 offset-s1">
+                    <a class="btn" onclick="return popitup(this.href)" href="https://www.facebook.com/dialog/share?app_id=1520870684859598&amp;display=popup&amp;&href=vaquita-project.herokuapp.com/search?id={{id}}&amp;redirect_uri=http://localhost:5000/search?id={{id}}"  
+			  		style="background-color:Blue; color:white; padding:15px 10px">Compartir en facebook</a>
                 </div>
             </div>
 
@@ -61,7 +65,7 @@
 
             </div>
         </div>
-        <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 2">
+        <div class="parallax"><img src="resources/img/background1.jpg" alt="Unsplashed background img 2">
         </div>
     </div>
     <div class="row">
@@ -85,7 +89,7 @@
 
                 </div>
             </div>
-            <div class="parallax"><img src="background2.jpg" alt="Unsplashed background img 2">
+            <div class="parallax"><img src="resources/img/background2.jpg" alt="Unsplashed background img 2">
             </div>
         </div>
         <div id="invite" class="col s12">
@@ -107,7 +111,7 @@
 
             </div>
         </div>
-        <div class="parallax"><img src="background1.jpg" alt="Unsplashed background img 1">
+        <div class="parallax"><img src="resources/img/background1.jpg" alt="Unsplashed background img 1">
         </div>
     </div>
     <!-- Participate Modal -->
@@ -116,7 +120,8 @@
             <p>
                 Texto descriptivo de la participación
             </p>
-            <form action="/participate" method="POST">
+            <form action="/participar" method="POST">
+            <input type="number" value="{{vaquita.id}}" style="display:none" name="id" />
                 <div class="row">
                     <div class="col s12">
                         <div class="input-field col s12">
@@ -155,7 +160,9 @@
             Terminos y condiciones, bla bla bla.
         </div>
     </div>
+   	{{> /WEB-INF/views/templates/footer.html}} 
 </body>
+
 
 <script type="text/javascript">
 function popitup(url) {

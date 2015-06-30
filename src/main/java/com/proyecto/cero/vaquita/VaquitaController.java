@@ -19,9 +19,11 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.cero.controller.ModelManager;
+import com.proyecto.cero.model.Participacion;
 import com.proyecto.cero.model.Vaquita;
 import com.proyecto.cero.model.Vaquita.ContributionType;
 import com.proyecto.cero.model.Vaquita.Status;
+import com.proyecto.cero.service.ParticipacionesService;
 import com.proyecto.cero.service.VaquitaService;
 
 @Controller
@@ -30,12 +32,14 @@ public class VaquitaController {
 	private final Facebook facebook;
 	private final ProviderSignInUtils providerSignInUtils;
 	private final VaquitaService vaquitaService;
+	private final ParticipacionesService participacionService;
 	
 	@Inject
-	public VaquitaController(VaquitaService vs, Facebook facebook) {
+	public VaquitaController(VaquitaService vs, Facebook facebook, ParticipacionesService participacionServ) {
 		this.vaquitaService = vs;
 		this.providerSignInUtils = new ProviderSignInUtils();
 		this.facebook = facebook;
+		this.participacionService = participacionServ;
 	}
  
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -83,6 +87,7 @@ public class VaquitaController {
 //    	model.addObject("vaquita", vaquita);
 		model.setViewName("newVaquita3");
 		model.addObject("id",ID);
+		model.addObject("vaquita",vaquita);
 		return model;
 	}
 	 
@@ -94,6 +99,24 @@ public class VaquitaController {
 		Vaquita vaquita = vaquitaService.findVaquitaById(id);
 		model.addObject("vaquita", vaquita);
 		model.setViewName("verVaquita");
+		return model;
+	}
+
+	@RequestMapping(value = "/participar", method = RequestMethod.POST)
+	public ModelAndView participar(WebRequest request, Principal user, Model modelo) {
+		ModelAndView model = new ModelAndView();
+		ModelManager.initializeModel(model, facebook);
+		
+		
+		Participacion participacion = new Participacion();
+		participacion.setVaquitaID(Integer.parseInt(request.getParameter("id")));//TODO 
+		participacion.setNombre(request.getParameter("participantName"));
+		participacion.setMensaje(request.getParameter("participMessage"));
+		participacion.setMonto(Integer.parseInt(request.getParameter("participantContr")));
+		participacion.setEmail(request.getParameter("participantEmail"));
+		
+		participacionService.addParticipacion(participacion);
+		model.setViewName("home");
 		return model;
 	}
 	
@@ -111,6 +134,7 @@ public class VaquitaController {
   // Internal Helpers
   private Vaquita crearVaquita(VaquitaFirstStepForm form, BindingResult formBinding, String userName) {
 		Vaquita vaquita = new Vaquita(form.getTitle(), form.getDescription(), form.getImage(), userName);
+		vaquita.setOrganizedFor(form.getOrganizedFor());
 		vaquita.setStatus(Status.ACTIVE);;
     vaquitaService.createVaquita(vaquita);
     return vaquita;

@@ -23,7 +23,7 @@ public class Participacion {
 	private Integer mercadoPagoEstado;
 
 	@Column(name = "mensaje", nullable = true)
-	private Integer mensaje;
+	private String mensaje;
 	
 	@Column(name = "privacidad", nullable = false)
 	private boolean privacidad;
@@ -37,10 +37,22 @@ public class Participacion {
 	@Column(name = "telefono", nullable = true)
 	private String telefono;
 
+	@Column(name = "monto", nullable = false)
+	private int monto;
+	
+
 	public Participacion() {
 		// VACIO
 	}
 	
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -73,14 +85,6 @@ public class Participacion {
 		this.mercadoPagoEstado = mercadoPagoEstado;
 	}
 
-	public Integer getMensaje() {
-		return mensaje;
-	}
-
-	public void setMensaje(Integer mensaje) {
-		this.mensaje = mensaje;
-	}
-
 	public boolean isPrivacidad() {
 		return privacidad;
 	}
@@ -111,6 +115,14 @@ public class Participacion {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public int getMonto() {
+		return monto;
+	}
+
+	public void setMonto(int monto) {
+		this.monto = monto;
 	}
 	
 	
