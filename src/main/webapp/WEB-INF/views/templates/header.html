@@ -13,13 +13,26 @@
 </head>
 
 <body>
-
     <nav class="white" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" href="#" class="brand-logo"><img src="/resources/img/logo.png" />
             </a>
+            
+            {{#isAthenticate}}
+				<ul class="right hide-on-med-and-down">
+                	<li><a href="/create" class="valign-wrapper"><i class="material-icons valign">add</i>Nueva Vaquita</a></li>
+                	<li>
+           			{{#profileInfo}}
+						<img src="http://graph.facebook.com/{{profileInfo.id}}/picture"	alt="profile image" />
+					{{/profileInfo}}
+						<a href="/signout">Salir</a>
+    				</li>
+	            </ul>
+				
+            {{/isAthenticate}}
+            {{^isAthenticate}}
             <ul class="right hide-on-med-and-down">
-                <li><a href="/create" class="valign-wrapper"><i class="material-icons valign">add</i> Nueva Vaquita</a>
+                <li><a href="/create" class="valign-wrapper"><i class="material-icons valign">add</i>Nueva Vaquita</a>
                 </li>
                 <li><a href="/access">Acceso</a>
                 </li>
@@ -31,6 +44,8 @@
                 <li><a href="/access">Acceso</a>
                 </li>
             </ul>
+            {{/isAthenticate}}
+            
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
     </nav>

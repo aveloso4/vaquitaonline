@@ -34,7 +34,8 @@ public class SigninController {
 	}
 
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public String signin(WebRequest request, Model model) {
+	public ModelAndView signin(WebRequest request, Model modelo) {
+		ModelAndView model = new ModelAndView();
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(request);
 		ModelManager.initializeModel(model, facebook);
 		
@@ -47,10 +48,14 @@ public class SigninController {
 			providerSignInUtils.doPostSignUp(account.getEmail(), request);
 			
 		} else {
-			return "redirect:/access?error=bad_credentials";
+			model.addObject("error","bad_credentials");
+			model.setViewName("access");
+			return model;
 		}
-
-		return "/";
+		model.setViewName("home");
+		model.addObject("error","bad_credentials");
+		return model;
+		
 	}
 
 	private Account signInAccount(String email, String password) {

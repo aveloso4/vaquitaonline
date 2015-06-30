@@ -25,6 +25,7 @@ public class AccountDaoImpl implements AccountDao {
 	private Session openSession() {
 		return sessionFactory.getCurrentSession();
 	}
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	

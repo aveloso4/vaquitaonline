@@ -80,6 +80,7 @@ public class VaquitaController {
 		updateVaquita(form, result, vaquita, request);
 //    	model.addObject("vaquita", vaquita);
 		model.setViewName("newVaquita3");
+		model.addObject("id",ID);
 		return model;
 	}
 	 
