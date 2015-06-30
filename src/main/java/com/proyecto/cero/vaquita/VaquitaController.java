@@ -37,7 +37,7 @@ public class VaquitaController {
 		this.providerSignInUtils = new ProviderSignInUtils();
 		this.facebook = facebook;
 	}
-
+ 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView crearVaquita(Principal user, Model modelo) {
 		ModelAndView model = new ModelAndView();
@@ -55,7 +55,9 @@ public class VaquitaController {
   		model.addObject("error","Ups! Algo a salido mal. Por favor asegurate de completar los campos requeridos (*)");
   		return model;
   	}
-    	Vaquita vaquita = crearVaquita(form, result, user.getName());
+  		String name = (user == null ? "Annonymous" : user.getName());
+  		
+    	Vaquita vaquita = crearVaquita(form, result, name);
     	request.setAttribute("ID", vaquita.getId(), RequestAttributes.SCOPE_GLOBAL_SESSION);
     	model.setViewName("newVaquita2");
     return model;

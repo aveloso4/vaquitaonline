@@ -33,6 +33,7 @@
 		<dbcp.version>1.4</dbcp.version>
 		<mysql.connector.version>5.1.32</mysql.connector.version>
 		<cglib>2.2.2</cglib>
+		<sengrid>2.2.2</sengrid>
 	</properties>
 
 	<repositories>
@@ -270,6 +271,15 @@
 			<artifactId>cglib</artifactId>
 			<version>${cglib}</version>
 		</dependency>
+
+		<!-- SENGRID EMAIL -->
+		<dependency>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
+			<version>${sengrid}</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<plugins>
