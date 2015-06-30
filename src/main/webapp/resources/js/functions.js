@@ -59,3 +59,8 @@ function requiredChanger(elemId, elFrom) {
         el.checked = false;
     }
 }
+
+$(document).ready(function(){
+    $('ul.tabs').tabs();
+     $('.modal-trigger').leanModal();
+  });

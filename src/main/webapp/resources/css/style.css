@@ -191,7 +191,7 @@ p {
 }
 
 .home-ideas .collection .collection-item.avatar .circle,
-{                                               
+{
     left: 0px;
 }
 
@@ -212,8 +212,6 @@ footer.page-footer .footer-copyright {
     margin: 0 auto;
     display: block;
 }
-
-
 /*Steps*/
 
 .para-steps1 {
@@ -221,25 +219,28 @@ footer.page-footer .footer-copyright {
     min-height: 50px;
 }
 
+.para-steps1-part {
+    height: 20px;
+    min-height: 20px;
+}
+
 .para-steps2 {
     height: 100px;
     min-height: 100px;
 }
 
-.col .s11 .step2-fixer {
+.col .s11 p {
     margin-top: 0px;
     width: 50%;
     display: inline-block;
     float: left;
 }
 
-.col .s11 .step2-fixer2 {
+.col .s11 div {
     width: 45%;
     float: left;
     display: inline-block;
 }
-/*Med
-
 /*Media Queries*/
 /*Positioning of the logo in different screen sizes*/
 
