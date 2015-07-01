@@ -2,6 +2,7 @@ package com.proyecto.cero.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 public class Participacion {
 	
 	@Id
+	@GeneratedValue
 	@Column(name = "ID", unique = true, nullable = true)
 	private String id;
 	
